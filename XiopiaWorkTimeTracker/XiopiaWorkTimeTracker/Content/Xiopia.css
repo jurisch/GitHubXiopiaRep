@@ -1,0 +1,41 @@
+﻿table {
+    width:100%;
+}
+
+th {
+    background-color:burlywood;
+}
+
+.data-user-actions{
+    padding:1em;
+    margin:0em;
+    background-color:beige;
+}
+
+.data-user-action-btn{
+    width:6em;
+    margin-left:2em;
+}
+
+.data-current-user-title{
+    margin:1em;
+}
+
+.date-dayofweek-Mo, .date-dayofweek-Mi{
+    background-color:lightcyan;
+}
+.date-dayofweek-Di, .date-dayofweek-Do{
+    background-color:azure;
+}
+.date-dayofweek-Fr{
+    background-color:lemonchiffon;
+}
+
+.date-dayofweek-Sa{
+    background-color:peachpuff;
+}
+    
+.date-dayofweek-So{
+    background-color:lightpink;
+}
+

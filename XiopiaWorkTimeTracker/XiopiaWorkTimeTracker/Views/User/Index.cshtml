@@ -1,0 +1,22 @@
+﻿
+@using XiopiaWorkTimeTracker.Models
+@model UserViewModel
+
+<header>
+    <h1>Test User Auswahl</h1>
+</header>
+<body>
+    <section>
+        <header>
+            <h2>Bitte einen Test User auswählen</h2>
+        </header>
+        <div>
+            @using(@Html.BeginForm("SelectMonthWorkTimes", "User", FormMethod.Get))
+            { 
+                @Html.Hidden("month", DateTime.Now.Month)
+                @Html.DropDownListFor(ul => ul.SelectedUser, Model.UserList)
+                <input type="submit"/>
+            }
+        </div>
+    </section>
+</body>

@@ -1,0 +1,43 @@
+﻿@using XiopiaWorkTimeTracker.Models
+@model SettingsViewModel
+
+<div class="jumbotron">
+    <h1 class="panel-title">Admin Bereich</h1>
+</div>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#Home">Home</a></li>
+    <li><a data-toggle="tab" href="#defaultProfile">Default Profile</a></li>
+    <li><a data-toggle="tab" href="#userSettings">User</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="Home" class="tab-pane fade in active">
+        <h3>Global Settings</h3>
+    </div>
+    <div id="defaultProfile" class="tab-pane fade">
+        <h3>Default Settings</h3>
+        <section>
+            Stunden pro Tag :
+            @Html.TextBox("hoursAday")
+        </section>
+        <section>
+            Stunden pro Woche :
+            @Html.TextBox("hoursAweek")
+        </section>
+        <section>
+            Monate im Jahr :
+            @Html.TextBox("monthsAyear")
+        </section>
+        <section>
+            Tage pro Woche :
+            @Html.TextBox("daysAweek")
+        </section>
+        <section>
+            Urlaub Tage :
+            @Html.TextBox("holidayDays")
+        </section>
+    </div>
+    <div id="userSettings" class="tab-pane fade">
+        <h3>User Settings</h3>
+    </div>
+</div>
