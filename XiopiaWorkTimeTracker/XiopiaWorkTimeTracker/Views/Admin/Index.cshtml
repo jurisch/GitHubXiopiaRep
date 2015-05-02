@@ -16,26 +16,31 @@
     </div>
     <div id="defaultProfile" class="tab-pane fade">
         <h3>Default Settings</h3>
-        <section>
-            Stunden pro Tag :
-            @Html.TextBox("hoursAday")
-        </section>
-        <section>
-            Stunden pro Woche :
-            @Html.TextBox("hoursAweek")
-        </section>
-        <section>
-            Monate im Jahr :
-            @Html.TextBox("monthsAyear")
-        </section>
-        <section>
-            Tage pro Woche :
-            @Html.TextBox("daysAweek")
-        </section>
-        <section>
-            Urlaub Tage :
-            @Html.TextBox("holidayDays")
-        </section>
+        <div class="form-group">
+            @Html.LabelFor(m => m.HoursAday)
+            @Html.TextBoxFor(m => m.HoursAday)
+            @Html.ValidationMessageFor(m =>m.HoursAday)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.HoursAweek)
+            @Html.TextBoxFor(m => m.HoursAweek)
+            @Html.ValidationMessageFor(m => m.HoursAweek)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.MonthsAyear)
+            @Html.TextBoxFor(m => m.MonthsAyear)
+            @Html.ValidationMessageFor(m => m.MonthsAyear)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.DaysAweek)
+            @Html.TextBoxFor(m => m.DaysAweek)
+            @Html.ValidationMessageFor(m => m.DaysAweek)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.HolidayDays)
+            @Html.TextBoxFor(m => m.HolidayDays)
+            @Html.ValidationMessageFor(m => m.HolidayDays)
+        </div>
     </div>
     <div id="userSettings" class="tab-pane fade">
         <h3>User Settings</h3>

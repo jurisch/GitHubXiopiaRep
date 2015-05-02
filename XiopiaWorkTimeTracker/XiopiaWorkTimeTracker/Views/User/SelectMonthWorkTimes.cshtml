@@ -1,14 +1,15 @@
 ﻿@using XiopiaWorkTimeTracker.Models
+@using Ressources
 @model UserViewModel
 
 <div class="jumbotron">
-    <h1 class="panel-title">Stundenaufstellung für den Monat @Model.CurrentMonth @Model.CurrentYear</h1>
+    <h1 class="panel-title">@Language.UserHeader @Model.CurrentMonth @Model.CurrentYear</h1>
     <p class="data-current-user-title">@Model.CurrentUser</p>
     <nav class="navbar navbar-default">
-        <button type="button" class="btn btn-primary btn-lg">Arbeit beginnen jetzt</button>
-        <button type="button" class="btn btn-primary btn-lg">Arbeit abschliessen</button>
-        <button type="button" class="btn btn-primary btn-lg">Krank melden</button>
-        <button type="button" class="btn btn-primary btn-lg">Urlaub beantragen</button>
+        <button type="button" class="btn btn-primary btn-lg">@Language.StartWorkNow</button>
+        <button type="button" class="btn btn-primary btn-lg">@Language.EndWork</button>
+        <button type="button" class="btn btn-primary btn-lg">@Language.ReportIllness</button>
+        <button type="button" class="btn btn-primary btn-lg">@Language.RequestHoloday</button>
     </nav>
 </div>
 <nav>
@@ -18,18 +19,18 @@
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>*@
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 1, SelectedUser = Model.SelectedUser })">Januar</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 2, SelectedUser = Model.SelectedUser })">Februar</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 3, SelectedUser = Model.SelectedUser })">März</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 4, SelectedUser = Model.SelectedUser })">April</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 5, SelectedUser = Model.SelectedUser })">Mai</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 6, SelectedUser = Model.SelectedUser })">Juni</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 7, SelectedUser = Model.SelectedUser })">Juli</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 8, SelectedUser = Model.SelectedUser })">August</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 9, SelectedUser = Model.SelectedUser })">September</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 10, SelectedUser = Model.SelectedUser })">Oktober</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 11, SelectedUser = Model.SelectedUser })">November</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 12, SelectedUser = Model.SelectedUser })">Dezember</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 1, SelectedUser = Model.SelectedUser })">@Language.January</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 2, SelectedUser = Model.SelectedUser })">@Language.February</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 3, SelectedUser = Model.SelectedUser })">@Language.March</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 4, SelectedUser = Model.SelectedUser })">@Language.April</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 5, SelectedUser = Model.SelectedUser })">@Language.Mai</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 6, SelectedUser = Model.SelectedUser })">@Language.Juni</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 7, SelectedUser = Model.SelectedUser })">@Language.July</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 8, SelectedUser = Model.SelectedUser })">@Language.August</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 9, SelectedUser = Model.SelectedUser })">@Language.September</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 10, SelectedUser = Model.SelectedUser })">@Language.October</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 11, SelectedUser = Model.SelectedUser })">@Language.November</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 12, SelectedUser = Model.SelectedUser })">@Language.Dezember</a></li>
         @*<li>
             <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>

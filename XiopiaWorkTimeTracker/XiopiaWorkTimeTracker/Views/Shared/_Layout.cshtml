@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using XiopiaWorkTimeTracker.Code52.i18n
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,8 +7,10 @@
     <title>@ViewBag.Title - XIOPIA Zeiterfassung</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/Code52.i18n/Code52.i18n.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    @Html.Partial("LanguageSelection")
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -38,5 +41,21 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.globalize/globalize.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.cookie.js")"></script>
+    <script type="text/javascript"
+            src="@Url.Content(string.Format("~/Scripts/jquery.globalize/cultures/globalize.culture.{0}.js", CultureHelper.GetCurrentCulture()))"></script>
+    @if (CultureHelper.GetCurrentNeutralCulture() != "en")
+    {
+        <script type="text/javascript"
+                src="@String.Format("http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/localization/messages_{0}.js", CultureHelper.GetCurrentNeutralCulture())"></script>
+    }
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Code52.i18n.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/i18n/Code52.i18n.language.js")"></script>
+    <script type="text/javascript">
+    Code52.Language.Init('@CultureHelper.GetCurrentCulture()');
+    </script>
 </body>
 </html>

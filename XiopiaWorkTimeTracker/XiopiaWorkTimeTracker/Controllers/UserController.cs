@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using XiopiaWorkTimeTracker.BusinessLogic;
 using XiopiaWorkTimeTracker.Models;
 using XiopiaWorkTimeTracker.Models.Database;
-using XiopiaWorkTimeTracker.BusinessLogic;
-using System.Globalization;
 
 namespace XiopiaWorkTimeTracker.Controllers
 {
