@@ -43,8 +43,7 @@ namespace XiopiaWorkTimeTracker.Models.Database
             context.SaveChanges();
             var settings = new List<Setting>
             {
-                new Setting{ Name = "WeekFirstDay", Value = "1"},
-                new Setting{ Name = "WeekLastDay", Value = "5"},
+                new Setting{ DaysAweek = 5, HoursAday = 8, HoursAweek = 40, MonthsAyear=12, VacationDays=30},
             };
             settings.ForEach(r => context.GlobalSettings.Add(r));
             context.SaveChanges();

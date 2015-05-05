@@ -39,3 +39,13 @@ th {
     background-color:lightpink;
 }
 
+.data-num-field-small{
+    width:3em;
+    margin-left:2em;
+    text-align:center
+}
+
+.data-settings-section{
+    display:inline-block;
+    margin-right:5em;
+}
