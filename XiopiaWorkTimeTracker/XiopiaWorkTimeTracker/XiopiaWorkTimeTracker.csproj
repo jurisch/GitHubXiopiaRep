@@ -579,6 +579,8 @@
     <Content Include="Views\User\SelectMonthWorkTimes.cshtml" />
     <Content Include="Views\Admin\GlobalSettings.cshtml" />
     <Content Include="Views\Admin\HolidaysSettings.cshtml" />
+    <Content Include="Views\Admin\StartRecordingNowDialog.cshtml" />
+    <Content Include="Views\User\StartRecordingNowDialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

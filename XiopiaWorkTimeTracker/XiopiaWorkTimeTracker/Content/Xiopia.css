@@ -1,51 +1,58 @@
 ﻿table {
-    width:100%;
+    width: 100%;
 }
 
 th {
-    background-color:burlywood;
+    background-color: burlywood;
 }
 
-.data-user-actions{
-    padding:1em;
-    margin:0em;
-    background-color:beige;
+.data-user-actions {
+    padding: 1em;
+    margin: 0em;
+    background-color: beige;
 }
 
-.data-user-action-btn{
-    width:6em;
-    margin-left:2em;
+.data-user-action-btn {
+    width: 6em;
+    margin-left: 2em;
 }
 
-.data-current-user-title{
-    margin:1em;
+.data-current-user-title {
+    margin: 1em;
 }
 
-.date-dayofweek-Mo, .date-dayofweek-Mi{
-    background-color:lightcyan;
-}
-.date-dayofweek-Di, .date-dayofweek-Do{
-    background-color:azure;
-}
-.date-dayofweek-Fr{
-    background-color:lemonchiffon;
+.date-dayofweek-Mo, .date-dayofweek-Mi {
+    background-color: lightcyan;
 }
 
-.date-dayofweek-Sa{
-    background-color:peachpuff;
-}
-    
-.date-dayofweek-So{
-    background-color:lightpink;
+.date-dayofweek-Di, .date-dayofweek-Do {
+    background-color: azure;
 }
 
-.data-num-field-small{
-    width:3em;
-    margin-left:2em;
-    text-align:center
+.date-dayofweek-Fr {
+    background-color: lemonchiffon;
 }
 
-.data-settings-section{
-    display:inline-block;
-    margin-right:5em;
+.date-dayofweek-Sa {
+    background-color: peachpuff;
+}
+
+.date-dayofweek-So {
+    background-color: lightpink;
+}
+
+.data-num-field-small {
+    width: 3em;
+    margin-left: 2em;
+    text-align: center;
+}
+
+.data-settings-section {
+    display: inline-block;
+    margin-right: 5em;
+}
+
+modal-content {
+    width: 600px !important;
+    margin: 30px auto !important;
 }

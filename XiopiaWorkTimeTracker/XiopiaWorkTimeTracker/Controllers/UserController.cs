@@ -42,17 +42,17 @@ namespace XiopiaWorkTimeTracker.Controllers
                 if (currentUser != null)
                 {
                     var settingsFromDb = context.GlobalSettings;
-                    int fd = 0, ld = 0;
-                    String fds = settingsFromDb.Where(s => s.Name.Equals("WeekFirstDay")).FirstOrDefault().Value;
-                    if (fds != null)
-                    {
-                        Int32.TryParse(fds, out fd);
-                    }
-                    String lds = settingsFromDb.Where(s => s.Name.Equals("WeekLastDay")).FirstOrDefault().Value;
-                    if (lds != null)
-                    {
-                        Int32.TryParse(lds, out ld);
-                    }
+                    int fd = 1, ld = 5;
+                    //String fds = settingsFromDb.Where(s => s.Name.Equals("WeekFirstDay")).FirstOrDefault().Value;
+                    //if (fds != null)
+                    //{
+                    //    Int32.TryParse(fds, out fd);
+                    //}
+                    //String lds = settingsFromDb.Where(s => s.Name.Equals("WeekLastDay")).FirstOrDefault().Value;
+                    //if (lds != null)
+                    //{
+                    //    Int32.TryParse(lds, out ld);
+                    //}
                     SettingsModel settingsModel = new SettingsModel() { FirstWorkDayOfWeek = fd, LastWorkDayOfWeek = ld };
                     userViewModel.CurrentUser = currentUser.FirstName + ", " + currentUser.LastName;
                     userViewModel.SelectedUser = SelectedUser;
@@ -64,6 +64,15 @@ namespace XiopiaWorkTimeTracker.Controllers
             return View(userViewModel);
         }
 
+        public ActionResult StartRecordingNow()
+        {
+            return PartialView("StartRecordingNowDialog");
+        }
 
+        [HttpPost]
+        public ActionResult SaveStartRecording()
+        {
+            return RedirectToAction("Index");
+        }
     }
 }
