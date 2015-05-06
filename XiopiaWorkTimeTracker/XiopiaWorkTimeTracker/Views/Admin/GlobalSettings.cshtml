@@ -1,0 +1,51 @@
+﻿@using XiopiaWorkTimeTracker.Models
+@using Ressources
+@model SettingsViewModel
+
+<section class="data-settings-section">
+    <h3>Default Settings</h3>
+    @using (Html.BeginForm("SaveSettings", "Admin", FormMethod.Post))
+    {
+        <table data-toggle="table">
+            <tr>
+                <td> </td>
+                <td><button class="btn btn-primary" type="submit">@Language.SaveSettings</button></td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.HoursAday)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.HoursAday, new { @class = "data-num-field-small" })
+                    @Html.ValidationMessageFor(m => m.HoursAday)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.HoursAweek)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.HoursAweek, new { @class = "data-num-field-small" })
+                    @Html.ValidationMessageFor(m => m.HoursAweek)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.MonthsAyear)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.MonthsAyear, new { @class = "data-num-field-small" })
+                    @Html.ValidationMessageFor(m => m.MonthsAyear)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.DaysAweek)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.DaysAweek, new { @class = "data-num-field-small" })
+                    @Html.ValidationMessageFor(m => m.DaysAweek)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.VacationDays)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.VacationDays, new { @class = "data-num-field-small" })
+                    @Html.ValidationMessageFor(m => m.VacationDays)
+                </td>
+            </tr>
+        </table>
+    }
+</section>
