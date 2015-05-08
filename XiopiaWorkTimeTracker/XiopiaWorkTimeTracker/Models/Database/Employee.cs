@@ -19,6 +19,6 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
         public string Email { get; set; }
 
-        public virtual ICollection<int> WorkTimeTrackerRoleId { get; set; }
+        public virtual List<UserToRoleMapping> UserToRoleMappings { get; set; }
     }
 }

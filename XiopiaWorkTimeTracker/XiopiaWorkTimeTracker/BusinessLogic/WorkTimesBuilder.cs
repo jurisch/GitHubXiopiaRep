@@ -8,7 +8,7 @@ namespace XiopiaWorkTimeTracker.BusinessLogic
 {
     public class WorkTimesBuilder
     {
-        public static List<WorkTimeRow> GetMonth(int month, SettingsModel settingsModel)
+        public static List<WorkTimeRow> GetMonth(int month)
         {
             List<WorkTimeRow> entryList = new List<WorkTimeRow>();
             var daysCount = DateTime.DaysInMonth(DateTime.Now.Year, month);

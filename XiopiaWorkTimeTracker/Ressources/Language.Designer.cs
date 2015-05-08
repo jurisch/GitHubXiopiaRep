@@ -97,6 +97,15 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Days a week.
         /// </summary>
         public static string DaysAweek {
@@ -214,7 +223,7 @@ namespace Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Wirk Time fpr today.
+        ///   Looks up a localized string similar to New Work Time for.
         /// </summary>
         public static string NewWorkTime {
             get {
@@ -282,6 +291,15 @@ namespace Ressources {
         public static string September {
             get {
                 return ResourceManager.GetString("September", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string StartWork {
+            get {
+                return ResourceManager.GetString("StartWork", resourceCulture);
             }
         }
         

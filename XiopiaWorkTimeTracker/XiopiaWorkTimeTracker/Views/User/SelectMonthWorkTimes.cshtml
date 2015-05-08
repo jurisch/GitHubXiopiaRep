@@ -8,7 +8,6 @@
     <h1 class="panel-title">@Language.UserHeader @Model.CurrentMonth @Model.CurrentYear</h1>
     <p class="data-current-user-title">@Model.CurrentUser</p>
     <nav class="navbar navbar-default">
-        @*@Html.ActionLink(@Language.StartWorkNow, "StartRecordingNow", "User", null, new { @class = "modal-link btn btn-primary btn-lg" })*@
         <button id="startNowBtn" type="button" class="btn btn-primary btn-lg">@Language.StartWorkNow</button>
         <button type="button" class="btn btn-primary btn-lg">@Language.EndWork</button>
         <button type="button" class="btn btn-primary btn-lg">@Language.ReportIllness</button>
@@ -22,18 +21,18 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>*@
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 1, SelectedUser = Model.SelectedUser })">@Language.January</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 2, SelectedUser = Model.SelectedUser })">@Language.February</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 3, SelectedUser = Model.SelectedUser })">@Language.March</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 4, SelectedUser = Model.SelectedUser })">@Language.April</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 5, SelectedUser = Model.SelectedUser })">@Language.Mai</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 6, SelectedUser = Model.SelectedUser })">@Language.Juni</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 7, SelectedUser = Model.SelectedUser })">@Language.July</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 8, SelectedUser = Model.SelectedUser })">@Language.August</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 9, SelectedUser = Model.SelectedUser })">@Language.September</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 10, SelectedUser = Model.SelectedUser })">@Language.October</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 11, SelectedUser = Model.SelectedUser })">@Language.November</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 12, SelectedUser = Model.SelectedUser })">@Language.Dezember</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 1})">@Language.January</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 2})">@Language.February</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 3})">@Language.March</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 4})">@Language.April</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 5})">@Language.Mai</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 6})">@Language.Juni</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 7})">@Language.July</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 8})">@Language.August</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 9})">@Language.September</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 10})">@Language.October</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 11})">@Language.November</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 12})">@Language.Dezember</a></li>
         @*<li>
                 <a href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
@@ -49,13 +48,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">@Language.NewWorkTime</h4>
+                <h4 class="modal-title">@Language.NewWorkTime @DateTime.Now.ToString()</h4>
             </div>
-            <div class="modal-body" id="client-detail-modal"></div>
-            @*<div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">@Language.Close</button>
-                <button type="button" class="btn btn-primary">@Language.SaveChanges</button>
-            </div>*@
+            <div class="modal-body" id="client-detail-modal">
+                @{Html.RenderPartial("StartRecordingNowDialog", Model);}
+            </div>
         </div>
     </div>
 </div>
@@ -85,15 +82,41 @@
 <script type="text/javascript">
     $("#startNowBtn").on("click", function (event) {
         event.preventDefault();
-        $.ajax({
-            url: "/User/StartRecordingNow/",
-            type: "GET",
-        }).done(function (result) {
-            $("#client-detail-modal").html(result);
-            $("#myModal").modal('show');
-        });
+        $("#myModal").modal('show');
     });
 </script>
+
+@*<script type="text/javascript">
+        $("#startNowBtn").on("click", function (event) {
+            event.preventDefault();
+            var modelDataJSON = '@Html.Raw(Json.Encode(Model))';
+            $.ajax({
+                url: "/User/StartRecordingNow/",
+                type: "POST",
+                data: { myObject1: modelDataJSON },
+                dataType: 'json'
+            }).done(function (result) {
+                $("#client-detail-modal").html(result);
+                $("#myModal").modal('show');
+            });
+        });
+    </script>*@
+@*<script type="text/javascript">
+    $("#startNowBtn").on("click", function (event) {
+        event.preventDefault();
+        var modelDataJSON = '@Html.Raw(Json.Encode(Model))';
+        $.ajax({
+            url: "/User/StartRecordingNow/?userId=" + @Model.SelectedUser,
+                type: "GET"
+            }).done(function (result) {
+                $("#client-detail-modal").html(result);
+                $("#myModal").modal('show');
+                $("#viewPlaceHolder").load("/User/StartRecordingNow/?userId=" + @Model.SelectedUser, { customerID: custID, viewName: "OrderDetails" });
+            });
+        });
+    </script>*@
+
+
 
 
 @*<script type="text/javascript">

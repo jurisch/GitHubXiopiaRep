@@ -47,5 +47,13 @@ namespace XiopiaWorkTimeTracker.Controllers
             }
             return View("Index");
         }
+
+        [HttpPost]
+        public ActionResult SetVariable(string key, string value)
+        {
+            Session[key] = value;
+
+            return this.Json(new { success = true });
+        }
     }
 }

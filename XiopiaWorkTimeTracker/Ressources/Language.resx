@@ -129,6 +129,9 @@
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
   <data name="DaysAweek" xml:space="preserve">
     <value>Days a week</value>
   </data>
@@ -169,7 +172,7 @@
     <value>Months a year</value>
   </data>
   <data name="NewWorkTime" xml:space="preserve">
-    <value>New Wirk Time fpr today</value>
+    <value>New Work Time for</value>
   </data>
   <data name="November" xml:space="preserve">
     <value>November</value>
@@ -191,6 +194,9 @@
   </data>
   <data name="September" xml:space="preserve">
     <value>September</value>
+  </data>
+  <data name="StartWork" xml:space="preserve">
+    <value>Start</value>
   </data>
   <data name="StartWorkNow" xml:space="preserve">
     <value>Start Work Now</value>
