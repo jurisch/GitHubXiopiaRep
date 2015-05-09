@@ -8,9 +8,9 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
 {
     public class UserToRoleRepository : Repository<UserToRoleMapping>
     {
-        //public List<UserToRoleMapping> GetByUserId(int id)
-        //{
-        //    return DbSet.Where(u => u.EmployeeId == id).ToList();
-        //}
+        public List<UserToRoleMapping> GetByUserGuid(Guid guid)
+        {
+            return DbSet.Where(u => u.EmployeeGuid == guid).ToList();
+        }
     }
 }

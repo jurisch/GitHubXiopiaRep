@@ -7,8 +7,8 @@
 </div>
 
 <div class="row">
-@*@if (Model.User.WorkTimeRoles != null)
-{*@
+@if (Model.User.HasRole("User"))
+{
     <div class="col-md-4">
         <h2>Mitarbeiter Zeiterfassung Bereich</h2>
         <p>
@@ -16,30 +16,30 @@
         </p>
         <p><a class="btn btn-default" href="/User/SelectMonthWorkTimes/?month=@DateTime.Now.Month.ToString()">Zu der Zeiterfassung &raquo;</a></p>
     </div>
-@*}
-@if (Model.User.WorkTimeRoles != null)
-{*@
+}
+@if (Model.User.HasRole("ProjectSupervisor"))
+    {
     <div class="col-md-4">
         <h2>Projekte Verwaltung Bereich</h2>
         <p>In diesem Bereich können die Projektverantwortliche (Vertrieb, Rekruter usw.) neue Projekte erstellen und die Mitarbeiter den Projekten zuordnen.</p>
         <p><a class="btn btn-default" href="/Projects">Zu Projekte Verwaltung &raquo;</a></p>
     </div>
-@*}
-@if (Model.User.WorkTimeRoles != null)
-{*@
+}
+@if (Model.User.HasRole("Accounting"))
+{
     <div class="col-md-4">
         <h2>Auswertung für Buchhaltung</h2>
         <p>In diesem Bereich könnnen die Backoffice Mitarbeiter die Zeiten nach unterschiedlichen Kriterien (Zeit Interval, Mitarbeiter, Projekt) filtern, auswerten, exportieren.</p>
         <p><a class="btn btn-default" href="/Reporting">Zu Reporting &raquo;</a></p>
     </div>
-@*}
-@if (Model.User.WorkTimeRoles != null)
-{*@
+}
+@if (Model.User.HasRole("Admin"))
+{
     <div class="col-md-4">
         <h2>Globale Settings</h2>
         <p>In diesem Bereich können die Applikation Administratoren globale Einstellungen für Applikation (Reguläre Arbeitszeiten, Feiertage, Anzahl der Arbeitsstunden usw.) setzen.</p>
         <p><a class="btn btn-default" href="/Admin">Zu Admin Bereich &raquo;</a></p>
     </div>
-@*}*@
+}
 </div>
     
