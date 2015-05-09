@@ -11,8 +11,7 @@ namespace XiopiaWorkTimeTracker.Models
 {
     public class UserViewModel
     {
-        public int SelectedUser { get; set; }
-        public string CurrentUser { get; set; }
+        public Employee User { get; set; }
         public string CurrentYear { get; set; }
         public string CurrentMonth { get; set; }
         public List<WorkTimeRow> WorkTimeRows { get; set; }

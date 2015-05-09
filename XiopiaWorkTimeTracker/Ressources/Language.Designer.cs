@@ -115,6 +115,24 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default Profile.
+        /// </summary>
+        public static string DefaultProfile {
+            get {
+                return ResourceManager.GetString("DefaultProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default settings for all employees.
+        /// </summary>
+        public static string DefaultSettingsForAllEmployees {
+            get {
+                return ResourceManager.GetString("DefaultSettingsForAllEmployees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dezember.
         /// </summary>
         public static string Dezember {
@@ -147,6 +165,15 @@ namespace Ressources {
         public static string Holidays {
             get {
                 return ResourceManager.GetString("Holidays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
         
@@ -250,6 +277,24 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pause in min..
+        /// </summary>
+        public static string PauseInMin {
+            get {
+                return ResourceManager.GetString("PauseInMin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project.
+        /// </summary>
+        public static string Project {
+            get {
+                return ResourceManager.GetString("Project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Report Illness.
         /// </summary>
         public static string ReportIllness {
@@ -264,6 +309,15 @@ namespace Ressources {
         public static string RequestHoloday {
             get {
                 return ResourceManager.GetString("RequestHoloday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Roles Management.
+        /// </summary>
+        public static string RolesManagement {
+            get {
+                return ResourceManager.GetString("RolesManagement", resourceCulture);
             }
         }
         
@@ -318,6 +372,15 @@ namespace Ressources {
         public static string UserHeader {
             get {
                 return ResourceManager.GetString("UserHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Settings.
+        /// </summary>
+        public static string UserSettings {
+            get {
+                return ResourceManager.GetString("UserSettings", resourceCulture);
             }
         }
         

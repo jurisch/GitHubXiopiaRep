@@ -135,6 +135,12 @@
   <data name="DaysAweek" xml:space="preserve">
     <value>Tage pro Woche</value>
   </data>
+  <data name="DefaultProfile" xml:space="preserve">
+    <value>Default Profile</value>
+  </data>
+  <data name="DefaultSettingsForAllEmployees" xml:space="preserve">
+    <value>Default Einstellungen für alle Mitarbeiter</value>
+  </data>
   <data name="Dezember" xml:space="preserve">
     <value>Dezember</value>
   </data>
@@ -146,6 +152,9 @@
   </data>
   <data name="Holidays" xml:space="preserve">
     <value>Feiertage</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
   </data>
   <data name="HoursAday" xml:space="preserve">
     <value>Stunden pro Tag:</value>
@@ -180,11 +189,20 @@
   <data name="October" xml:space="preserve">
     <value>Oktober</value>
   </data>
+  <data name="PauseInMin" xml:space="preserve">
+    <value>Pause in min.</value>
+  </data>
+  <data name="Project" xml:space="preserve">
+    <value>Projekt</value>
+  </data>
   <data name="ReportIllness" xml:space="preserve">
     <value>Krank melden</value>
   </data>
   <data name="RequestHoloday" xml:space="preserve">
     <value>Urlaub beantragen</value>
+  </data>
+  <data name="RolesManagement" xml:space="preserve">
+    <value>Rolen Verwaltung</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>Änderungen speichern</value>
@@ -203,6 +221,9 @@
   </data>
   <data name="UserHeader" xml:space="preserve">
     <value>Stundenaufstellung für den Monat</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>User Settings</value>
   </data>
   <data name="VacationDays" xml:space="preserve">
     <value>Urlaubstage</value>

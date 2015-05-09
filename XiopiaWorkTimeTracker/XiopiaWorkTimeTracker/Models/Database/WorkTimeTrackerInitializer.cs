@@ -58,22 +58,22 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
             usersRepo.SaveChanges();
 
-            //var projects = new List<Project>
-            //{
-            //    new Project{ Name = "Urlaub", ProjectResponsibleId = 0},
-            //    new Project{ Name = "Krank" , ProjectResponsibleId = 0},
-            //    new Project{ Name = "Momentan ohne Projekt", ProjectResponsibleId = 0},
-            //    new Project{ Name = "Weiterbildung", ProjectResponsibleId = 0},
-            //    new Project{ Name = "Business Development", ProjectResponsibleId = 0},
-            //    new Project{ Name = "Personalmanagement", ProjectResponsibleId = 0},
-            //    new Project{ Name = "Vorstellungsgespräche", ProjectResponsibleId = 0}
-            //};
-            //var settings = new List<Setting>
-            //{
-            //    new Setting{ DaysAweek = 5, HoursAday = 8, HoursAweek = 40, MonthsAyear=12, VacationDays=30},
-            //};
-            //settings.ForEach(r => context.GlobalSettings.Add(r));
-            //context.SaveChanges();
+            var projects = new List<Project>
+            {
+                new Project{ Name = "Urlaub", ProjectResponsibleId = 0},
+                new Project{ Name = "Krank" , ProjectResponsibleId = 0},
+                new Project{ Name = "Momentan ohne Projekt", ProjectResponsibleId = 0},
+                new Project{ Name = "Weiterbildung", ProjectResponsibleId = 0},
+                new Project{ Name = "Business Development", ProjectResponsibleId = 0},
+                new Project{ Name = "Personalmanagement", ProjectResponsibleId = 0},
+                new Project{ Name = "Vorstellungsgespräche", ProjectResponsibleId = 0}
+            };
+            var settings = new List<Setting>
+            {
+                new Setting{ DaysAweek = 5, HoursAday = 8, HoursAweek = 40, MonthsAyear=12, VacationDays=30},
+            };
+            settings.ForEach(r => context.GlobalSettings.Add(r));
+            context.SaveChanges();
         }
     }
 }

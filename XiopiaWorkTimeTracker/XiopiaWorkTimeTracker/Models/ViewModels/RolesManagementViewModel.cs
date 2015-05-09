@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace XiopiaWorkTimeTracker.Models
+namespace XiopiaWorkTimeTracker.Models.ViewModels
 {
-    public class SettingsViewModel
+    public class RolesManagementViewModel
     {
     }
 }

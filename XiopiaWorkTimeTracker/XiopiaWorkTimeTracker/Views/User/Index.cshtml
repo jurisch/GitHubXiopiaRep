@@ -16,7 +16,7 @@
             @using(@Html.BeginForm("SelectMonthWorkTimes", "User", FormMethod.Get))
             { 
                 @Html.Hidden("month", DateTime.Now.Month)
-                @Html.DropDownListFor(ul => ul.SelectedUser, Model.UserList, new { id="userList"})
+                @Html.DropDownListFor(ul => ul.User.Id, Model.UserList, new { id="userList"})
                 <input type="button" id="btnSubmit" value="Select"/>
             }
         </div>

@@ -3,7 +3,7 @@
 @model SettingsViewModel
 
 <section class="data-settings-section">
-    <h3>Default Settings</h3>
+    <h3>@Language.DefaultSettingsForAllEmployees</h3>
     @using (Html.BeginForm("SaveSettings", "Admin", FormMethod.Post))
     {
         <table data-toggle="table">

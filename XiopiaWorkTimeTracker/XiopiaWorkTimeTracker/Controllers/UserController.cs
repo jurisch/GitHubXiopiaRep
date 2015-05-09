@@ -34,15 +34,13 @@ namespace XiopiaWorkTimeTracker.Controllers
 
         public ActionResult SelectMonthWorkTimes(int month)
         {
-            var userViewModel = new UserViewModel();
-            userViewModel.CurrentUser = "Anonyme";
             var tmp = Session["userId"];
             if (tmp != null)
             {
-                var currentUser = this.usersRepository.GetById(Int32.Parse(tmp.ToString()));
-                if (currentUser != null)
+                var userViewModel = new UserViewModel();
+                userViewModel.User = this.usersRepository.GetById(Int32.Parse(tmp.ToString()));
+                if (userViewModel.User != null)
                 {
-                    userViewModel.CurrentUser = currentUser.FirstName + ", " + currentUser.LastName;
                     userViewModel.WorkTimeRows = WorkTimesBuilder.GetMonth(month);
                     userViewModel.CurrentYear = DateTime.Now.Year.ToString();
                     userViewModel.CurrentMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month);

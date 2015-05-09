@@ -6,7 +6,7 @@
 
 <div class="jumbotron">
     <h1 class="panel-title">@Language.UserHeader @Model.CurrentMonth @Model.CurrentYear</h1>
-    <p class="data-current-user-title">@Model.CurrentUser</p>
+    <p class="data-current-user-title">@Model.User.FirstName @Model.User.LastName</p>
     <nav class="navbar navbar-default">
         <button id="startNowBtn" type="button" class="btn btn-primary btn-lg">@Language.StartWorkNow</button>
         <button type="button" class="btn btn-primary btn-lg">@Language.EndWork</button>
@@ -60,16 +60,16 @@
 <table class="table-hover">
     <thead>
         <tr>
-            <th>Datum</th>
-            <th>Kommen</th>
-            <th>Pause in min.</th>
-            <th>Gehen</th>
-            <th>Projekt</th>
+            <th>@Language.Date</th>
+            <th>@Language.StartWork</th>
+            <th>@Language.PauseInMin</th>
+            <th>@Language.EndWork</th>
+            <th>@Language.Project</th>
         </tr>
     </thead>
     @foreach (var cur in Model.WorkTimeRows)
     {
-        <tr class="date-dayofweek-@cur.Date.ToString("ddd")">
+        <tr class="date-dayofweek-@cur.Date.ToString("ddd")" >
             <td>@cur.Date.ToShortDateString() @cur.Date.ToString("ddd")</td>
             <td>@cur.StartTime</td>
             <td>@cur.PauseLength</td>
@@ -81,7 +81,6 @@
 
 <script type="text/javascript">
     $("#startNowBtn").on("click", function (event) {
-        event.preventDefault();
         $("#myModal").modal('show');
     });
 </script>
