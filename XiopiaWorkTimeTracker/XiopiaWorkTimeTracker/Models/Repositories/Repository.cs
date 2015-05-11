@@ -32,7 +32,7 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
             return DbSet.Find(id);
         }
 
-        public void Add(T entity)
+        public void Add (T entity)
         {
             DbSet.Add(entity);
         }
