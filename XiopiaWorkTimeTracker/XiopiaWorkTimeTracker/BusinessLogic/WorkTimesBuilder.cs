@@ -24,6 +24,7 @@ namespace XiopiaWorkTimeTracker.BusinessLogic
                 });
             }
             return entryList;
+
         }
     }
 }
