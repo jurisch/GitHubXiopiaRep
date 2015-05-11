@@ -13,6 +13,6 @@ namespace WorkTimeTracker.Models
 
         public int ProjectResponsibleId { get; set; }
 
-        public List<int> Members { get; set; }
+        public virtual ICollection<int> Members { get; set; }
     }
 }
