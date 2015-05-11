@@ -56,3 +56,80 @@ modal-content {
     width: 600px !important;
     margin: 30px auto !important;
 }
+
+/*start Alpay*/
+.webGrid {
+        font-family: verdana,arial,sans-serif;
+        font-size: 12px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+    }
+.webGrid-header {
+		text-align: center;
+		background: #b5cfd2;
+		border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #999999;
+}
+.webGrid-footer {
+		text-align: center;
+}
+.webGrid-alternating-row {
+		background: #ffffff;
+		border-bottom:solid 0px;
+		border-left:solid 0px;
+		border-right:solid 0px;
+        border-width: 1px;
+        padding: 8px;
+        border-color: #333333;
+}
+.webGrid-selected-row {
+		background: #ff6a00;
+}
+.webGrid-row-style {
+		background: #ffffff;
+		border-bottom:solid 0px;
+		border-left:solid 0px;
+		border-right:solid 0px;
+        border-width: 1px;
+        padding: 8px;
+        border-color: #333333;
+}
+.webGrid-Date {
+	width:12%;
+	border-right:solid 0px;
+	border-width: 1px;
+	font-weight:bold;
+}
+.webGrid-StartTime {
+	width:15%;
+	border-right:solid 0px;
+	border-width: 1px;
+}
+.webGrid-PauseLength {
+	width:15%;
+	border-right:solid 0px;
+	border-width: 1px;
+}
+.webGrid-EndTime {
+	width:15%;
+	border-right:solid 0px;
+	border-width: 1px;
+}
+
+
+.clsRed {
+	background: peachpuff;
+}
+.clsNormal {
+	background: #ffffff;
+}
+.clickable{
+    cursor: pointer;
+    background: #ffff99;
+}
+
+/*end Alpay*/

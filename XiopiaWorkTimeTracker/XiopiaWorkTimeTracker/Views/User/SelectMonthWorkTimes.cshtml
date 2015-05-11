@@ -2,6 +2,7 @@
 @using Ressources
 @model UserViewModel
 
+
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
 <div class="jumbotron">
@@ -57,7 +58,7 @@
     </div>
 </div>
 <!--<table class="table-striped table-hover">-->
-<table class="table-hover">
+<!--table class="table-hover">
     <thead>
         <tr>
             <th>@Language.Date</th>
@@ -77,7 +78,75 @@
             <td>@cur.Project</td>
         </tr>
     }
-</table>
+</table-->
+
+
+<div id="DivGrid" style="width:100%;">
+	@{
+		var grid = new WebGrid(Model.WorkTimeRows, canPage: true, defaultSort: "Date", rowsPerPage: 100);
+		@grid.GetHtml(tableStyle: "webGrid",
+					  headerStyle: "webGrid-header",
+					  footerStyle: "webGrid-footer",
+					  alternatingRowStyle: "webGrid-alternating-row",
+					  selectedRowStyle: "webGrid-selected-row",
+					  rowStyle: "webGrid-row-style",
+					  htmlAttributes: new { id = "tblWebGrid" },
+					  columns: grid.Columns(
+												grid.Column("Date", "Datum", format: (item) => string.Format("{0:dd/MM/yyyy ddd}", item.Date), style: "webGrid-Date"),
+												grid.Column("StartTime", "Kommen", format: (item) => string.Format("{0:hh:mm}", item.StartTime), style: "webGrid-StartTime"),
+												grid.Column("PauseLength", "Pause in min.", format: (item) => string.Format("{0:hh:mm}", item.PauseLength), style: "webGrid-PauseLength"),
+												grid.Column("EndTime", "Gehen", format: (item) => string.Format("{0:hh:mm}", item.EndTime), style: "webGrid-EndTime"),
+												grid.Column("Project", header: "Projekt", style: "webGrid-Project")
+											)
+					 );
+
+	}
+
+</div>
+
+<div class="modal fade" id="newWorkTimeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="exampleModalLabel">New message</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="Datum" class="control-label">Datum:</label>
+						<input type="date" class="form-control" id="Datum">
+					</div>
+					<div class="form-group">
+						<label for="Kommen" class="control-label">Kommen:</label>
+						<input type="datetime-local" class="form-control" id="Kommen">
+					</div>
+					<div class="form-group">
+						<label for="Pause" class="control-label">Pause in min.:</label>
+						<input type="datetime-local" class="form-control" id="Pause">
+					</div>
+					<div class="form-group">
+						<label for="Gehen" class="control-label">Gehen:</label>
+						<input type="datetime" class="form-control" id="Gehene">
+					</div>
+					<div class="form-group">
+						<label for="Projekt" class="control-label">Projekt:</label>
+						<input type="text" class="form-control" id="Projekt">
+					</div>
+					<div class="form-group">
+						<label for="Beschreibung" class="control-label">Beschreibung:</label>
+						<textarea class="form-control" id="Beschreibung"></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save Time</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <script type="text/javascript">
     $("#startNowBtn").on("click", function (event) {
@@ -115,6 +184,44 @@
         });
     </script>*@
 
+
+
+
+<script type="text/javascript">
+	function styleGrid() {
+		$("#tblWebGrid tr:not(:first)").each(function () {
+			var aptStatus = $(this).find("td:nth-child(1)").html();
+			if ((aptStatus.indexOf("Sa") >= 0) || (aptStatus.indexOf("So") >= 0)) {
+				$(this).find("td:nth-child(1)").addClass("clsRed");
+			} else {
+				$(this).find("td:nth-child(1)").addClass("clsNormal");
+			}
+		});
+	}
+
+	$(document).ready(function () {
+		styleGrid();
+	});
+</script>
+
+<script type="text/javascript">
+	$(function(){
+		$('#tblWebGrid tr').hover(function () {
+			$(this).toggleClass('clickable');
+		}).on('click', function () {
+			//TODO:create detail page or Model Dialog view for selected date (abir)
+			//location.href = '/Details/' + $(this).find('td:first').text();
+			var data = new Date($(this).find('td:first').text());
+			var dt = new Date();
+			var time = dt.getHours() + ":" + dt.getMinutes();
+			var modal = $("#newWorkTimeModal");
+			modal.find('.modal-title').text('New WorkTime for @Model.CurrentUser')
+			modal.find('#Datum').val(data);
+			modal.find('#Kommen').val(time);
+			$("#newWorkTimeModal").modal('show');
+		});
+	});
+</script>
 
 
 
