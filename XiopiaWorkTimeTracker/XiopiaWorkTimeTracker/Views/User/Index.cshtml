@@ -2,6 +2,8 @@
 @using XiopiaWorkTimeTracker.Models
 @model UserViewModel
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
 <header>
     <h1>Test User Auswahl</h1>
 </header>
@@ -14,9 +16,19 @@
             @using(@Html.BeginForm("SelectMonthWorkTimes", "User", FormMethod.Get))
             { 
                 @Html.Hidden("month", DateTime.Now.Month)
-                @Html.DropDownListFor(ul => ul.SelectedUser, Model.UserList)
-                <input type="submit"/>
+                @Html.DropDownListFor(ul => ul.User.Id, Model.UserList, new { id="userList"})
+                <input type="button" id="btnSubmit" value="Select"/>
             }
         </div>
     </section>
+    <script type="text/javascript">
+        $("#btnSubmit").on("click", function (event) {
+            event.preventDefault();
+            $(function () {
+                $.post('/Admin/SetVariable',
+                       { key: "userId", value: $("#userList").val() },
+                       function (data) {}).done(function () {$(location).attr('href', '/');});
+            });
+        })
+    </script>
 </body>

@@ -24,9 +24,14 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
         public DbSet<Setting> GlobalSettings { get; set; }
 
+        public DbSet<UserToRoleMapping> UserToRoleMappings { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            //modelBuilder.Entity<Employee>().HasMany(e => e.WorkTimeRoles)
+            //    .WithMany(e => e.Employees);
         }
 
     }

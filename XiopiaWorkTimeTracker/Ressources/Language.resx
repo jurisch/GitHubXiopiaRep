@@ -129,8 +129,17 @@
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
   <data name="DaysAweek" xml:space="preserve">
     <value>Days a week</value>
+  </data>
+  <data name="DefaultProfile" xml:space="preserve">
+    <value>Default Profile</value>
+  </data>
+  <data name="DefaultSettingsForAllEmployees" xml:space="preserve">
+    <value>Default settings for all employees</value>
   </data>
   <data name="Dezember" xml:space="preserve">
     <value>Dezember</value>
@@ -143,6 +152,9 @@
   </data>
   <data name="Holidays" xml:space="preserve">
     <value>Holidays</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
   </data>
   <data name="HoursAday" xml:space="preserve">
     <value>Hours in a day</value>
@@ -172,7 +184,7 @@
     <value>Add New project</value>
   </data>
   <data name="NewWorkTime" xml:space="preserve">
-    <value>New Wirk Time fpr today</value>
+    <value>New Work Time for</value>
   </data>
   <data name="November" xml:space="preserve">
     <value>November</value>
@@ -180,11 +192,20 @@
   <data name="October" xml:space="preserve">
     <value>October</value>
   </data>
+  <data name="PauseInMin" xml:space="preserve">
+    <value>Pause in min.</value>
+  </data>
+  <data name="Project" xml:space="preserve">
+    <value>Project</value>
+  </data>
   <data name="ReportIllness" xml:space="preserve">
     <value>Report Illness</value>
   </data>
   <data name="RequestHoloday" xml:space="preserve">
     <value>Request Holoday</value>
+  </data>
+  <data name="RolesManagement" xml:space="preserve">
+    <value>Roles Management</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>Save Changes</value>
@@ -195,11 +216,17 @@
   <data name="September" xml:space="preserve">
     <value>September</value>
   </data>
+  <data name="StartWork" xml:space="preserve">
+    <value>Start</value>
+  </data>
   <data name="StartWorkNow" xml:space="preserve">
     <value>Start Work Now</value>
   </data>
   <data name="UserHeader" xml:space="preserve">
     <value>Time tracking for month</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>User Settings</value>
   </data>
   <data name="VacationDays" xml:space="preserve">
     <value>Vacation days</value>

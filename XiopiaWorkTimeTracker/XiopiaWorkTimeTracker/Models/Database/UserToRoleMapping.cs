@@ -7,15 +7,14 @@ using System.Web;
 
 namespace XiopiaWorkTimeTracker.Models.Database
 {
-    public class WorkTimeRole
+    public class UserToRoleMapping
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        [Required]
+        public Guid EmployeeGuid { get; set; }
 
-        public virtual List<UserToRoleMapping> UserToRoleMappings { get; set; }
-
-        //public virtual List<Employee> Employees { get; set; }
-
+        [Required]
+        public int WorkTimeRoleId { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using XiopiaWorkTimeTracker.Models;
 using XiopiaWorkTimeTracker.Models.Database;
+using XiopiaWorkTimeTracker.Models.ViewModels;
 
 namespace XiopiaWorkTimeTracker.Controllers
 {
@@ -46,6 +47,20 @@ namespace XiopiaWorkTimeTracker.Controllers
                 }
             }
             return View("Index");
+        }
+
+        public RolesManagementViewModel GetRolesManagementViewModel ()
+        {
+            RolesManagementViewModel model = new RolesManagementViewModel();
+            return model;
+        }
+
+        [HttpPost]
+        public ActionResult SetVariable(string key, string value)
+        {
+            Session[key] = value;
+
+            return this.Json(new { success = true });
         }
     }
 }
