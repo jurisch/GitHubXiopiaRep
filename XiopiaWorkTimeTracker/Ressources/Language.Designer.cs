@@ -88,6 +88,15 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back to List.
+        /// </summary>
+        public static string BacktoList {
+            get {
+                return ResourceManager.GetString("BacktoList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {
@@ -106,6 +115,24 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this Project?.
+        /// </summary>
+        public static string deletePrWarning {
+            get {
+                return ResourceManager.GetString("deletePrWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dezember.
         /// </summary>
         public static string Dezember {
@@ -120,6 +147,24 @@ namespace Ressources {
         public static string EndWork {
             get {
                 return ResourceManager.GetString("EndWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please write the Project responsible name..
+        /// </summary>
+        public static string errProjectResponsible {
+            get {
+                return ResourceManager.GetString("errProjectResponsible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please write the Projects&apos;s name.
+        /// </summary>
+        public static string errProjName {
+            get {
+                return ResourceManager.GetString("errProjName", resourceCulture);
             }
         }
         
@@ -214,6 +259,15 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New project.
+        /// </summary>
+        public static string newProject {
+            get {
+                return ResourceManager.GetString("newProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Wirk Time fpr today.
         /// </summary>
         public static string NewWorkTime {
@@ -237,6 +291,24 @@ namespace Ressources {
         public static string October {
             get {
                 return ResourceManager.GetString("October", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project name.
+        /// </summary>
+        public static string ProjectName {
+            get {
+                return ResourceManager.GetString("ProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project responsible.
+        /// </summary>
+        public static string ProjectResponsible {
+            get {
+                return ResourceManager.GetString("ProjectResponsible", resourceCulture);
             }
         }
         

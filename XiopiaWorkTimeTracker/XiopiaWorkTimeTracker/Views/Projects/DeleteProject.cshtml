@@ -1,0 +1,38 @@
+﻿@using Ressources
+@model XiopiaWorkTimeTracker.Models.Database.Project
+
+@{
+    ViewBag.Title = Language.Delete;
+}
+
+<h3>@Language.deletePrWarning</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectResponsibleId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectResponsibleId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="@Language.Delete" class="btn btn-default" /> |
+            @Html.ActionLink(@Language.BacktoList, "Index")
+        </div>
+    }
+</div>

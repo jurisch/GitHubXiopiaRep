@@ -168,6 +168,9 @@
   <data name="MonthsAyear" xml:space="preserve">
     <value>Months a year</value>
   </data>
+  <data name="newProject" xml:space="preserve">
+    <value>Add New project</value>
+  </data>
   <data name="NewWorkTime" xml:space="preserve">
     <value>New Wirk Time fpr today</value>
   </data>
@@ -200,5 +203,26 @@
   </data>
   <data name="VacationDays" xml:space="preserve">
     <value>Vacation days</value>
+  </data>
+  <data name="deletePrWarning" xml:space="preserve">
+    <value>Are you sure you want to delete this Project?</value>
+  </data>
+  <data name="BacktoList" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="errProjName" xml:space="preserve">
+    <value>Please write the Projects's name</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Project name</value>
+  </data>
+  <data name="ProjectResponsible" xml:space="preserve">
+    <value>Project responsible</value>
+  </data>
+  <data name="errProjectResponsible" xml:space="preserve">
+    <value>Please write the Project responsible name.</value>
   </data>
 </root>

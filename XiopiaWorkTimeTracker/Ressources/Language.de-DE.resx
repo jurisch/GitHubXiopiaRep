@@ -168,6 +168,9 @@
   <data name="MonthsAyear" xml:space="preserve">
     <value>Monats im Jahr</value>
   </data>
+  <data name="newProject" xml:space="preserve">
+    <value>Neues Projekt erstellen</value>
+  </data>
   <data name="NewWorkTime" xml:space="preserve">
     <value>Neue Arbeitzeit für heute</value>
   </data>
@@ -200,5 +203,26 @@
   </data>
   <data name="VacationDays" xml:space="preserve">
     <value>Urlaubstage</value>
+  </data>
+  <data name="deletePrWarning" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie dieses Projekt löschen wollen?</value>
+  </data>
+  <data name="BacktoList" xml:space="preserve">
+    <value>zurück zu Liste</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="errProjName" xml:space="preserve">
+    <value>Bitte schreiben Sie den Namen des Projektes</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Projektname</value>
+  </data>
+  <data name="ProjectResponsible" xml:space="preserve">
+    <value>Projektverantwortlicher</value>
+  </data>
+  <data name="errProjectResponsible" xml:space="preserve">
+    <value>Bitte schreiben Sie den Namen des Projektverantwortlichers</value>
   </data>
 </root>
