@@ -215,7 +215,7 @@
 			var dt = new Date();
 			var time = dt.getHours() + ":" + dt.getMinutes();
 			var modal = $("#newWorkTimeModal");
-			modal.find('.modal-title').text('New WorkTime for @Model.CurrentUser')
+			modal.find('.modal-title').text('New WorkTime for @Model.User.FirstName @Model.User.LastName')
 			modal.find('#Datum').val(data);
 			modal.find('#Kommen').val(time);
 			$("#newWorkTimeModal").modal('show');
