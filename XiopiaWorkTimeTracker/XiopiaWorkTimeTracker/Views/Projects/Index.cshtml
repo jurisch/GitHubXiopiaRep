@@ -1,45 +1,99 @@
 ﻿@using Ressources
-@*@model IEnumerable<XiopiaWorkTimeTracker.Models.Database.Project>*@
 @model XiopiaWorkTimeTracker.Models.ViewModels.ProjectViewModel
-
-@{
-	ViewBag.Title = "Projekt Verwaltung";
-}
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
-<h2>Projekt Verwaltung</h2>
+<h2>@Language.ProjectsManagement</h2>
 <p>
-	<button id="newPrjectBtn" type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("CreateNewProject", "Projects")'">@Language.newProject</button>
+    @*<button id="newPrjectBtn" type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("CreateNewProject", "Projects")'">@Language.newProject</button>*@
+    <button id="newPrjectBtn" type="button" class="btn btn-primary btn-lg">@Language.newProject</button>
 </p>
-<table class="table">
-	<tr>
-		<th>
-			@*@Html.DisplayNameFor(Model.projects => Model.projects)*@
-			name
-		</th>
-		<th>
-			@*@Html.DisplayNameFor(model => model.ProjectResponsibleId)*@
-			member
-		</th>
-		<th></th>
-	</tr>
 
-	@foreach (var item in Model.projects)
-	{
-		<tr>
-			<td>
-				@Html.DisplayFor(modelItem => item.Name)
-			</td>
-			<td>
-				@*@Html.Display(item.Employees.Single(e => e.Id == item.Id).FirstName)*@
-			</td>
-			<td>
-				@Html.ActionLink("Edit", "EditProject", new { id = item.Id }) |
-				@*Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
-				@Html.ActionLink("Delete", "DeleteProject", new { id = item.Id })
-			</td>
-		</tr>
-	}
+<div id="DivGrid" style="width:100%;">
+    @{
+        var grid = new WebGrid(Model.projects, canPage: true, defaultSort: "Name", rowsPerPage: 100);
+        @grid.GetHtml(tableStyle: "webGrid",
+                      headerStyle: "webGrid-header",
+                      footerStyle: "webGrid-footer",
+                      alternatingRowStyle: "webGrid-alternating-row",
+                      selectedRowStyle: "webGrid-selected-row",
+                      rowStyle: "webGrid-row-style",
+                      htmlAttributes: new { id = "tblWebGrid" },
+                      columns: grid.Columns(grid.Column("Name", Language.ProjectName, null, style: "webGrid-Date"),
+                                            grid.Column("ProjectResponsible", Language.ProjectResponsible, null, style: "webGrid-StartTime"),
+                                            grid.Column("Members", Language.Members, format: (item) => item.Members != null ? "" : "", style: "webGrid-Project")));
+    }
 
-</table>
+</div>
+
+
+
+<div>
+    @*@Html.ActionLink("Edit", "EditProject", new { id = item.Id }) |*@
+    @*Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+    @*@Html.ActionLink("Delete", "DeleteProject", new { id = item.Id })*@
+
+</div>
+<script type="text/javascript">
+    $("#newPrjectBtn").on("click", function () {
+        var myRow = '<tr id="newPrRow"> \
+                        <td><input id="newProjName" type="text" title="@Language.TooltipPleaseEnterProjectName" autofocus  required/></td>\
+                        <td><input id="newResponsible" type="text" title=@Language.TooltipPleaseEnterProjectResponsible required/></td>\
+                        <td></td>\
+                    </tr>';
+        var postAndCancelButtons = '<div id="newPrButtons">\
+                                <button id="postNewProjBtn" type="button" class="btn btn-primary btn-lg">@Language.Save</button>\
+                                <button id="cancelNewProjBtn" type="button" class="btn btn-default btn-lg">@Language.Cancel</button>\
+                            </div>';
+        $("#tblWebGrid > tbody:last").append(myRow);
+        $("#tblWebGrid").after(postAndCancelButtons);
+        $("#cancelNewProjBtn").on("click", function () {
+            $("#newPrRow").remove();
+            $("#newPrButtons").remove();
+        });
+        $("#postNewProjBtn").on("click", function () {
+            var newProjData = { "Name": $("#newProjName").val(), "ProjectResponsible": $("#newResponsible").val() };
+            $.ajax({
+                type: "POST",
+                url: "/Projects/CreateNewProject",
+                data: newProjData,
+                datatype: "html",
+                success: function (data) {
+                    alert("Erfolg");
+                    var newRow = '<tr class="webGrid-row-style"> \
+                        <td class="webGrid-Date">' + $("#newProjName").val() + '</td>\
+                        <td class="webGrid-Project">' + $("#newResponsible").val() + '</td>\
+                        <td  class="webGrid-Project">aaaaa </td>\
+                    </tr>';
+                    $("#newPrRow").remove();
+                    $("#newPrButtons").remove();
+                    $("#tblWebGrid > tbody:last").append(newRow);
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        });
+        @*$("#newProjName").on("blur", function () {
+            if ($("#newProjName").val() == "") {
+                alert("@Language.TooltipPleaseEnterProjectName");
+                $("#newProjName").focus();
+            }
+            else {
+                $("#newResponsible").on("focus", function () {
+                    $("#newResponsible").on("blur", function () {
+                        if ($("#newResponsible").val() == "") {
+                            alert("@Language.TooltipPleaseEnterProjectResponsible");
+                            $("#newResponsible").focus();
+                        }
+                    });
+
+                });
+            }
+        });*@
+
+    });
+</script>
+
+
+

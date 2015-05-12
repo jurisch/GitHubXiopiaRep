@@ -155,6 +155,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\Employee.cs" />
+    <Compile Include="Models\Database\ProjectToMembersMapping.cs" />
     <Compile Include="Models\Database\SettingsModel.cs" />
     <Compile Include="Models\Database\Project.cs" />
     <Compile Include="Models\Database\UserToRoleMapping.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Models\Database\WorkTimeRole.cs" />
     <Compile Include="Models\Database\WorkTimeTrackerInitializer.cs" />
     <Compile Include="Models\Repositories\ProjectsRepository.cs" />
+    <Compile Include="Models\Repositories\ProjectToMembersRepository.cs" />
     <Compile Include="Models\Repositories\Repository.cs" />
     <Compile Include="Models\Repositories\RolesRepository.cs" />
     <Compile Include="Models\Repositories\UserRepository.cs" />

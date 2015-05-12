@@ -211,7 +211,8 @@
 		}).on('click', function () {
 			//TODO:create detail page or Model Dialog view for selected date (abir)
 			//location.href = '/Details/' + $(this).find('td:first').text();
-			var data = new Date($(this).find('td:first').text());
+		    var data = new Date($(this).find('td:first').text());
+		    debugger;
 			var dt = new Date();
 			var time = dt.getHours() + ":" + dt.getMinutes();
 			var modal = $("#newWorkTimeModal");

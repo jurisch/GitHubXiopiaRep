@@ -18,9 +18,9 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
             return DbSet.Where(ac => ac.Account.Equals(acc)).First();
         }
 
-        public void AddRole(int userId, int roleId)
-        {
-            var user = DbSet.Find(userId);
-        }
+        //public void AddRole(int userId, int roleId)
+        //{
+        //    var user = DbSet.Add(userId);
+        //}
     }
 }

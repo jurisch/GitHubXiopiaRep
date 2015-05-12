@@ -252,4 +252,22 @@
   <data name="errProjectResponsible" xml:space="preserve">
     <value>Please write the Project responsible name.</value>
   </data>
+  <data name="Members" xml:space="preserve">
+    <value>Members</value>
+  </data>
+  <data name="ProjectsManagement" xml:space="preserve">
+    <value>Projects Management</value>
+  </data>
+  <data name="TooltipPleaseEnterProjectName" xml:space="preserve">
+    <value>Please Enter Project Name</value>
+  </data>
+  <data name="TooltipPleaseEnterProjectResponsible" xml:space="preserve">
+    <value>Please enter a project responsible</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

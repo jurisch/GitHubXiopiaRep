@@ -97,6 +97,15 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {
@@ -286,6 +295,15 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Members.
+        /// </summary>
+        public static string Members {
+            get {
+                return ResourceManager.GetString("Members", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Months a year.
         /// </summary>
         public static string MonthsAyear {
@@ -304,7 +322,6 @@ namespace Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Wirk Time fpr today.
         ///   Looks up a localized string similar to New Work Time for.
         /// </summary>
         public static string NewWorkTime {
@@ -332,6 +349,24 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pause in min..
+        /// </summary>
+        public static string PauseInMin {
+            get {
+                return ResourceManager.GetString("PauseInMin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project.
+        /// </summary>
+        public static string Project {
+            get {
+                return ResourceManager.GetString("Project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project name.
         /// </summary>
         public static string ProjectName {
@@ -350,20 +385,11 @@ namespace Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pause in min..
+        ///   Looks up a localized string similar to Projects Management.
         /// </summary>
-        public static string PauseInMin {
+        public static string ProjectsManagement {
             get {
-                return ResourceManager.GetString("PauseInMin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Project.
-        /// </summary>
-        public static string Project {
-            get {
-                return ResourceManager.GetString("Project", resourceCulture);
+                return ResourceManager.GetString("ProjectsManagement", resourceCulture);
             }
         }
         
@@ -391,6 +417,15 @@ namespace Ressources {
         public static string RolesManagement {
             get {
                 return ResourceManager.GetString("RolesManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         
@@ -436,6 +471,24 @@ namespace Ressources {
         public static string StartWorkNow {
             get {
                 return ResourceManager.GetString("StartWorkNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Enter Project Name.
+        /// </summary>
+        public static string TooltipPleaseEnterProjectName {
+            get {
+                return ResourceManager.GetString("TooltipPleaseEnterProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a project responsible.
+        /// </summary>
+        public static string TooltipPleaseEnterProjectResponsible {
+            get {
+                return ResourceManager.GetString("TooltipPleaseEnterProjectResponsible", resourceCulture);
             }
         }
         

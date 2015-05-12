@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using XiopiaWorkTimeTracker.Models.Database;
+using XiopiaWorkTimeTracker.Models.Repositories;
 using XiopiaWorkTimeTracker.Models.ViewModels;
 
 namespace XiopiaWorkTimeTracker.Controllers
@@ -13,141 +10,80 @@ namespace XiopiaWorkTimeTracker.Controllers
         // GET: Projects
         public ActionResult Index()
         {
-			//using (WorkTimeTrackerDbContext accdb = new WorkTimeTrackerDbContext()) {
-			//	List<Project> projectmodel = accdb.Projects.ToList();
-			//	return View(projectmodel);
-			//}
+            var projectsRepo = new ProjectsRepository();
+            var userRepo = new UserRepository();
+            var allprojects = projectsRepo.GetAll();
+            var allemployes = userRepo.GetAll();
+            var viewModel = new ProjectViewModel(allprojects, allemployes);
+            return View(viewModel);
+        }
 
-			using (WorkTimeTrackerDbContext accdb = new WorkTimeTrackerDbContext())
-			{
-				var allprojects = accdb.Projects.ToList();
-				var allemployes = accdb.Employees.ToList();
-				var viewModel = new ProjectViewModel(allprojects, allemployes);
+        public ActionResult CreateNewProject()
+        {
+            var userRepo = new UserRepository();
+            var projectModel = new Project();
+            return View(projectModel);
+        }
 
-				return View(viewModel);
-			}
+        [HttpPost]
+        public ActionResult CreateNewProject(Project model)
+        {
+            if (ModelState.IsValid)
+            {
+                var projectsRepo = new ProjectsRepository();
+                var newProject = new Project();
+                newProject.Name = model.Name;
+                newProject.ProjectResponsible = model.ProjectResponsible;
+                projectsRepo.Add(newProject);
+                projectsRepo.SaveChanges();
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false });
+            }
+        }
 
-		}
+        public ActionResult EditProject(int Id)
+        {
+            var projectsRepo = new ProjectsRepository();
+            return View(projectsRepo.Get(Id));
+        }
 
-		public ActionResult CreateNewProject(){
-			using (WorkTimeTrackerDbContext accdb = new WorkTimeTrackerDbContext())
-			{
-				var projectModel = new Project() {
+        [HttpPost]
+        public ActionResult EditProject(int? Id, Project project)
+        {
+            var projectsRepo = new ProjectsRepository();
+            projectsRepo.SetModified(project);
+            projectsRepo.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-					Employees = accdb.Employees.ToList()
-				};
-				return View(projectModel);
-			}
-		}
+        public ActionResult DeleteProject(int Id)
+        {
+            var projectsRepo = new ProjectsRepository();
+            return View(projectsRepo.Get(Id));
+        }
 
-		[HttpPost]
-		public ActionResult CreateNewProject(Project model)
-		{
-			try
-			{
-				using (WorkTimeTrackerDbContext accdb = new WorkTimeTrackerDbContext())
-				{
-					var Project = accdb.Projects.ToList();
-					if (!Project.Exists(p => p.Name == model.Name))
-					{
-						Project newProject = new Project();
-						newProject.Name = model.Name;
-						newProject.ProjectResponsibleId = model.ProjectResponsibleId;
-						accdb.Projects.Add(newProject);
-						accdb.SaveChanges();
-						return RedirectToAction("Index");
-					}
-					else
-					{
-						return View();
-					}
+        [HttpPost]
+        public ActionResult DeleteProject(int? Id, Project project)
+        {
+            var projectsRepo = new ProjectsRepository();
+            projectsRepo.SetDeleted(project);
+            projectsRepo.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-				}
-			}
-			catch
-			{
-				return View();
-			}
-		}
-
-
-
-
-		public ActionResult EditProject(int? Id)
-		{
-			try
-			{
-				using (WorkTimeTrackerDbContext accdb = new WorkTimeTrackerDbContext())
-				{
-					var Project = accdb.Projects.ToList();
-					return View(accdb.Projects.Find(Id));
-				}
-
-			}
-			catch
-			{
-				return View();
-			}
-		}
-		[HttpPost]
-		public ActionResult EditProject(int? Id, Project project)
-		{
-			try
-			{
-				using (WorkTimeTrackerDbContext accdb = new WorkTimeTrackerDbContext())
-				{
-					accdb.Entry(project).State = System.Data.Entity.EntityState.Modified;
-					accdb.SaveChanges();
-					return RedirectToAction("Index");
-				}
-			}
-			catch
-			{
-				return View();
-			}
-
-		}
+        [HttpPost]
+        public JsonResult GetAllEmployeesJson(int? number)
+        {
+            var userRepo = new UserRepository();
+            var employee = userRepo.GetAll();
+            if (null != employee)
+                return Json(employee, JsonRequestBehavior.AllowGet);
+            return null;
+        }
 
 
-
-		public ActionResult DeleteProject(int? Id)
-		{
-			using (WorkTimeTrackerDbContext accdb = new WorkTimeTrackerDbContext())
-			{
-				return View(accdb.Projects.Find(Id));
-			}
-		}
-		[HttpPost]
-		public ActionResult DeleteProject(int? Id, Project project)
-		{
-			try
-			{
-				using (WorkTimeTrackerDbContext accdb = new WorkTimeTrackerDbContext())
-				{
-					accdb.Entry(project).State = System.Data.Entity.EntityState.Deleted;
-					accdb.SaveChanges();
-					return RedirectToAction("Index");
-				}
-			}
-			catch
-			{
-				return View();
-			}
-		}
-
-		[HttpPost]
-		public JsonResult GetAllEmployeesJson(int? number)
-		{
-			using (WorkTimeTrackerDbContext accdb = new WorkTimeTrackerDbContext())
-			{
-				var employee = accdb.Employees.ToList();
-				if (null != employee)
-					return Json(employee, JsonRequestBehavior.AllowGet);
-				return null;
-			}
-
-		}
-
-
-	}
+    }
 }
