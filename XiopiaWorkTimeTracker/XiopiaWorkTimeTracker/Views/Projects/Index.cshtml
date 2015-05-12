@@ -2,6 +2,7 @@
 @model XiopiaWorkTimeTracker.Models.ViewModels.ProjectViewModel
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
 
 <h2>@Language.ProjectsManagement</h2>
 <p>
@@ -34,66 +35,8 @@
     @*@Html.ActionLink("Delete", "DeleteProject", new { id = item.Id })*@
 
 </div>
-<script type="text/javascript">
-    $("#newPrjectBtn").on("click", function () {
-        var myRow = '<tr id="newPrRow"> \
-                        <td><input id="newProjName" type="text" title="@Language.TooltipPleaseEnterProjectName" autofocus  required/></td>\
-                        <td><input id="newResponsible" type="text" title=@Language.TooltipPleaseEnterProjectResponsible required/></td>\
-                        <td></td>\
-                    </tr>';
-        var postAndCancelButtons = '<div id="newPrButtons">\
-                                <button id="postNewProjBtn" type="button" class="btn btn-primary btn-lg">@Language.Save</button>\
-                                <button id="cancelNewProjBtn" type="button" class="btn btn-default btn-lg">@Language.Cancel</button>\
-                            </div>';
-        $("#tblWebGrid > tbody:last").append(myRow);
-        $("#tblWebGrid").after(postAndCancelButtons);
-        $("#cancelNewProjBtn").on("click", function () {
-            $("#newPrRow").remove();
-            $("#newPrButtons").remove();
-        });
-        $("#postNewProjBtn").on("click", function () {
-            var newProjData = { "Name": $("#newProjName").val(), "ProjectResponsible": $("#newResponsible").val() };
-            $.ajax({
-                type: "POST",
-                url: "/Projects/CreateNewProject",
-                data: newProjData,
-                datatype: "html",
-                success: function (data) {
-                    alert("Erfolg");
-                    var newRow = '<tr class="webGrid-row-style"> \
-                        <td class="webGrid-Date">' + $("#newProjName").val() + '</td>\
-                        <td class="webGrid-Project">' + $("#newResponsible").val() + '</td>\
-                        <td  class="webGrid-Project">aaaaa </td>\
-                    </tr>';
-                    $("#newPrRow").remove();
-                    $("#newPrButtons").remove();
-                    $("#tblWebGrid > tbody:last").append(newRow);
-                },
-                error: function () {
-                    alert("error");
-                }
-            });
-        });
-        @*$("#newProjName").on("blur", function () {
-            if ($("#newProjName").val() == "") {
-                alert("@Language.TooltipPleaseEnterProjectName");
-                $("#newProjName").focus();
-            }
-            else {
-                $("#newResponsible").on("focus", function () {
-                    $("#newResponsible").on("blur", function () {
-                        if ($("#newResponsible").val() == "") {
-                            alert("@Language.TooltipPleaseEnterProjectResponsible");
-                            $("#newResponsible").focus();
-                        }
-                    });
 
-                });
-            }
-        });*@
-
-    });
-</script>
+<script src="~/Scripts/Custom/ProjectsManagement.js"></script>
 
 
 

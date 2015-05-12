@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 using XiopiaWorkTimeTracker.Models.Database;
 using XiopiaWorkTimeTracker.Models.Repositories;
 using XiopiaWorkTimeTracker.Models.ViewModels;
@@ -42,6 +44,13 @@ namespace XiopiaWorkTimeTracker.Controllers
             {
                 return Json(new { success = false });
             }
+        }
+
+        public JsonResult GetUserList()
+        {
+            var userRepo = new UserRepository();
+            var users = userRepo.GetAll();
+            return Json(users, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult EditProject(int Id)

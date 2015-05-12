@@ -61,6 +61,24 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string AddMember {
+            get {
+                return ResourceManager.GetString("AddMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add members to project.
+        /// </summary>
+        public static string AddMembers {
+            get {
+                return ResourceManager.GetString("AddMembers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Admin Array.
         /// </summary>
         public static string AdminArray {

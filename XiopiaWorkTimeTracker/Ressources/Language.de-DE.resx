@@ -270,4 +270,10 @@
   <data name="Cancel" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
+  <data name="AddMembers" xml:space="preserve">
+    <value>Mitarbeiter zu Projekt hinzufügen</value>
+  </data>
+  <data name="AddMember" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
 </root>
