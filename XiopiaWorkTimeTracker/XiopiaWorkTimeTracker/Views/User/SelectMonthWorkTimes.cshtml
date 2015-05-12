@@ -92,15 +92,18 @@
 					  rowStyle: "webGrid-row-style",
 					  htmlAttributes: new { id = "tblWebGrid" },
 					  columns: grid.Columns(
-												grid.Column("Date", "Datum", format: (item) => string.Format("{0:dd/MM/yyyy ddd}", item.Date), style: "webGrid-Date"),
-												grid.Column("StartTime", "Kommen", format: (item) => string.Format("{0:hh:mm}", item.StartTime), style: "webGrid-StartTime"),
-												grid.Column("PauseLength", "Pause in min.", format: (item) => string.Format("{0:hh:mm}", item.PauseLength), style: "webGrid-PauseLength"),
-												grid.Column("EndTime", "Gehen", format: (item) => string.Format("{0:hh:mm}", item.EndTime), style: "webGrid-EndTime"),
-												grid.Column("Project", header: "Projekt", style: "webGrid-Project")
+												grid.Column("Date", "Datum", format: (item) => string.Format("{0:dd/MM/yyyy ddd}", item.Date), style: "webGrid-Date hover-me"),
+												grid.Column("StartTime", "Kommen", format: (item) => string.Format("{0:hh:mm}", item.StartTime), style: "webGrid-StartTime hover-me"),
+												grid.Column("PauseLength", "Pause in min.", format: (item) => string.Format("{0:hh:mm}", item.PauseLength), style: "webGrid-PauseLength hover-me"),
+												grid.Column("EndTime", "Gehen", format: (item) => string.Format("{0:hh:mm}", item.EndTime), style: "webGrid-EndTime hover-me"),
+												grid.Column("Project", header: "Projekt", style: "webGrid-Project hover-me"),
+												grid.Column("Action", format: @<text><button class="new-mode do-not-hover-this">Neus Projekt</button></text>, style: "webGrid-NewPrj do-not-hover-me", canSort: false)
+																						
 											)
-					 );
 
-	}
+					);
+
+}
 
 </div>
 
@@ -154,39 +157,6 @@
     });
 </script>
 
-@*<script type="text/javascript">
-        $("#startNowBtn").on("click", function (event) {
-            event.preventDefault();
-            var modelDataJSON = '@Html.Raw(Json.Encode(Model))';
-            $.ajax({
-                url: "/User/StartRecordingNow/",
-                type: "POST",
-                data: { myObject1: modelDataJSON },
-                dataType: 'json'
-            }).done(function (result) {
-                $("#client-detail-modal").html(result);
-                $("#myModal").modal('show');
-            });
-        });
-    </script>*@
-@*<script type="text/javascript">
-    $("#startNowBtn").on("click", function (event) {
-        event.preventDefault();
-        var modelDataJSON = '@Html.Raw(Json.Encode(Model))';
-        $.ajax({
-            url: "/User/StartRecordingNow/?userId=" + @Model.SelectedUser,
-                type: "GET"
-            }).done(function (result) {
-                $("#client-detail-modal").html(result);
-                $("#myModal").modal('show');
-                $("#viewPlaceHolder").load("/User/StartRecordingNow/?userId=" + @Model.SelectedUser, { customerID: custID, viewName: "OrderDetails" });
-            });
-        });
-    </script>*@
-
-
-
-
 <script type="text/javascript">
 	function styleGrid() {
 		$("#tblWebGrid tr:not(:first)").each(function () {
@@ -206,12 +176,14 @@
 
 <script type="text/javascript">
 	$(function(){
-		$('#tblWebGrid tr').hover(function () {
-			$(this).toggleClass('clickable');
+		$('#tblWebGrid td:not(.webGrid-NewPrj)').hover(function () {
+			$(this).parent().toggleClass('clickable');
+			
 		}).on('click', function () {
 			//TODO:create detail page or Model Dialog view for selected date (abir)
 			//location.href = '/Details/' + $(this).find('td:first').text();
-			var data = new Date($(this).find('td:first').text());
+			var datumSelected = $(this).find('td:first').text();
+			var data = new Date(datumSelected);
 			var dt = new Date();
 			var time = dt.getHours() + ":" + dt.getMinutes();
 			var modal = $("#newWorkTimeModal");
@@ -224,34 +196,45 @@
 </script>
 
 
+<script type="text/javascript" >
+    $(function () {
+        //$('.edit-user, .cancel-user').on('click', function () {
+        //    var tr = $(this).parents('tr:first');
+        //    tr.find('.edit-mode, .display-mode').toggle();
+        //});
 
-@*<script type="text/javascript">
-        $(function () {
-            // Initialize numeric spinner input boxes
-            //$(".numeric-spinner").spinedit();
-            // Initialize modal dialog
-            // attach modal-container bootstrap attributes to links with .modal-link class.
-            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
-            $('#startNowBtn').on('click', '.modal-link', function (e) {
-                e.preventDefault();
-                $(this).attr('data-target', '#modal-container');
-                $(this).attr('data-toggle', 'modal');
-            });
-            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
-            $('startNowBtn').on('click', '.modal-close-btn', function () {
-                $('#modal-container').modal('hide');
-            });
-            //clear modal cache, so that new content can be loaded
-            $('#modal-container').on('hidden.bs.modal', function () {
-                $(this).removeData('bs.modal');
-            });
-            $('#CancelModal').on('click', function () {
-                return false;
-            });
+        $('.new-mode').on('click', function () {
+            //var tr = $(this).parents('tr:first');
+            //var FirstName = tr.find("#FirstName").val();
+            //var LastName = tr.find("#LastName").val();
+            //var UserID = tr.find("#UserID").html();
+            //var UserModel =
+            //{
+            //    "ID": UserID,
+            //    "FirstName": FirstName,
+            //    "LastName": LastName
+            //};
+            //$.ajax({
+            //    url: '/User/UpdateUser/',
+            //    data: JSON.stringify(UserModel),
+            //    type: 'POST',
+            //    contentType: 'application/json; charset=utf-8',
+            //    success: function (data) {
+            //        alert(data);
+            //    }
+            //});
+			var datumSelected = $(this).find('td:first').text();
+			var data = new Date();
+			var dt = new Date();
+			var time = dt.getHours() + ":" + dt.getMinutes();
+			var modal = $("#newWorkTimeModal");
+			modal.find('.modal-title').text('New WorkTime for @Model.User.FirstName @Model.User.LastName')
+			modal.find('#Datum').val("");
+			modal.find('#Kommen').val("");
+			$("#newWorkTimeModal").modal('show');
         });
-    </script>*@
-
-
+    })
+</script>
 
 
 
