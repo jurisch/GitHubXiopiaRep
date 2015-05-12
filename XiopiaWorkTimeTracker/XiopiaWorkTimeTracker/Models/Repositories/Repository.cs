@@ -22,6 +22,16 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
             DbSet = context.Set<T>();
         }
 
+        public void SetModified(T obj)
+        {
+            context.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+        }
+
+        public void SetDeleted(T obj)
+        {
+            context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+        }
+
         public List<T> GetAll()
         {
             return DbSet.ToList();

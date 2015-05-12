@@ -11,6 +11,8 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
 		public List<Project> projects { get; set; }
 		public List<Employee> employees { get; set; }
 
+        public string MyProperty { get; set; }
+
 		public ProjectViewModel(List<Project> _projects, List<Employee> _employees)
 		{
 			projects = _projects;

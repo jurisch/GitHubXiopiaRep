@@ -247,9 +247,27 @@
     <value>Projektname</value>
   </data>
   <data name="ProjectResponsible" xml:space="preserve">
-    <value>Projektverantwortlicher</value>
+    <value>Projekt Verantwortlicher</value>
   </data>
   <data name="errProjectResponsible" xml:space="preserve">
     <value>Bitte schreiben Sie den Namen des Projektverantwortlichers</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>Mitglieder</value>
+  </data>
+  <data name="ProjectsManagement" xml:space="preserve">
+    <value>Projekte Verwaltung</value>
+  </data>
+  <data name="TooltipPleaseEnterProjectName" xml:space="preserve">
+    <value>Bitte geben Sie Projekt Name ein</value>
+  </data>
+  <data name="TooltipPleaseEnterProjectResponsible" xml:space="preserve">
+    <value>Bitte geben Sie einen Projekt Verantwortlichen ein</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
   </data>
 </root>

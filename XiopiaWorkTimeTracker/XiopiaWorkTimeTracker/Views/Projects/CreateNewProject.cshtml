@@ -1,7 +1,7 @@
 ﻿@using Ressources
-@using XiopiaWorkTimeTracker.Models.Database;
+@using XiopiaWorkTimeTracker.Models.ViewModels;
 
-@model XiopiaWorkTimeTracker.Models.Database.Project
+@model ProjectViewModel
 
 @{
     ViewBag.Title = @Language.newProject;
@@ -54,7 +54,7 @@
 		<div class="form-group">
 			@Html.LabelFor(model => model.ProjectResponsibleId, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.DropDownListFor(model => model.ProjectResponsibleId, Model.Employees.Select(m => new SelectListItem
+				@Html.DropDownListFor(model => model.ProjectResponsibleId, Model.Members.Select(m => new SelectListItem
 																			   {
 																				   Text = m.FirstName +" "+ m.LastName,
 																				   Value = m.Id.ToString()
