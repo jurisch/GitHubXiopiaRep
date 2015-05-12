@@ -119,7 +119,12 @@ modal-content {
 	border-right:solid 0px;
 	border-width: 1px;
 }
-
+.webGrid-NewPrj {
+	width:8.4%;
+	border-left:solid 1px;
+	border-width: 1px;
+	z-index: 999;
+}
 
 .clsRed {
 	background: peachpuff;

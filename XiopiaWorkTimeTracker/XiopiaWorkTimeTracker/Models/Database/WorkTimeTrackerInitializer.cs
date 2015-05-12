@@ -74,6 +74,14 @@ namespace XiopiaWorkTimeTracker.Models.Database
             };
             settings.ForEach(r => context.GlobalSettings.Add(r));
             context.SaveChanges();
+
+			var times = new List<WorkTimeEntry>() {
+				new WorkTimeEntry { Id=1, WorkDay=new DateTime(2015, 05, 10), EmployeeId = 1, ProjectId = 1, WorkStartTime = new DateTime(2015, 05, 10, 09, 00, 00), PauseLength = 30, WorkEndTime = new DateTime(2015, 05, 10, 17, 30, 00) },
+				new WorkTimeEntry { Id=2, WorkDay=new DateTime(2015, 05, 11), EmployeeId = 3, ProjectId = 1, WorkStartTime = new DateTime(2015, 05, 11, 08, 00, 00), PauseLength = 20, WorkEndTime = new DateTime(2015, 05, 11, 17, 30, 00) },
+				new WorkTimeEntry { Id=3, WorkDay=new DateTime(2015, 05, 12), EmployeeId = 1, ProjectId = 2, WorkStartTime = new DateTime(2015, 05, 12, 09, 00, 00), PauseLength = 30, WorkEndTime = new DateTime(2015, 05, 12, 17, 30, 00) }
+			};
+			times.ForEach(r => context.WorkTimeEntries.Add(r));
+			context.SaveChanges();
         }
     }
 }
