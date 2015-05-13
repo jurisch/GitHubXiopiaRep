@@ -8,9 +8,9 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
 {
     public class UserRepository : Repository<Employee>
     {
-        public Employee GetById(int id)
+        public Employee GetByGuid(Guid guid)
         {
-            return DbSet.Where(u => u.Id == id).First();
+            return DbSet.Where(u => u.Guid == guid).First();
         }
 
         public Employee GetByAccount(string acc)

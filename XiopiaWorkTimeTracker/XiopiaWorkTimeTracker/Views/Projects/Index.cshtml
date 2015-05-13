@@ -21,8 +21,8 @@
                       rowStyle: "webGrid-row-style",
                       htmlAttributes: new { id = "tblWebGrid" },
                       columns: grid.Columns(grid.Column("Name", Language.ProjectName, null, style: "webGrid-Date"),
-                                            grid.Column("ProjectResponsible", Language.ProjectResponsible, null, style: "webGrid-StartTime"),
-                                            grid.Column("Members", Language.Members, format: (item) => item.Members != null ? "" : "", style: "webGrid-Project")));
+                                            grid.Column("ProjectResponsible", Language.ProjectResponsible, null, style: "webGrid-StartTime")));
+                                            //grid.Column("Members", Language.Members, null, style: "webGrid-Project")));
     }
 
     <div style="margin-top : 2em; margin-bottom : 2em; display: none; width:100%" id="newPrButtons">
@@ -42,6 +42,9 @@
 </div>
 
 <script src="~/Scripts/Custom/ProjectsManagement.js"></script>
+<script>
+    (FillSelectBox());
+</script>
 
 
 

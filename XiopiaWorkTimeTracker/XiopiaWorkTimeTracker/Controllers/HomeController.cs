@@ -20,7 +20,7 @@ namespace XiopiaWorkTimeTracker.Controllers
             if (userId != null)
             {
                 var model = new UserAndRolesViewModel();
-                var user = usersRepository.GetById(Int32.Parse(userId.ToString()));
+                var user = usersRepository.Get(Int32.Parse(userId.ToString()));
                 model.User = user;
                 return View(model);
                 //return Redirect("/User/SelectMonthWorkTimes/?month=" + DateTime.Now.Month + "&SelectedUser=" + userId);

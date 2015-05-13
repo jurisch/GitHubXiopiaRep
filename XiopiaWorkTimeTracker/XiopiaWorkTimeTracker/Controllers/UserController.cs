@@ -38,7 +38,7 @@ namespace XiopiaWorkTimeTracker.Controllers
             if (tmp != null)
             {
                 var userViewModel = new UserViewModel();
-                userViewModel.User = this.usersRepository.GetById(Int32.Parse(tmp.ToString()));
+                userViewModel.User = this.usersRepository.Get(Int32.Parse(tmp.ToString()));
                 if (userViewModel.User != null)
                 {
                     userViewModel.WorkTimeRows = WorkTimesBuilder.GetMonth(month);

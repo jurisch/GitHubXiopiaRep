@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Web;
 
 namespace XiopiaWorkTimeTracker.Models.Database
 {
@@ -28,8 +24,6 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
         public DbSet<ProjectToMembersMapping> ProjectToMembersMappings { get; set; }
 
-		public DbSet<UserToTimeEntriesMapping> UserToTimeEntriesMappings { get; set; }
-		
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

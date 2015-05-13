@@ -11,6 +11,6 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
         public Guid ProjectGuid { get; set; }
 
-        public int MemberId { get; set; }
+        public Guid MemberGuid { get; set; }
     }
 }

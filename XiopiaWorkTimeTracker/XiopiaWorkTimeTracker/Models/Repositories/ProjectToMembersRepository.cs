@@ -14,7 +14,7 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
             var mappings = DbSet.Where(u => u.ProjectGuid == guid).ToList();
             foreach (var m in mappings)
             {
-                members.Add(usersRepo.Get(m.MemberId));
+                members.Add(usersRepo.GetByGuid(m.MemberGuid));
             }
             return members;
         }

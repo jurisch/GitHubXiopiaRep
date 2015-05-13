@@ -13,8 +13,8 @@ namespace XiopiaWorkTimeTracker.Models.Database
             this.Guid = Guid.NewGuid();
         }
 
-        [Key]
         public int Id { get; set; }
+        public Guid Guid { get; private set; }
 
         [Display(Name = "ProjectName", ResourceType = typeof(Language))]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "errProjName", ErrorMessageResourceType = typeof(Language))]
@@ -24,23 +24,23 @@ namespace XiopiaWorkTimeTracker.Models.Database
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "errProjectResponsible", ErrorMessageResourceType = typeof(Language))]
         public string ProjectResponsible { get; set; }
 
-        public Guid Guid { get; private set; }
-
         public List<int> MemberIds { get; set; }
 
-        public List<Employee> Members
-        {
-            get
-            {
-                var projectsRepo = new ProjectToMembersRepository();
-                return projectsRepo.GetMembersByProjectGuid(this.Guid);
-            }
-        }
+        //public List<Employee> Members
+        //{
+        //    get
+        //    {
+        //        var projectsRepo = new ProjectToMembersRepository();
+        //        return projectsRepo.GetMembersByProjectGuid(this.Guid);
+        //    }
+        //}
 
         public void AddMember(int memberId)
         {
+            var usersRepo = new UserRepository();
+            var user = usersRepo.Get(memberId);
             var projectToMembersRepo = new ProjectToMembersRepository();
-            projectToMembersRepo.Add(new ProjectToMembersMapping() { MemberId = memberId, ProjectGuid = this.Guid });
+            projectToMembersRepo.Add(new ProjectToMembersMapping() { MemberGuid = user.Guid, ProjectGuid = this.Guid });
             projectToMembersRepo.SaveChanges();
         }
 
