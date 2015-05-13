@@ -20,11 +20,26 @@
                       selectedRowStyle: "webGrid-selected-row",
                       rowStyle: "webGrid-row-style",
                       htmlAttributes: new { id = "tblWebGrid" },
-                      columns: grid.Columns(grid.Column("Name", Language.ProjectName, null, style: "webGrid-Date"),
-                                            grid.Column("ProjectResponsible", Language.ProjectResponsible, null, style: "webGrid-StartTime")));
-                                            //grid.Column("Members", Language.Members, null, style: "webGrid-Project")));
+                      columns: grid.Columns(grid.Column("Name", Language.ProjectName, style: "webGrid-Date"),
+                                            grid.Column("ProjectResponsible", Language.ProjectResponsible, style: "webGrid-StartTime"),
+                                            grid.Column("MemberNames", Language.Members, format:(item)=>{
+                                                if (item.MemberNames == null)
+                                                { 
+                                                    return String.Empty;
+                                                }
+                                                else
+                                                {
+                                                    string tmp = "<div style=''>";
+                                                    foreach (var c in item.MemberNames)
+                                                    {
+                                                        tmp += c + "<br/>";
+                                                    }
+                                                    tmp += "</div>";
+                                                    return new HtmlString(tmp);
+                                                }
+                                            })
+                       ));
     }
-
     <div style="margin-top : 2em; margin-bottom : 2em; display: none; width:100%" id="newPrButtons">
         <div id="myDiv" style="display:inline">
             <select style="margin:0.5em" class = "form-control"  id = "memberselect"></select>

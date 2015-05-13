@@ -58,17 +58,18 @@ $("#newPrjectBtn").on("click", function () {
             datatype: "html",
             success: function (data) {
                 alert("Erfolg");
-                var newRow = '<tr class="webGrid-row-style"> \
-                        <td class="webGrid-Date">' + $("#newProjName").val() + '</td>\
-                        <td class="webGrid-Project">' + $("#newResponsible").val() + '</td>\
-                        <td  class="webGrid-Project">aaaaa </td>\
-                    </tr>';
-                $("#newPrRow").remove();
-                $("#newPrButtons").hide();
-                $("#addUser").off("click");
-                $("#cancelNewProjBtn").off("click");
-                $("#postNewProjBtn").off("click");
-                $("#tblWebGrid > tbody:last").append(newRow);
+                window.location.replace("/Projects");
+                //var newRow = '<tr class="webGrid-row-style"> \
+                //        <td class="webGrid-Date">' + $("#newProjName").val() + '</td>\
+                //        <td class="webGrid-Project">' + $("#newResponsible").val() + '</td>\
+                //        <td  class="webGrid-Project">aaaaa </td>\
+                //    </tr>';
+                //$("#newPrRow").remove();
+                //$("#newPrButtons").hide();
+                //$("#addUser").off("click");
+                //$("#cancelNewProjBtn").off("click");
+                //$("#postNewProjBtn").off("click");
+                //$("#tblWebGrid > tbody:last").append(newRow);
             },
             error: function () {
                 alert("error");

@@ -26,14 +26,21 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
         public List<int> MemberIds { get; set; }
 
-        //public List<Employee> Members
-        //{
-        //    get
-        //    {
-        //        var projectsRepo = new ProjectToMembersRepository();
-        //        return projectsRepo.GetMembersByProjectGuid(this.Guid);
-        //    }
-        //}
+        public List<string> MemberNames
+        {
+            get
+            {
+                List<string> names = new List<string>();
+                var projectsRepo = new ProjectToMembersRepository();
+
+                var members = projectsRepo.GetMembersByProjectGuid(this.Guid);
+                foreach(var mem in members)
+                {
+                    names.Add(mem.FirstName + " " + mem.LastName);
+                }
+                return names;
+            }
+        }
 
         public void AddMember(int memberId)
         {
