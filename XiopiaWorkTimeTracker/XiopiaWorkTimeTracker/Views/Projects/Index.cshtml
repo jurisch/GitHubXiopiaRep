@@ -25,11 +25,16 @@
                                             grid.Column("Members", Language.Members, format: (item) => item.Members != null ? "" : "", style: "webGrid-Project")));
     }
 
-</div>
-
-
-
-<div>
+    <div style="margin-top : 2em; margin-bottom : 2em; display: none; width:100%" id="newPrButtons">
+        <div id="myDiv" style="display:inline">
+            <select style="margin:0.5em" class = "form-control"  id = "memberselect"></select>
+            <button id="addUser" type="button" class="btn btn-primary btn-lg">@Language.AddMembers</button>
+        </div>
+        <div style="display:inline; margin-left:5em">
+            <button id="postNewProjBtn" type="button" class="btn btn-primary btn-lg">@Language.Save</button>
+            <button id="cancelNewProjBtn" type="button" class="btn btn-default btn-lg">@Language.Cancel</button>
+        </div>
+    </div>
     @*@Html.ActionLink("Edit", "EditProject", new { id = item.Id }) |*@
     @*Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
     @*@Html.ActionLink("Delete", "DeleteProject", new { id = item.Id })*@

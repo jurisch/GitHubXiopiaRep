@@ -28,7 +28,7 @@ namespace XiopiaWorkTimeTracker.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateNewProject(Project model)
+        public JsonResult CreateNewProject(Project model)
         {
             if (ModelState.IsValid)
             {
@@ -36,6 +36,10 @@ namespace XiopiaWorkTimeTracker.Controllers
                 var newProject = new Project();
                 newProject.Name = model.Name;
                 newProject.ProjectResponsible = model.ProjectResponsible;
+                foreach(var member in model.MemberIds)
+                {
+                    newProject.AddMember(member);
+                }
                 projectsRepo.Add(newProject);
                 projectsRepo.SaveChanges();
                 return Json(new { success = true });
