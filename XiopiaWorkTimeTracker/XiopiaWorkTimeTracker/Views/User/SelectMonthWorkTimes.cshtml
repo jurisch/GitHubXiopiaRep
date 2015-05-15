@@ -22,18 +22,18 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>*@
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 1})">@Language.January</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 2})">@Language.February</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 3})">@Language.March</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 4})">@Language.April</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 5})">@Language.Mai</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 6})">@Language.Juni</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 7})">@Language.July</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 8})">@Language.August</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 9})">@Language.September</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 10})">@Language.October</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 11})">@Language.November</a></li>
-        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 12})">@Language.Dezember</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 1 })">@Language.January</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 2 })">@Language.February</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 3 })">@Language.March</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 4 })">@Language.April</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 5 })">@Language.Mai</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 6 })">@Language.Juni</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 7 })">@Language.July</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 8 })">@Language.August</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 9 })">@Language.September</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 10 })">@Language.October</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 11 })">@Language.November</a></li>
+        <li><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 12 })">@Language.Dezember</a></li>
         @*<li>
                 <a href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
@@ -69,7 +69,7 @@
         </tr>
     </thead>
     @foreach (var cur in Model.WorkTimeRows)
-    {
+	{
         <tr class="date-dayofweek-@cur.Date.ToString("ddd")" >
             <td>@cur.Date.ToShortDateString() @cur.Date.ToString("ddd")</td>
             <td>@cur.StartTime</td>
@@ -77,7 +77,7 @@
             <td>@cur.EndTime</td>
             <td>@cur.Project</td>
         </tr>
-    }
+	}
 </table-->
 
 
@@ -85,21 +85,37 @@
 	@{
 		var grid = new WebGrid(Model.WorkTimeRows, canPage: true, defaultSort: "Date", rowsPerPage: 100);
 		@grid.GetHtml(tableStyle: "webGrid",
-					  headerStyle: "webGrid-header",
-					  footerStyle: "webGrid-footer",
-					  alternatingRowStyle: "webGrid-alternating-row",
-					  selectedRowStyle: "webGrid-selected-row",
-					  rowStyle: "webGrid-row-style",
-					  htmlAttributes: new { id = "tblWebGrid" },
-					  columns: grid.Columns(
-												grid.Column("Date", "Datum", format: (item) => string.Format("{0:dd/MM/yyyy ddd}", item.Date), style: "webGrid-Date hover-me"),
-												grid.Column("StartTime", "Kommen", format: (item) => string.Format("{0:hh:mm}", item.StartTime), style: "webGrid-StartTime hover-me"),
-												grid.Column("PauseLength", "Pause in min.", format: (item) => string.Format("{0:hh:mm}", item.PauseLength), style: "webGrid-PauseLength hover-me"),
-												grid.Column("EndTime", "Gehen", format: (item) => string.Format("{0:hh:mm}", item.EndTime), style: "webGrid-EndTime hover-me"),
-												grid.Column("Project", header: "Projekt", style: "webGrid-Project hover-me"),
-												grid.Column("Action", format: @<text><button class="new-mode do-not-hover-this">Neus Projekt</button></text>, style: "webGrid-NewPrj do-not-hover-me", canSort: false)
-																						
-											)
+	   headerStyle: "webGrid-header",
+	   footerStyle: "webGrid-footer",
+	   alternatingRowStyle: "webGrid-alternating-row",
+	   selectedRowStyle: "webGrid-selected-row",
+	   rowStyle: "webGrid-row-style",
+	   htmlAttributes: new { id = "tblWebGrid" },
+	   columns: grid.Columns(
+								grid.Column(format: (item) =>
+								{
+									using (Html.BeginForm())
+									{
+										string htmlString = string.Empty;
+
+										foreach (var parameter in item)
+										{
+											htmlString = "<span>" + parameter + "</span>";
+										}
+
+										htmlString += "<input type=\"submit\" />";
+
+										return new HtmlString(htmlString);
+									}
+								}))
+								@*grid.Column("Date", "Datum", format: (item) => string.Format("{0:dd/MM/yyyy ddd}", item.Date), style: "webGrid-Date hover-me"),
+								grid.Column("StartTime", "Kommen", format: (item) => string.Format("{0:hh:mm}", item.StartTime), style: "webGrid-StartTime hover-me"),
+								grid.Column("PauseLength", "Pause in min.", format: (item) => string.Format("{0:hh:mm}", item.PauseLength), style: "webGrid-PauseLength hover-me"),
+								grid.Column("EndTime", "Gehen", format: (item) => string.Format("{0:hh:mm}", item.EndTime), style: "webGrid-EndTime hover-me"),
+								grid.Column("Project", header: "Projekt", style: "webGrid-Project hover-me"),
+								grid.Column("Action", format: @<text><button class="new-mode do-not-hover-this">Neus Projekt</button></text>, style: "webGrid-NewPrj do-not-hover-me", canSort: false)
+
+							)*@
 
 					 );
 
