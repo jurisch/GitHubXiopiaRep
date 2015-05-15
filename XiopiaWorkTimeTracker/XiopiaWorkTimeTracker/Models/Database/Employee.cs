@@ -11,7 +11,10 @@ namespace XiopiaWorkTimeTracker.Models.Database
         public Employee()
         {
             this.Guid = Guid.NewGuid();
+            this.workTimeRepo = new WorkTimeEntriesRepository();
         }
+
+        private WorkTimeEntriesRepository workTimeRepo = null;
 
         public int Id { get; set; }
 
@@ -52,6 +55,29 @@ namespace XiopiaWorkTimeTracker.Models.Database
                     return true;
             }
             return false;
+        }
+
+        public List<WorkTimeEntry> GetTimeEntriesForMonth(int month)
+        {
+            return this.workTimeRepo.GetUserEntriesForMonth(this.Id, month);
+        }
+
+        public void AddTimeEntry(WorkTimeEntry entry)
+        {
+            entry.EmployeeId = this.Id;
+            this.workTimeRepo.Add(entry);
+            this.workTimeRepo.SaveChanges();
+        }
+
+        public List<WorkTimeEntry> GetTodayStartedEntries()
+        {
+            return this.workTimeRepo.GetUserTodayStartedEntries(this.Id);
+        }
+
+        public void UpdateTimeEntry(WorkTimeEntry entry)
+        {
+            this.workTimeRepo.SetModified(entry);
+            this.workTimeRepo.SaveChanges();
         }
     }
 }

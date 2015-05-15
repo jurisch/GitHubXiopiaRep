@@ -8,22 +8,17 @@ namespace XiopiaWorkTimeTracker.BusinessLogic
 {
     public class WorkTimesBuilder
     {
-        public static List<WorkTimeRow> GetMonth(int month)
+        public static List<DateRowModel> GetMonth(int month)
         {
-            List<WorkTimeRow> entryList = new List<WorkTimeRow>();
+            var DateRows = new List<DateRowModel>();
             var daysCount = DateTime.DaysInMonth(DateTime.Now.Year, month);
             for (int i = 1; i <= daysCount; i++)
             {
-                entryList.Add(new WorkTimeRow()
-                {
-                    Date = new DateTime(DateTime.Now.Year, month, i),
-                    StartTime = "",
-                    EndTime = "",
-                    PauseLength = "",
-                    Project = ""
+                DateRows.Add(new DateRowModel() {
+                    WorkDate = new DateTime(DateTime.Now.Year, month, i)
                 });
             }
-            return entryList;
+            return DateRows;
 
         }
     }

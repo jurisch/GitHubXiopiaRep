@@ -12,14 +12,14 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
         public DateTime WorkDay { get; set; }
 
-        public DateTime WorkStartTime { get; set; }
+        public DateTime? WorkStartTime { get; set; }
 
-        public DateTime WorkEndTime { get; set; }
+        public DateTime? WorkEndTime { get; set; }
 
-        public int PauseLength { get; set; }
+        public int? PauseLength { get; set; }
 
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
 
-        public int ProjectId { get; set; }
+        public string ProjectName { get; set; }
     }
 }

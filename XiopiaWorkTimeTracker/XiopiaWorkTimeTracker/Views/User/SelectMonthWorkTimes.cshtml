@@ -10,7 +10,7 @@
     <p class="data-current-user-title">@Model.User.FirstName @Model.User.LastName</p>
     <nav class="navbar navbar-default">
         <button id="startNowBtn" type="button" class="btn btn-primary btn-lg">@Language.StartWorkNow</button>
-        <button type="button" class="btn btn-primary btn-lg">@Language.EndWork</button>
+        <button id="endNowBtn" type="button" class="btn btn-primary btn-lg">@Language.EndWork</button>
         <button type="button" class="btn btn-primary btn-lg">@Language.ReportIllness</button>
         <button type="button" class="btn btn-primary btn-lg">@Language.RequestHoloday</button>
     </nav>
@@ -68,7 +68,7 @@
             <th>@Language.Project</th>
         </tr>
     </thead>
-    @foreach (var cur in Model.WorkTimeRows)
+    @*foreach (var cur in Model.WorkDays)
     {
         <tr class="date-dayofweek-@cur.Date.ToString("ddd")" >
             <td>@cur.Date.ToShortDateString() @cur.Date.ToString("ddd")</td>
@@ -77,126 +77,201 @@
             <td>@cur.EndTime</td>
             <td>@cur.Project</td>
         </tr>
-    }
+    }*@
 </table-->
 
-
 <div id="DivGrid" style="width:100%;">
-	@{
-		var grid = new WebGrid(Model.WorkTimeRows, canPage: true, defaultSort: "Date", rowsPerPage: 100);
-		@grid.GetHtml(tableStyle: "webGrid",
-					  headerStyle: "webGrid-header",
-					  footerStyle: "webGrid-footer",
-					  alternatingRowStyle: "webGrid-alternating-row",
-					  selectedRowStyle: "webGrid-selected-row",
-					  rowStyle: "webGrid-row-style",
-					  htmlAttributes: new { id = "tblWebGrid" },
-					  columns: grid.Columns(
-												grid.Column("Date", "Datum", format: (item) => string.Format("{0:dd/MM/yyyy ddd}", item.Date), style: "webGrid-Date hover-me"),
-												grid.Column("StartTime", "Kommen", format: (item) => string.Format("{0:hh:mm}", item.StartTime), style: "webGrid-StartTime hover-me"),
-												grid.Column("PauseLength", "Pause in min.", format: (item) => string.Format("{0:hh:mm}", item.PauseLength), style: "webGrid-PauseLength hover-me"),
-												grid.Column("EndTime", "Gehen", format: (item) => string.Format("{0:hh:mm}", item.EndTime), style: "webGrid-EndTime hover-me"),
-												grid.Column("Project", header: "Projekt", style: "webGrid-Project hover-me"),
-												grid.Column("Action", format: @<text><button class="new-mode do-not-hover-this">Neus Projekt</button></text>, style: "webGrid-NewPrj do-not-hover-me", canSort: false)
-																						
-											)
-
-					 );
-
-	}
-
+    @{
+        var grid = new WebGrid(Model.WorkDays, canPage: true, defaultSort: "Date", rowsPerPage: 31, selectionFieldName: "SelectedRow");
+        @grid.GetHtml(tableStyle: "webGrid",
+                      headerStyle: "webGrid-header",
+                      footerStyle: "webGrid-footer",
+                      alternatingRowStyle: "webGrid-alternating-row",
+                      selectedRowStyle: "webGrid-selected-row",
+                      rowStyle: "webGrid-row-style",
+                      htmlAttributes: new { id = "tblWebGrid" },
+                            columns: grid.Columns(
+                              grid.Column("WorkDate", "Datum", format: (item) => string.Format("{0:dd/MM/yyyy ddd}", item.WorkDate), style: "webGrid-Date hover-me"),
+                              grid.Column("DataRow", "Entry", format: (item) =>
+                                {
+                                    if (item.DataRow == null)
+                                    {
+                                        return string.Empty;
+                                    }
+                                    string temp = string.Empty;
+                                    var sub = new WebGrid(item.DataRow);
+                                    temp += sub.GetHtml(displayHeader: false,
+                                        columns: sub.Columns(
+                                            sub.Column("StartTime"),
+                                            sub.Column("EndTime"),
+                                            sub.Column("Project")
+                                        )
+                                    );
+                                    return new HtmlString(temp);
+                                }
+                             )
+            )
+        );
+    }
 </div>
 
+@*<div id="DivGrid" style="width:100%;">
+        @{
+            var grid = new WebGrid(Model.WorkTimeRows, canPage: true, defaultSort: "Date", rowsPerPage: 100);
+            @grid.GetHtml(tableStyle: "webGrid",
+                          headerStyle: "webGrid-header",
+                          footerStyle: "webGrid-footer",
+                          alternatingRowStyle: "webGrid-alternating-row",
+                          selectedRowStyle: "webGrid-selected-row",
+                          rowStyle: "webGrid-row-style",
+                          htmlAttributes: new { id = "tblWebGrid" },
+                          columns: grid.Columns(
+                                                    grid.Column("Date", "Datum", format: (item) => string.Format("{0:dd/MM/yyyy ddd}", item.Date), style: "webGrid-Date hover-me"),
+                                                    grid.Column("StartTime", "Kommen", style: "webGrid-StartTime hover-me"),
+                                                    grid.Column("PauseLength", "Pause in min.", format: (item) => string.Format("{0:hh:mm}", item.PauseLength), style: "webGrid-PauseLength hover-me"),
+                                                    grid.Column("EndTime", "Gehen", format: (item) => string.Format("{0:hh:mm}", item.EndTime), style: "webGrid-EndTime hover-me"),
+                                                    grid.Column("Project", header: "Projekt", style: "webGrid-Project hover-me"),
+                                                    grid.Column("Action", format: @<text><button class="new-mode do-not-hover-this">Neus Projekt</button></text>, style: "webGrid-NewPrj do-not-hover-me", canSort: false)
+
+                                                )
+
+                         );
+
+        }
+
+    </div>*@
+
 <div class="modal fade" id="newWorkTimeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="exampleModalLabel">New message</h4>
-			</div>
-			<div class="modal-body">
-				<form>
-					<div class="form-group">
-						<label for="Datum" class="control-label">Datum:</label>
-						<input type="date" class="form-control" id="Datum">
-					</div>
-					<div class="form-group">
-						<label for="Kommen" class="control-label">Kommen:</label>
-						<input type="datetime-local" class="form-control" id="Kommen">
-					</div>
-					<div class="form-group">
-						<label for="Pause" class="control-label">Pause in min.:</label>
-						<input type="datetime-local" class="form-control" id="Pause">
-					</div>
-					<div class="form-group">
-						<label for="Gehen" class="control-label">Gehen:</label>
-						<input type="datetime" class="form-control" id="Gehene">
-					</div>
-					<div class="form-group">
-						<label for="Projekt" class="control-label">Projekt:</label>
-						<input type="text" class="form-control" id="Projekt">
-					</div>
-					<div class="form-group">
-						<label for="Beschreibung" class="control-label">Beschreibung:</label>
-						<textarea class="form-control" id="Beschreibung"></textarea>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save Time</button>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="Datum" class="control-label">Datum:</label>
+                        <input type="date" class="form-control" id="Datum">
+                    </div>
+                    <div class="form-group">
+                        <label for="Kommen" class="control-label">Kommen:</label>
+                        <input type="datetime-local" class="form-control" id="Kommen">
+                    </div>
+                    <div class="form-group">
+                        <label for="Pause" class="control-label">Pause in min.:</label>
+                        <input type="datetime-local" class="form-control" id="Pause">
+                    </div>
+                    <div class="form-group">
+                        <label for="Gehen" class="control-label">Gehen:</label>
+                        <input type="datetime" class="form-control" id="Gehene">
+                    </div>
+                    <div class="form-group">
+                        <label for="Projekt" class="control-label">Projekt:</label>
+                        <input type="text" class="form-control" id="Projekt">
+                    </div>
+                    <div class="form-group">
+                        <label for="Beschreibung" class="control-label">Beschreibung:</label>
+                        <textarea class="form-control" id="Beschreibung"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save Time</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <script type="text/javascript">
+    //debugger;
     $("#startNowBtn").on("click", function (event) {
         $("#myModal").modal('show');
+    });
+    $("#endNowBtn").on("click", function () {
+        event.preventDefault();
+        var newProjData = { "UserId": @Model.User.Id, "Action": "EndWork" };
+        $.ajax({
+            type: "POST",
+            url: "/User/ActionFromView",
+            data: newProjData,
+            datatype: "html",
+            success: function (data) {
+                switch(data)
+                {
+                    case 0:
+                        window.location.replace("/User/SelectMonthWorkTimes/?month=@Model.WorkDay.Month.ToString()");
+                        break;
+                    case 1:
+                        alert("You have multiple Projects started today !");
+                        break;
+                    case 2:
+                        alert("You don't have started any Projects today !");
+                        break;
+                    default:
+                        break;
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+
+    })
+</script>
+
+<script type="text/javascript">
+    //debugger;
+    function styleGrid() {
+        $("#tblWebGrid tr:not(:first)").each(function () {
+            var aptStatus = $(this).find("td:nth-child(1)").html();
+            if (aptStatus != null) {
+                if ((aptStatus.indexOf("Sa") >= 0) || (aptStatus.indexOf("So") >= 0)) {
+                    $(this).find("td:nth-child(1)").addClass("clsRed");
+                } else {
+                    $(this).find("td:nth-child(1)").addClass("clsNormal");
+                }
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        styleGrid();
     });
 </script>
 
 <script type="text/javascript">
-	function styleGrid() {
-		$("#tblWebGrid tr:not(:first)").each(function () {
-			var aptStatus = $(this).find("td:nth-child(1)").html();
-			if ((aptStatus.indexOf("Sa") >= 0) || (aptStatus.indexOf("So") >= 0)) {
-				$(this).find("td:nth-child(1)").addClass("clsRed");
-			} else {
-				$(this).find("td:nth-child(1)").addClass("clsNormal");
-			}
-		});
-	}
+    debugger;
+    $(function () {
+        $('#tblWebGrid td:not(.webGrid-NewPrj)').hover(function () {
+            $(this).parent().toggleClass('clickable');
 
-	$(document).ready(function () {
-		styleGrid();
-	});
+        }).on('click', function () {
+            //TODO:create detail page or Model Dialog view for selected date (abir)
+            //location.href = '/Details/' + $(this).find('td:first').text();
+//            alert(event.target.innerText);
+            var node = event.target
+            if(node.nodeName == "TD")
+            {
+                node = node.parentElement;
+            }
+            var datumSelected = $(node).find('td:first').text();
+            var dt = new Date();
+            var time = dt.getHours() + ":" + dt.getMinutes();
+            var modal = $("#newWorkTimeModal");
+            modal.find('.modal-title').text('New WorkTime for @Model.User.FirstName @Model.User.LastName')
+            modal.find('#Datum').val(datumSelected);
+            modal.find('#Kommen').val(time);
+            $("#newWorkTimeModal").modal('show');
+        });
+    });
+
 </script>
+
 
 <script type="text/javascript">
-	$(function(){
-		$('#tblWebGrid td:not(.webGrid-NewPrj)').hover(function () {
-			$(this).parent().toggleClass('clickable');
-			
-		}).on('click', function () {
-			//TODO:create detail page or Model Dialog view for selected date (abir)
-			//location.href = '/Details/' + $(this).find('td:first').text();
-			var datumSelected = $(this).find('td:first').text();
-			var data = new Date(datumSelected);
-			var dt = new Date();
-			var time = dt.getHours() + ":" + dt.getMinutes();
-			var modal = $("#newWorkTimeModal");
-			modal.find('.modal-title').text('New WorkTime for @Model.User.FirstName @Model.User.LastName')
-			modal.find('#Datum').val(data);
-			modal.find('#Kommen').val(time);
-			$("#newWorkTimeModal").modal('show');
-		});
-	});
-</script>
-
-
-<script type="text/javascript" >
     $(function () {
         //$('.edit-user, .cancel-user').on('click', function () {
         //    var tr = $(this).parents('tr:first');
@@ -223,15 +298,15 @@
             //        alert(data);
             //    }
             //});
-			var datumSelected = $(this).find('td:first').text();
-			var data = new Date();
-			var dt = new Date();
-			var time = dt.getHours() + ":" + dt.getMinutes();
-			var modal = $("#newWorkTimeModal");
-			modal.find('.modal-title').text('New WorkTime for @Model.User.FirstName @Model.User.LastName')
-			modal.find('#Datum').val("");
-			modal.find('#Kommen').val("");
-			$("#newWorkTimeModal").modal('show');
+            var datumSelected = $(this).find('td:first').text();
+            var data = new Date();
+            var dt = new Date();
+            var time = dt.getHours() + ":" + dt.getMinutes();
+            var modal = $("#newWorkTimeModal");
+            modal.find('.modal-title').text('New WorkTime for @Model.User.FirstName @Model.User.LastName')
+            modal.find('#Datum').val("");
+            modal.find('#Kommen').val("");
+            $("#newWorkTimeModal").modal('show');
         });
     })
 </script>

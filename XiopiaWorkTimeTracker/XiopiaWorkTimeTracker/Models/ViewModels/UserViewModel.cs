@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using XiopiaWorkTimeTracker.Models.Database;
-using XiopiaWorkTimeTracker.BusinessLogic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using XiopiaWorkTimeTracker.BusinessLogic;
+using XiopiaWorkTimeTracker.Models.Database;
 
 namespace XiopiaWorkTimeTracker.Models
 {
@@ -14,8 +12,12 @@ namespace XiopiaWorkTimeTracker.Models
         public Employee User { get; set; }
         public string CurrentYear { get; set; }
         public string CurrentMonth { get; set; }
-        public List<WorkTimeRow> WorkTimeRows { get; set; }
+
+        public List<DateRowModel> WorkDays { get; set; }
+
         public List<SelectListItem> UserList = new List<SelectListItem>();
+
+        public List<SelectListItem> UserProjects { get; set; }
 
         [Display(Name = "Date", ResourceType = typeof(Ressources.Language))]
         public DateTime WorkDay { get; set; }

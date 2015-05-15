@@ -18,5 +18,17 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
             }
             return members;
         }
+
+        public List<Project> GetProjectsByUserGuid(Guid guid)
+        {
+            var projects = new List<Project>();
+            var projRepo = new ProjectsRepository();
+            var userMappings = DbSet.Where(m => m.MemberGuid == guid);
+            foreach (var pr in userMappings)
+            {
+                projects.Add(projRepo.GetByGuid(pr.ProjectGuid));
+            }
+            return projects;
+        }
     }
 }

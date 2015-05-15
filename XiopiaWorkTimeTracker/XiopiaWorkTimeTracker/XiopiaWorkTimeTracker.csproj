@@ -140,6 +140,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLogic\DateRowModel.cs" />
     <Compile Include="BusinessLogic\WorkTimeRow.cs" />
     <Compile Include="BusinessLogic\WorkTimesBuilder.cs" />
     <Compile Include="Code52.i18n\CultureHelper.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Models\Repositories\UserToTimeEntrieRepository.cs" />
     <Compile Include="Models\Repositories\WorkTimeEntriesRepository.cs" />
     <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="Models\ViewModels\ActionsFromViewViewModel.cs" />
     <Compile Include="Models\ViewModels\RolesManagementViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectViewModel.cs" />
     <Compile Include="Models\ViewModels\SettingsViewModel.cs" />
