@@ -62,6 +62,11 @@ namespace XiopiaWorkTimeTracker.Models.Database
             return this.workTimeRepo.GetUserEntriesForMonth(this.Id, month);
         }
 
+        public WorkTimeEntry GetTimeEntryByid(int entryId)
+        {
+            return this.workTimeRepo.Get(entryId);
+        }
+
         public void AddTimeEntry(WorkTimeEntry entry)
         {
             entry.EmployeeId = this.Id;

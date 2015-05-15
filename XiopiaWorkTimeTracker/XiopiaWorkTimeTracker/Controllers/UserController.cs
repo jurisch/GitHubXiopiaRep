@@ -42,7 +42,7 @@ namespace XiopiaWorkTimeTracker.Controllers
         {
             var userRepo = new UserRepository();
             var user = userRepo.Get(model.UserId);
-            var wtEntry = new WorkTimeEntry();
+            WorkTimeEntry wtEntry = null;
             WorkTimeEntry startetEntry = null;
             ViewArctionResults result = ViewArctionResults.Success;
             List<WorkTimeEntry> startedEntries = user.GetTodayStartedEntries(); ;
@@ -69,6 +69,7 @@ namespace XiopiaWorkTimeTracker.Controllers
                 case "StartWork":
                     if (!startet)
                     {
+                        wtEntry = new WorkTimeEntry();
                         var projRepo = new ProjectsRepository();
                         wtEntry.WorkDay = DateTime.Now;
                         wtEntry.WorkStartTime = DateTime.Now;
@@ -86,13 +87,40 @@ namespace XiopiaWorkTimeTracker.Controllers
                         startetEntry.WorkEndTime = DateTime.Now;
                         user.UpdateTimeEntry(startetEntry);
                     }
-                    //else if (startedEntries.Count > 1)
-                    //{
-                    //    result = ViewArctionResults.MultipleStarts;
-                    //}
                     else
                     {
                         result = ViewArctionResults.NotYetStarted;
+                    }
+                    break;
+                case "ElementChange":
+                    if (string.IsNullOrEmpty(model.ElementId))
+                    {
+                        wtEntry = new WorkTimeEntry();
+                        wtEntry.WorkDay = DateTime.Now;
+                    }
+                    else
+                    {
+                        var entryId = Int32.Parse(model.ElementId);
+                        wtEntry = user.GetTimeEntryByid(entryId);
+                    }
+                    switch (model.Element)
+                    {
+                        case "Pause":
+                            if (!string.IsNullOrEmpty(model.Value) && (wtEntry != null))
+                            {
+                                wtEntry.PauseLength = Int32.Parse(model.Value);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    if (string.IsNullOrEmpty(model.ElementId))
+                    {
+                        user.AddTimeEntry(wtEntry);
+                    }
+                    else
+                    {
+                        user.UpdateTimeEntry(wtEntry);
                     }
                     break;
                 default:
@@ -144,8 +172,10 @@ namespace XiopiaWorkTimeTracker.Controllers
                                     if (dbEntry.WorkStartTime.HasValue)
                                     {
                                         var entry = new WorkTimeRow();
-                                        entry.StartTime = dbEntry.WorkStartTime.HasValue ? dbEntry.WorkStartTime.Value.ToShortTimeString() : "";
-                                        entry.EndTime = dbEntry.WorkEndTime.HasValue ? dbEntry.WorkEndTime.Value.ToShortTimeString() : "";
+                                        entry.EntryId = dbEntry.Id;
+                                        entry.StartTime = dbEntry.WorkStartTime.HasValue ? dbEntry.WorkStartTime.Value.ToShortTimeString() : "00:00";
+                                        entry.PauseLength = dbEntry.PauseLength.HasValue ? dbEntry.PauseLength.Value.ToString() : "0";
+                                        entry.EndTime = dbEntry.WorkEndTime.HasValue ? dbEntry.WorkEndTime.Value.ToShortTimeString() : "00:00";
                                         entry.Project = dbEntry.ProjectName;
                                         modelViewDayRows.DataRow.Add(entry);
                                     }

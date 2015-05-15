@@ -145,7 +145,7 @@
     <value>Dezember</value>
   </data>
   <data name="EndWork" xml:space="preserve">
-    <value>Arbeit abschliessen</value>
+    <value>Gehen</value>
   </data>
   <data name="February" xml:space="preserve">
     <value>Februar</value>
@@ -220,7 +220,7 @@
     <value>Kommen</value>
   </data>
   <data name="StartWorkNow" xml:space="preserve">
-    <value>Arbeit beginnen jetzt</value>
+    <value>Arbeit jetzt beginnen</value>
   </data>
   <data name="UserHeader" xml:space="preserve">
     <value>Stundenaufstellung für den Monat</value>

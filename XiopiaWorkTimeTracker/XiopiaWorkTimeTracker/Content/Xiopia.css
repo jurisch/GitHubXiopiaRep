@@ -30,7 +30,7 @@ th {
 }
 
 .date-dayofweek-Fr {
-    background-color: lemonchiffon;
+    background-color: azure;
 }
 
 .date-dayofweek-Sa {
@@ -95,35 +95,35 @@ modal-content {
 		border-left:solid 0px;
 		border-right:solid 0px;
         border-width: 1px;
-        padding: 8px;
+        padding: 3px;
         border-color: #333333;
 }
 .webGrid-Date {
-	width:12%;
-	border-right:solid 0px;
-	border-width: 1px;
+	border-right:solid 1px;
+    border-color:black;
 	font-weight:bold;
 }
 .webGrid-StartTime {
-	width:15%;
-	border-right:solid 0px;
-	border-width: 1px;
+    text-align: center;
+	border-right:solid 1px;
+    border-color:black;
 }
 .webGrid-PauseLength {
-	width:15%;
-	border-right:solid 0px;
-	border-width: 1px;
+    text-align: center;
+	border-right:solid 1px;
+    border-color:black;
 }
 .webGrid-EndTime {
-	width:15%;
-	border-right:solid 0px;
-	border-width: 1px;
+    text-align: center;
+	border-right:solid 1px;
+    border-color:black;
 }
-.webGrid-NewPrj {
-	width:8.4%;
-	border-left:solid 1px;
-	border-width: 1px;
-	z-index: 999;
+.webGrid-Proj {
+    text-align: center;
+	/*width:8.4%;*/
+	/*border-left:solid 1px;*/
+	/*border-width: 1px;*/
+	/*z-index: 999;*/
 }
 
 .clsRed {
@@ -132,9 +132,19 @@ modal-content {
 .clsNormal {
 	background: #ffffff;
 }
-.clickable{
+.webGrid-StartTime:hover, .webGrid-PauseLength:hover, .webGrid-EndTime:hover, .webGrid-Proj:hover{
     cursor: pointer;
     background: #ffff99;
 }
 
 /*end Alpay*/
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*.row{
+    background-color:azure
+}*/

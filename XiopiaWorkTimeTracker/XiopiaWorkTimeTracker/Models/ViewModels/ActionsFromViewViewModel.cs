@@ -10,5 +10,8 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
         public int UserId { get; set; }
         public string Action { get; set; }
         public int ProjectId { get; set; }
+        public string ElementId { get; set; }
+        public string Element { get; set; }
+        public string Value { get; set; }
     }
 }
