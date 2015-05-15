@@ -77,8 +77,8 @@ modal-content {
 .webGrid-footer {
 		text-align: center;
 }
-.webGrid-alternating-row {
-		background: #ffffff;
+.webGrid-alternating-row, .webSubGrid-alternating-row {
+		background: #f8f8f8;
 		border-bottom:solid 0px;
 		border-left:solid 0px;
 		border-right:solid 0px;
@@ -89,7 +89,12 @@ modal-content {
 .webGrid-selected-row {
 		background: #ff6a00;
 }
-.webGrid-row-style {
+
+.webGrid-selected-row {
+		background: #00ff21;
+}
+
+.webGrid-row-style, .webSubGrid-row-style {
 		background: #ffffff;
 		border-bottom:solid 0px;
 		border-left:solid 0px;
@@ -120,7 +125,7 @@ modal-content {
 	border-width: 1px;
 }
 .webGrid-NewPrj {
-	width:8.4%;
+	width:9%;
 	border-left:solid 1px;
 	border-width: 1px;
 	z-index: 999;
