@@ -1,8 +1,7 @@
 ﻿
 //debugger;
 
-function FillSelectBox()
-{
+function FillSelectBox() {
     $.ajax({
         type: "GET",
         url: "/Projects/GetUserList",
@@ -57,18 +56,7 @@ $("#newPrjectBtn").on("click", function () {
             data: newProjData,
             datatype: "html",
             success: function (data) {
-                alert("Erfolg");
-                var newRow = '<tr class="webGrid-row-style"> \
-                        <td class="webGrid-Date">' + $("#newProjName").val() + '</td>\
-                        <td class="webGrid-Project">' + $("#newResponsible").val() + '</td>\
-                        <td  class="webGrid-Project">aaaaa </td>\
-                    </tr>';
-                $("#newPrRow").remove();
-                $("#newPrButtons").hide();
-                $("#addUser").off("click");
-                $("#cancelNewProjBtn").off("click");
-                $("#postNewProjBtn").off("click");
-                $("#tblWebGrid > tbody:last").append(newRow);
+                window.location.replace("/Projects");
             },
             error: function () {
                 alert("error");

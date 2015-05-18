@@ -111,6 +111,18 @@ namespace XiopiaWorkTimeTracker.Controllers
                                 wtEntry.PauseLength = Int32.Parse(model.Value);
                             }
                             break;
+                        case "Attr-Ill":
+                            if(!string.IsNullOrEmpty(model.Value) && (wtEntry != null))
+                            {
+                                wtEntry.AttrIll = Boolean.Parse(model.Value);
+                            }
+                            break;
+                        case "Attr-Holiday":
+                            if (!string.IsNullOrEmpty(model.Value) && (wtEntry != null))
+                            {
+                                wtEntry.AttrHoliday = Boolean.Parse(model.Value);
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -177,6 +189,8 @@ namespace XiopiaWorkTimeTracker.Controllers
                                         entry.PauseLength = dbEntry.PauseLength.HasValue ? dbEntry.PauseLength.Value.ToString() : "0";
                                         entry.EndTime = dbEntry.WorkEndTime.HasValue ? dbEntry.WorkEndTime.Value.ToShortTimeString() : "00:00";
                                         entry.Project = dbEntry.ProjectName;
+                                        entry.AttrHoliday = dbEntry.AttrHoliday;
+                                        entry.AttrIll = dbEntry.AttrIll;
                                         modelViewDayRows.DataRow.Add(entry);
                                     }
                                 }

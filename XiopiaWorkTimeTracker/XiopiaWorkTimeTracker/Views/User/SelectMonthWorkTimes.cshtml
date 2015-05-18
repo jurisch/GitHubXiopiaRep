@@ -3,9 +3,6 @@
 @model UserViewModel
 
 <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="~/Scripts/moment.js"></script>
-<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
-<script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
 
 <div class="jumbotron">
     <h1 class="panel-title">@Language.UserHeader @Model.CurrentMonth @Model.CurrentYear</h1>
@@ -81,10 +78,10 @@
                                     <input type="text" class=" form-control webGrid-Proj" placeholder="Projekt" readonly />
                                 </div>
                                 <div class="col-lg-1">
-                                    <input type="checkbox" class=" form-control" />
+                                    <input type="checkbox" class="form-control Attr-Ill" />
                                 </div>
                                 <div class="col-lg-1">
-                                    <input type="checkbox" class=" form-control" />
+                                    <input type="checkbox" class="form-control Attr-Holiday" />
                                 </div>
                             </div>
                         }
@@ -94,24 +91,50 @@
                             {
                                 <div class="row bg-info">
                                     @Html.Hidden(curEntry.EntryId.ToString())
-                                    <div class="col-lg-2">
-                                        <input type="time" class="form-control webGrid-StartTime" value="@curEntry.StartTime.Trim()" disabled />
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <input type="number" class="form-control webGrid-PauseLength" value="@curEntry.PauseLength" readonly />
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <input type="time" class="form-control webGrid-EndTime" value="@curEntry.EndTime" readonly />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <input type="text" class="form-control webGrid-Proj" value="@curEntry.Project" readonly />
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <input type="checkbox" class=" form-control" />
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <input type="checkbox" class=" form-control" />
-                                    </div>
+                                    @if (curEntry.AttrIll)
+                                    {
+                                        <div class="col-lg-10 field-illness">
+                                            <h3>Krank !!!</h3>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <input type="checkbox" class=" form-control  Attr-Ill" checked="@curEntry.AttrIll" />
+                                        </div>
+                                        <div class="col-lg-1"> </div>
+
+                                    }
+                                    else if (curEntry.AttrHoliday)
+                                    {
+                                        <div class="col-lg-10 field-holiday">
+                                            <h3>Urlaub</h3>
+                                        </div>
+                                        <div class="col-lg-1">
+
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <input type="checkbox" class=" form-control Attr-Holiday" checked="@curEntry.AttrHoliday" />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-2">
+                                            <input type="time" class="form-control webGrid-StartTime" value="@curEntry.StartTime.Trim()" disabled />
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <input type="number" class="form-control webGrid-PauseLength" value="@curEntry.PauseLength" readonly />
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <input type="time" class="form-control webGrid-EndTime" value="@curEntry.EndTime" readonly />
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control webGrid-Proj" value="@curEntry.Project" readonly />
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <input type="checkbox" class=" form-control  Attr-Ill" />
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <input type="checkbox" class=" form-control  Attr-Holiday" />
+                                        </div>
+                                    }
                                 </div>
                             }
                         }
@@ -203,20 +226,37 @@
                 SetEditHandler("Project", rowId);
                 break;
             }
+            if(nodeClasses[i] == "Attr-Ill")
+            {
+                SetEditHandler("Attr-Ill", rowId);
+                break;
+            }
+            if(nodeClasses[i] == "Attr-Holiday")
+            {
+                SetEditHandler("Attr-Holiday", rowId);
+                break;
+            }
         }
     })
 
     function SetEditHandler(element, id)
     {
-        $("#editElement").on("blur", function(){
-            PostElementChange(element, id, $("#editElement").val());
-        })
-        $("#editElement").keyup(function(e){
-            if (e.which == 13)
-            {
+        if((element == "Attr-Ill") || (element == "Attr-Holiday"))
+        {
+            PostElementChange(element, id, $("#editElement").is(':checked'));
+        }
+        else
+        {
+            $("#editElement").on("blur", function(){
                 PostElementChange(element, id, $("#editElement").val());
-            }
-        })
+            })
+            $("#editElement").keyup(function(e){
+                if (e.which == 13)
+                {
+                    PostElementChange(element, id, $("#editElement").val());
+                }
+            })
+        }
     }
 
     function PostElementChange(element, elementId, value)
@@ -228,6 +268,7 @@
             data: newProjData,
             datatype: "html",
             success: function (data) {
+                $("#editElement").removeAttr("id");
                 switch(data)
                 {
                     case 0:
@@ -249,9 +290,4 @@
         });
     }
 
-    $(document).ready(function () {
-        $('#datetimepicker3').datetimepicker({
-            format: 'LT'
-        });
-    });
 </script>

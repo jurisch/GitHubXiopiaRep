@@ -21,5 +21,9 @@ namespace XiopiaWorkTimeTracker.Models.Database
         public int? EmployeeId { get; set; }
 
         public string ProjectName { get; set; }
+
+        public bool AttrIll { get; set; }
+
+        public bool AttrHoliday { get; set; }
     }
 }

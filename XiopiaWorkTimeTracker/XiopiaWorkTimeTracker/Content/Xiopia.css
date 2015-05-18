@@ -161,6 +161,16 @@ modal-content {
   margin-right: auto;
 }
 
+.field-illness{
+    text-align:center;
+    background-color:red;
+}
+
+.field-holiday{
+    text-align:center;
+    background-color:lightblue;
+}
+
 /*.row{
     background-color:azure
 }*/
