@@ -199,10 +199,10 @@
     <value>Project</value>
   </data>
   <data name="ReportIllness" xml:space="preserve">
-    <value>Report Illness</value>
+    <value>Illness</value>
   </data>
   <data name="RequestHoloday" xml:space="preserve">
-    <value>Request Holoday</value>
+    <value>Holoday</value>
   </data>
   <data name="RolesManagement" xml:space="preserve">
     <value>Roles Management</value>

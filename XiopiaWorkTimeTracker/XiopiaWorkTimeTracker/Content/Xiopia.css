@@ -1,5 +1,6 @@
-﻿table {
-    width: 100%;
+﻿body {
+    position: relative;
+    width:100%;
 }
 
 th {
@@ -21,23 +22,19 @@ th {
     margin: 1em;
 }
 
-.date-dayofweek-Mo, .date-dayofweek-Mi {
+.date-dayofweek-1, .date-dayofweek-3 {
     background-color: lightcyan;
 }
 
-.date-dayofweek-Di, .date-dayofweek-Do {
+.date-dayofweek-2, .date-dayofweek-4, .date-dayofweek-5 {
     background-color: azure;
 }
 
-.date-dayofweek-Fr {
-    background-color: azure;
-}
-
-.date-dayofweek-Sa {
+.date-dayofweek-6 {
     background-color: peachpuff;
 }
 
-.date-dayofweek-So {
+.date-dayofweek-0 {
     background-color: lightpink;
 }
 
@@ -68,6 +65,8 @@ modal-content {
     }
 .webGrid-header {
 		text-align: center;
+        font-weight:bold;
+        font-size:larger;
 		background: #b5cfd2;
 		border-width: 1px;
         padding: 8px;
@@ -102,6 +101,7 @@ modal-content {
 	border-right:solid 1px;
     border-color:black;
 	font-weight:bold;
+    padding:0.6em;
 }
 .webGrid-StartTime {
     text-align: center;
@@ -134,7 +134,7 @@ modal-content {
 }
 .webGrid-StartTime:hover, .webGrid-PauseLength:hover, .webGrid-EndTime:hover, .webGrid-Proj:hover{
     cursor: pointer;
-    background: #ffff99;
+    background: #77dff6;
 }
 
 /*end Alpay*/

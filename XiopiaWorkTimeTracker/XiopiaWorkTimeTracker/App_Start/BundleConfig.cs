@@ -20,8 +20,9 @@ namespace XiopiaWorkTimeTracker
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-					  "~/Scripts/bootstrap-datetimepicker.min.js", 
+                      "~/Scripts/moment.min.js",
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/bootstrap-datetimepicker.min.js", 
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

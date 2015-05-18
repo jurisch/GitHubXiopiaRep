@@ -2,7 +2,10 @@
 @using Ressources
 @model UserViewModel
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/moment.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
 
 <div class="jumbotron">
     <h1 class="panel-title">@Language.UserHeader @Model.CurrentMonth @Model.CurrentYear</h1>
@@ -10,8 +13,6 @@
     <nav class="navbar navbar-default">
         <button id="startNowBtn" type="button" class="btn btn-primary btn-lg">@Language.StartWorkNow</button>
         <button id="endNowBtn" type="button" class="btn btn-success btn-lg">@Language.EndWork</button>
-        <button type="button" class="btn btn btn-warning btn-lg">@Language.ReportIllness</button>
-        <button type="button" class="btn btn btn-info btn-lg">@Language.RequestHoloday</button>
     </nav>
 </div>
 <nav>
@@ -48,51 +49,88 @@
 </div>
 
 <div id="tblWebGrid" class="container-fluid">
-    <div class="row webGrid-header">
-        <div class="col-sm-2 center-block">@Language.Date</div>
-        <div class="col-sm-2 center-block">@Language.StartWork</div>
-        <div class="col-sm-2 center-block">@Language.PauseInMin</div>
-        <div class="col-sm-2 center-block">@Language.EndWork</div>
-        <div class="col-sm-4 center-block">@Language.Project</div>
-    </div>
-    @foreach (var curDay in Model.WorkDays)
-    {
-        <div class="row  webGrid-row-style">
-            <div class="col-sm-2 webGrid-Date date-dayofweek-@curDay.WorkDate.ToString("ddd")">@curDay.WorkDate.ToString("dd.MM. ddd")</div>
-            <div class="col-sm-10 container-fluid date-dayofweek-@curDay.WorkDate.ToString("ddd")">
-                @if (curDay.DataRow.Count == 0)
-                {
-                    <div class="row bg-info">
-                        <div class="col-sm-3 webGrid-StartTime">00:00</div>
-                        <div class="col-sm-2 webGrid-PauseLength">0</div>
-                        <div class="col-sm-3 webGrid-EndTime">00:00</div>
-                        <div class="col-sm-4 webGrid-Proj">&nbsp;</div>
-                    </div>
-                }
-                else
-                {
-                    foreach (var curEntry in curDay.DataRow)
-                    {
-                        <div class="row">
-                            @Html.Hidden(curEntry.EntryId.ToString())
-                            <div class="col-sm-3 webGrid-StartTime center-block">@curEntry.StartTime.Trim()</div>
-                            <div class="col-sm-2 webGrid-PauseLength center-block">@curEntry.PauseLength</div>
-                            <div class="col-sm-3 webGrid-EndTime center-block">@curEntry.EndTime</div>
-                            <div class="col-sm-4 webGrid-Proj center-block">@curEntry.Project</div>
-                        </div>
-                    }
-                }
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="row webGrid-header">
+                <div class="col-lg-2 center-block">@Language.Date</div>
+                <div class="col-lg-2 center-block">@Language.StartWork</div>
+                <div class="col-lg-1 center-block">@Language.PauseInMin</div>
+                <div class="col-lg-2 center-block">@Language.EndWork</div>
+                <div class="col-lg-3 center-block">@Language.Project</div>
+                <div class="col-lg-1 center-block">@Language.ReportIllness</div>
+                <div class="col-lg-1 center-block">@Language.RequestHoloday</div>
             </div>
+            @foreach (var curDay in Model.WorkDays)
+            {
+                <div class="row">
+                    <div class="col-lg-2 webGrid-Date date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">@curDay.WorkDate.ToString("dd.MM. ddd")</div>
+                    <div class="col-lg-10 container  form-group date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
+                        @if (curDay.DataRow.Count == 0)
+                        {
+                            <div class="row bg-info">
+                                <div class="col-lg-2">
+                                    <input type="time" class="form-control webGrid-StartTime" placeholder="00:00" readonly />
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="number" class="form-control webGrid-PauseLength" placeholder="00" readonly />
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="time" class="form-control webGrid-EndTime" placeholder="00:00" readonly />
+                                </div>
+                                <div class="col-lg-4">
+                                    <input type="text" class=" form-control webGrid-Proj" placeholder="Projekt" readonly />
+                                </div>
+                                <div class="col-lg-1">
+                                    <input type="checkbox" class=" form-control" />
+                                </div>
+                                <div class="col-lg-1">
+                                    <input type="checkbox" class=" form-control" />
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            foreach (var curEntry in curDay.DataRow)
+                            {
+                                <div class="row bg-info">
+                                    @Html.Hidden(curEntry.EntryId.ToString())
+                                    <div class="col-lg-2">
+                                        <input type="time" class="form-control webGrid-StartTime" value="@curEntry.StartTime.Trim()" disabled />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="number" class="form-control webGrid-PauseLength" value="@curEntry.PauseLength" readonly />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="time" class="form-control webGrid-EndTime" value="@curEntry.EndTime" readonly />
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control webGrid-Proj" value="@curEntry.Project" readonly />
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="checkbox" class=" form-control" />
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="checkbox" class=" form-control" />
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
 
+                </div>
+            }
         </div>
-    }
+        <div class="col-lg-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">Zusammenfassung</div>
+                <div>Panel content</div>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 <script>
     debugger;
-
-    styleGrid();
 
     $("#startNowBtn").on("click", function (event) {
         $("#myModal").modal('show');
@@ -134,30 +172,52 @@
         var node = event.target;
         var nodeClasses = node.classList;
         var rowId = null;
+        if(node.parentElement.parentElement.firstElementChild.type == "hidden")
+        {
+            rowId = node.parentElement.parentElement.firstElementChild.name;
+        }
+        var att = document.createAttribute("id");
+        att.value = "editElement";
+        node.setAttributeNode(att);
+        $("#editElement").removeAttr("readonly");
+
         for(i=0; i<nodeClasses.length; i++)
         {
+            if(nodeClasses[i] == "webGrid-StartTime")
+            {
+                SetEditHandler("StartTime", rowId);
+                break;
+            }
             if(nodeClasses[i] == "webGrid-PauseLength")
             {
-                if(node.parentElement.firstElementChild.type == "hidden")
-                {
-                    rowId = node.parentElement.firstElementChild.name;
-                }
-                node.outerHTML = '<div class="col-sm-2 webGrid-PauseLength">\
-                                        <input style="text-align: center;width:3em" type="text" id="editField" value="' + node.innerText + '"/>\
-                                      </div>';
-                $("#editField").on("blur", function(){
-                    PostElementChange("Pause", rowId, $("#editField").val());
-                })
-                $("#editField").keyup(function(e){
-                    if (e.which == 13)
-                    {
-                        PostElementChange("Pause", rowId, $("#editField").val());
-                    }
-                })
+                SetEditHandler("Pause", rowId);
+                break;
+            }
+            if(nodeClasses[i] == "webGrid-EndTime")
+            {
+                SetEditHandler("EndTime", rowId);
+                break;
+            }
+            if(nodeClasses[i] == "webGrid-Proj")
+            {
+                SetEditHandler("Project", rowId);
                 break;
             }
         }
     })
+
+    function SetEditHandler(element, id)
+    {
+        $("#editElement").on("blur", function(){
+            PostElementChange(element, id, $("#editElement").val());
+        })
+        $("#editElement").keyup(function(e){
+            if (e.which == 13)
+            {
+                PostElementChange(element, id, $("#editElement").val());
+            }
+        })
+    }
 
     function PostElementChange(element, elementId, value)
     {
@@ -189,17 +249,9 @@
         });
     }
 
-
-    function styleGrid() {
-        $("#tblWebGrid tr:not(:first)").each(function () {
-            var aptStatus = $(this).find("td:nth-child(1)").html();
-            if (aptStatus != null) {
-                if ((aptStatus.indexOf("Sa") >= 0) || (aptStatus.indexOf("So") >= 0)) {
-                    $(this).find("td:nth-child(1)").addClass("clsRed");
-                } else {
-                    $(this).find("td:nth-child(1)").addClass("clsNormal");
-                }
-            }
+    $(document).ready(function () {
+        $('#datetimepicker3').datetimepicker({
+            format: 'LT'
         });
-    }
+    });
 </script>

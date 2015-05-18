@@ -199,10 +199,10 @@
     <value>Projekt</value>
   </data>
   <data name="ReportIllness" xml:space="preserve">
-    <value>Krank melden</value>
+    <value>Krank</value>
   </data>
   <data name="RequestHoloday" xml:space="preserve">
-    <value>Urlaub beantragen</value>
+    <value>Urlaub</value>
   </data>
   <data name="RolesManagement" xml:space="preserve">
     <value>Rolen Verwaltung</value>

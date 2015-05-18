@@ -412,7 +412,7 @@ namespace Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Report Illness.
+        ///   Looks up a localized string similar to Illness.
         /// </summary>
         public static string ReportIllness {
             get {
@@ -421,7 +421,7 @@ namespace Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Request Holoday.
+        ///   Looks up a localized string similar to Holoday.
         /// </summary>
         public static string RequestHoloday {
             get {
