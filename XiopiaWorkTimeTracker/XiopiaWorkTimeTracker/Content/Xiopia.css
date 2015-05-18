@@ -137,6 +137,22 @@ modal-content {
     background: #77dff6;
 }
 
+.body-content{
+	width: 90%;
+}
+.navbar-default  {
+	background-color:inherit;
+}
+
+.jumbotron {
+	text-align: center;
+	font-size:medium;
+}
+
+.jumbotron > h1 {
+	font-size:xx-large;
+}
+
 /*end Alpay*/
 
 .center-block {
