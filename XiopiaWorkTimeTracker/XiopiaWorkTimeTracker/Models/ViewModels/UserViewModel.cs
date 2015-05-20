@@ -10,8 +10,8 @@ namespace XiopiaWorkTimeTracker.Models
     public class UserViewModel
     {
         public Employee User { get; set; }
-        public string CurrentYear { get; set; }
-        public string CurrentMonth { get; set; }
+        public int CurrentYear { get; set; }
+        public int CurrentMonth { get; set; }
 
         public List<DateRowModel> WorkDays { get; set; }
 

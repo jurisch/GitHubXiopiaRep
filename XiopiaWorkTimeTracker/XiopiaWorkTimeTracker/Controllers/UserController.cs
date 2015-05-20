@@ -147,8 +147,8 @@ namespace XiopiaWorkTimeTracker.Controllers
                 {
                     userViewModel.WorkDays = WorkTimesBuilder.GetMonth(month);
 
-                    userViewModel.CurrentYear = DateTime.Now.Year.ToString();
-                    userViewModel.CurrentMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month);
+                    userViewModel.CurrentYear = DateTime.Now.Year;
+                    userViewModel.CurrentMonth = month;
 
                     var userEntriesForMonth = userViewModel.User.GetTimeEntriesForMonth(month);
                     foreach (var modelViewDayRows in userViewModel.WorkDays)
