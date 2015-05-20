@@ -17,8 +17,7 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
             var list = new List<WorkTimeEntry>();
             foreach(var ent in quiry)
             {
-                if((ent.WorkStartTime.HasValue) && (ent.WorkStartTime.Value.Month == month) ||
-                    (ent.WorkEndTime.HasValue) && (ent.WorkEndTime.Value.Month == month))
+                if(ent.WorkDay.Month == month)
                 {
                     list.Add(ent);
                 }

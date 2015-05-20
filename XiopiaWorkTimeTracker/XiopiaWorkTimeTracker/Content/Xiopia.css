@@ -77,7 +77,7 @@ modal-content {
 		text-align: center;
 }
 .webGrid-alternating-row {
-		background: #ffffff;
+		/*background: #ffffff;*/
 		border-bottom:solid 0px;
 		border-left:solid 0px;
 		border-right:solid 0px;
@@ -88,8 +88,8 @@ modal-content {
 .webGrid-selected-row {
 		background: #ff6a00;
 }
-.webGrid-row-style {
-		background: #ffffff;
+.webGrid-row {
+		/*background: #ffffff;*/
 		border-bottom:solid 0px;
 		border-left:solid 0px;
 		border-right:solid 0px;
@@ -97,7 +97,13 @@ modal-content {
         padding: 3px;
         border-color: #333333;
 }
-.webGrid-Date {
+
+.webGrid-row:hover{
+    cursor: pointer;
+    background: #77dff6;
+}
+
+.webGrid-Date, .webGrid-WeekDay {
 	border-right:solid 1px;
     border-color:black;
 	font-weight:bold;
@@ -132,10 +138,10 @@ modal-content {
 .clsNormal {
 	background: #ffffff;
 }
-.webGrid-StartTime:hover, .webGrid-PauseLength:hover, .webGrid-EndTime:hover, .webGrid-Proj:hover{
+/*.webGrid-StartTime:hover, .webGrid-PauseLength:hover, .webGrid-EndTime:hover, .webGrid-Proj:hover{
     cursor: pointer;
     background: #77dff6;
-}
+}*/
 
 .body-content{
 	width: 90%;
