@@ -43,6 +43,20 @@ namespace XiopiaWorkTimeTracker.Models.Database
             userToRoleMapRepo.SaveChanges();
         }
 
+		public void RemoveRole(int roleId)
+		{
+			var rolesRepo = new RolesRepository();
+			var userToRoleMapRepo = new UserToRoleRepository();
+			var allRoles = userToRoleMapRepo.GetByUserGuid(this.Guid);
+			var roleMapping = new UserToRoleMapping()
+			{
+				EmployeeGuid = this.Guid,
+				WorkTimeRoleId = roleId
+			};
+			userToRoleMapRepo.SetModified(roleMapping);
+			userToRoleMapRepo.SaveChanges();
+		}
+
         public bool HasRole(string roleStr)
         {
             var rolesRepo = new RolesRepository();

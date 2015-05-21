@@ -2,6 +2,9 @@
 @using Ressources
 @model SettingsViewModel
 
+
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+
 <div class="jumbotron">
     <h1 class="panel-title">@Language.AdminArray</h1>
 </div>
@@ -10,7 +13,7 @@
     <li><a data-toggle="tab" href="#defaultProfile">@Language.DefaultProfile</a></li>
     <li><a data-toggle="tab" href="#holidays">@Language.Holidays</a></li>
     <li><a data-toggle="tab" href="#userSettings">@Language.UserSettings</a></li>
-    <li><a data-toggle="tab" href="#rolesManafement">@Language.RolesManagement</a></li>
+    <li><a data-toggle="tab" href="#rolesManagement">@Language.RolesManagement</a></li>
 </ul>
 
 <div class="tab-content">
@@ -26,7 +29,8 @@
     <div id="userSettings" class="tab-pane fade">
         <h3>User Settings</h3>
     </div>
-    <div id="rolesManafement" class="tab-pane fade">
+    <div id="rolesManagement" class="tab-pane fade">
         <h3>@Language.RolesManagement</h3>
+		@Html.Partial("RolesManagement", Model.usrvm)
     </div>
 </div>
