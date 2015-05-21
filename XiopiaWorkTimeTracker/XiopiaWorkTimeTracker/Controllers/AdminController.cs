@@ -96,10 +96,10 @@ namespace XiopiaWorkTimeTracker.Controllers
 				var rolesRepo = new RolesRepository();
 
 				//Clear all Role from selected user
-				//if (selectedUser.HasRole("User")) selectedUser.RemoveRole(rolesRepo.GetByName("User").Id);
-				//if (selectedUser.HasRole("Accounting")) selectedUser.RemoveRole(rolesRepo.GetByName("Accounting").Id);
-				//if (selectedUser.HasRole("Admin")) selectedUser.RemoveRole(rolesRepo.GetByName("Admin").Id);
-				//if (selectedUser.HasRole("ProjectSupervisor")) selectedUser.RemoveRole(rolesRepo.GetByName("ProjectSupervisor").Id);
+				if (selectedUser.HasRole("User")) selectedUser.RemoveRole(rolesRepo.GetByName("User").Id);
+				if (selectedUser.HasRole("Accounting")) selectedUser.RemoveRole(rolesRepo.GetByName("Accounting").Id);
+				if (selectedUser.HasRole("Admin")) selectedUser.RemoveRole(rolesRepo.GetByName("Admin").Id);
+				if (selectedUser.HasRole("ProjectSupervisor")) selectedUser.RemoveRole(rolesRepo.GetByName("ProjectSupervisor").Id);
 
 				//add selected Roles to selected user
 				if (user) selectedUser.AddRole(rolesRepo.GetByName("User").Id);

@@ -2,139 +2,139 @@
 @using Ressources
 @model UserAndRolesViewModel
 
+
 <section class="data-settings-section">
-	@*@using (Html.BeginForm("GetRolesManagementViewModel", "Admin", FormMethod.Post))*@
-	@using (Html.BeginForm())
-	{
-		<div id="tblWebGrid" class="container-fluid">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="row webGrid-header">
-						<div class="col-lg-2 center-block">Mitarbeiter</div>
-						<div class="col-lg-2 center-block">User Rolle</div>
-						<div class="col-lg-2 center-block">Accounting Rolle</div>
-						<div class="col-lg-2 center-block">Admin Rolle</div>
-						<div class="col-lg-2 center-block">Projektmanager Rolle</div>
-						<div class="col-lg-2 center-block">Aktion</div>
-					</div>
-				</div>
-			</div>
-			@foreach (var user in Model.employees)
+		@using (Html.BeginForm())
 			{
-				<div class="row">
-					<div class="col-lg-2">
-						<input type="text" class="form-control" value="@user.FirstName @user.LastName" disabled />
+				<div id="tblWebGrid" class="container-fluid">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row webGrid-header">
+								<div class="col-lg-2 center-block">Mitarbeiter</div>
+								<div class="col-lg-2 center-block">User Rolle</div>
+								<div class="col-lg-2 center-block">Accounting Rolle</div>
+								<div class="col-lg-2 center-block">Admin Rolle</div>
+								<div class="col-lg-2 center-block">Projektmanager Rolle</div>
+								<div class="col-lg-2 center-block">Aktion</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-lg-2">
-						<input type="checkbox" class="form-control" checked="@user.HasRole("User")" disabled />
-					</div>
-					<div class="col-lg-2">
-						<input type="checkbox" class="form-control" checked="@user.HasRole("Accounting")" disabled />
-					</div>
-					<div class="col-lg-2">
-						<input type="checkbox" class="form-control" checked="@user.HasRole("Admin")" disabled />
-					</div>
-					<div class="col-lg-2">
-						<input type="checkbox" class="form-control" checked="@user.HasRole("ProjectSupervisor")" disabled />
-					</div>
-					<div class="col-lg-2">
-						<button class="new-mode do-not-hover-this" id="editBtn" onclick="editBtnClick('@user.Guid'); return false;">Edit</button>
-					</div>
+					@foreach (var user in Model.employees)
+					{
+						<div class="row">
+							<div class="col-lg-2">
+								<input type="text" class="form-control" value="@user.FirstName @user.LastName" disabled />
+							</div>
+							<div class="col-lg-2">
+								<input type="checkbox" class="form-control" checked="@user.HasRole("User")" disabled />
+							</div>
+							<div class="col-lg-2">
+								<input type="checkbox" class="form-control" checked="@user.HasRole("Accounting")" disabled />
+							</div>
+							<div class="col-lg-2">
+								<input type="checkbox" class="form-control" checked="@user.HasRole("Admin")" disabled />
+							</div>
+							<div class="col-lg-2">
+								<input type="checkbox" class="form-control" checked="@user.HasRole("ProjectSupervisor")" disabled />
+							</div>
+							<div class="col-lg-2">
+								<button class="new-mode do-not-hover-this" id="editBtn" onclick="editBtnClick('@user.Guid'); return false;">Edit</button>
+							</div>
+						</div>
+					}
 				</div>
 			}
-		</div>
-	}
 
-	<div class="modal fade" id="newWorkTimeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="exampleModalLabel">Rolle Vervaltung</h4>
-				</div>
-				<div class="modal-body">
-					<form>
-						@Html.Hidden("userGuid")
-						<div class="form-group">
-							<label for="Mitarbeiter" class="control-label">Mitarbeiter:</label>
-							<input type="text" class="form-control" id="Mitarbeiter" readonly />
+			<div class="modal fade" id="newWorkTimeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="exampleModalLabel">Rolle Vervaltung</h4>
 						</div>
-						<div class="form-group">
-							<label for="User" class="control-label">User:</label>
-							<input type="checkbox" class="form-control" id="User" />
+						<div class="modal-body">
+							<form>
+								@Html.Hidden("userGuid")
+								<div class="form-group">
+									<label for="Mitarbeiter" class="control-label">Mitarbeiter:</label>
+									<input type="text" class="form-control" id="Mitarbeiter" readonly />
+								</div>
+								<div class="form-group">
+									<label for="User" class="control-label">User:</label>
+									<input type="checkbox" class="form-control" id="User" />
+								</div>
+								<div class="form-group">
+									<label for="Accounting" class="control-label">Accounting:</label>
+									<input type="checkbox" class="form-control" id="Accounting" />
+								</div>
+								<div class="form-group">
+									<label for="Admin" class="control-label">Admin:</label>
+									<input type="checkbox" class="form-control" id="Admin" />
+								</div>
+								<div class="form-group">
+									<label for="Projektmanager" class="control-label">Projektmanager:</label>
+									<input type="checkbox" class="form-control" id="Projektmanager" />
+								</div>
+							</form>
 						</div>
-						<div class="form-group">
-							<label for="Accounting" class="control-label">Accounting:</label>
-							<input type="checkbox" class="form-control" id="Accounting" />
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+							<button type="submit" class="btn btn-primary" onclick="setUserRole($('#userGuid').val(), $('#User').is(':checked'), $('#Accounting').is(':checked'), $('#Admin').is(':checked'), $('#Projektmanager').is(':checked'));">Speichern</button>
 						</div>
-						<div class="form-group">
-							<label for="Admin" class="control-label">Admin:</label>
-							<input type="checkbox" class="form-control" id="Admin" />
-						</div>
-						<div class="form-group">
-							<label for="Projektmanager" class="control-label">Projektmanager:</label>
-							<input type="checkbox" class="form-control" id="Projektmanager" />
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-					<button type="submit" class="btn btn-primary" onclick="setUserRole($('#userGuid').val(), $('#User').is(':checked'), $('#Accounting').is(':checked'), $('#Admin').is(':checked'), $('#Projektmanager').is(':checked'));">Speichern</button>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 
-	<script>
-		debugger;
-		function editBtnClick(id) {
-			getSelectedUserRole(id);
-		}
-
-		function getSelectedUserRole(id) {
-			$.ajax({
-				type: "GET",
-				data: { id: id },
-				datatype: "json",
-				contentType: "application/json; charset=utf-8",
-				url: '/Admin/GetSelectedUserRole',
-				success: function (data) {
-					$('#Mitarbeiter').val(data.User.FirstName + " " + data.User.LastName);
-					$('#userGuid').val(id);
-					data.UserRoleId == 1 ? $('#User').prop("checked", true) : $('#User').removeAttr('checked')
-					data.AccountingRoleId == 1 ? $('#Accounting').prop("checked", true) : $('#Accounting').removeAttr('checked')
-					data.AdminRoleId == 1 ? $('#Admin').prop("checked", true) : $('#Admin').removeAttr('checked')
-					data.ProjectSupervisorRoleId == 1 ? $('#Projektmanager').prop("checked", true) : $('#Projektmanager').removeAttr('checked')
-					setTimeout('showModalDialog();', 1);
-				},
-				error: function () {
-					alert("error");
+			<script>
+				//debugger;
+				function editBtnClick(id) {
+					getSelectedUserRole(id);
 				}
-			});
-		}
 
-		function showModalDialog() {
-
-			$('#newWorkTimeModal').modal('show');
-		}
-
-
-		function setUserRole(guid, user, accounting, admin, projektmanager) {
-			$.ajax({
-				type: "GET",
-				data: { guid: guid, user: user, accounting: accounting, admin: admin, projektmanager: projektmanager },
-				datatype: "json",
-				contentType: "application/json; charset=utf-8",
-				url: '/Admin/UpdateUserRole',
-				success: function (data) {
-					window.location.reload(true);
-				},
-				error: function (er) {
-					window.location.reload(true);
+				function getSelectedUserRole(id) {
+					$.ajax({
+						type: "GET",
+						data: { id: id },
+						datatype: "json",
+						contentType: "application/json; charset=utf-8",
+						url: '/Admin/GetSelectedUserRole',
+						success: function (data) {
+							$('#Mitarbeiter').val(data.User.FirstName + " " + data.User.LastName);
+							$('#userGuid').val(id);
+							data.UserRoleId == 1 ? $('#User').prop("checked", true) : $('#User').removeAttr('checked')
+							data.AccountingRoleId == 1 ? $('#Accounting').prop("checked", true) : $('#Accounting').removeAttr('checked')
+							data.AdminRoleId == 1 ? $('#Admin').prop("checked", true) : $('#Admin').removeAttr('checked')
+							data.ProjectSupervisorRoleId == 1 ? $('#Projektmanager').prop("checked", true) : $('#Projektmanager').removeAttr('checked')
+							setTimeout('showModalDialog();', 1);
+						},
+						error: function () {
+							alert("error");
+						}
+					});
 				}
-			});
-		}
 
-	</script>
+				function showModalDialog() {
 
+					$('#newWorkTimeModal').modal('show');
+				}
+
+
+				function setUserRole(guid, user, accounting, admin, projektmanager) {
+					$.ajax({
+						type: "GET",
+						data: { guid: guid, user: user, accounting: accounting, admin: admin, projektmanager: projektmanager },
+						datatype: "json",
+						contentType: "application/json; charset=utf-8",
+						url: '/Admin/UpdateUserRole',
+						success: function (data) {
+							window.location.reload(true);
+						},
+						error: function (er) {
+							window.location.reload(true);
+						}
+					});
+				}
+
+			</script>
 </section>
+

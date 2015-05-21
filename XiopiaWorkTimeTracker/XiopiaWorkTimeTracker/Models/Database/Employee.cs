@@ -45,15 +45,21 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
 		public void RemoveRole(int roleId)
 		{
-			var rolesRepo = new RolesRepository();
-			var userToRoleMapRepo = new UserToRoleRepository();
-			var allRoles = userToRoleMapRepo.GetByUserGuid(this.Guid);
 			var roleMapping = new UserToRoleMapping()
 			{
 				EmployeeGuid = this.Guid,
 				WorkTimeRoleId = roleId
 			};
-			userToRoleMapRepo.SetModified(roleMapping);
+
+			var rolesRepo = new RolesRepository();
+			var userToRoleMapRepo = new UserToRoleRepository();
+			var allRoles = userToRoleMapRepo.GetByUserGuid(this.Guid);
+
+			foreach (var us in allRoles)
+			{
+				if (us.WorkTimeRoleId == roleId && us.EmployeeGuid == this.Guid)
+					userToRoleMapRepo.SetDeleted(us);
+			}
 			userToRoleMapRepo.SaveChanges();
 		}
 
