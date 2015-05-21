@@ -120,6 +120,32 @@ modal-content {
 .jumbotron > h1 {
 	font-size:xx-large;
 }
+.role-Hover:hover {
+	cursor: pointer;
+    background: #fce88a;
+}
+
+#chk1, #chk2, #chk3, #chk4 {
+	background-color: inherit;
+	margin-top: -1px;
+	box-shadow:none;
+}
+
+.role-Hover #editBtn {
+	margin-top:2px;
+	padding-left:20px;
+	padding-right:20px;
+	margin-left:30px;
+}
+.role-Hover #editBtn:hover {
+	color:darkred;
+}
+
+#tblRolen, .role-Hover > div {
+	padding:0;
+
+}
+
 
 /*end Alpay*/
 
@@ -140,5 +166,5 @@ modal-content {
 }
 
 .row{
-    margin:0px
+   /* margin:0px*/
 }
