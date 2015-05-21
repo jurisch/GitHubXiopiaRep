@@ -3,24 +3,6 @@
     width:100%;
 }
 
-th {
-    background-color: burlywood;
-}
-
-.data-user-actions {
-    padding: 1em;
-    margin: 0em;
-    background-color: beige;
-}
-
-.data-user-action-btn {
-    width: 6em;
-    margin-left: 2em;
-}
-
-.data-current-user-title {
-    margin: 1em;
-}
 
 .date-dayofweek-1, .date-dayofweek-3 {
     background-color: lightcyan;
@@ -76,20 +58,8 @@ modal-content {
 .webGrid-footer {
 		text-align: center;
 }
-.webGrid-alternating-row {
-		background: #ffffff;
-		border-bottom:solid 0px;
-		border-left:solid 0px;
-		border-right:solid 0px;
-        border-width: 1px;
-        padding: 8px;
-        border-color: #333333;
-}
-.webGrid-selected-row {
-		background: #ff6a00;
-}
-.webGrid-row-style {
-		background: #ffffff;
+
+.webGrid-row {
 		border-bottom:solid 0px;
 		border-left:solid 0px;
 		border-right:solid 0px;
@@ -97,7 +67,13 @@ modal-content {
         padding: 3px;
         border-color: #333333;
 }
-.webGrid-Date {
+
+.webGrid-row:hover{
+    cursor: pointer;
+    background: #77dff6;
+}
+
+.webGrid-Date, .webGrid-WeekDay {
 	border-right:solid 1px;
     border-color:black;
 	font-weight:bold;
@@ -120,10 +96,6 @@ modal-content {
 }
 .webGrid-Proj {
     text-align: center;
-	/*width:8.4%;*/
-	/*border-left:solid 1px;*/
-	/*border-width: 1px;*/
-	/*z-index: 999;*/
 }
 
 .clsRed {
@@ -131,10 +103,6 @@ modal-content {
 }
 .clsNormal {
 	background: #ffffff;
-}
-.webGrid-StartTime:hover, .webGrid-PauseLength:hover, .webGrid-EndTime:hover, .webGrid-Proj:hover{
-    cursor: pointer;
-    background: #77dff6;
 }
 
 .body-content{
@@ -171,6 +139,6 @@ modal-content {
     background-color:lightblue;
 }
 
-/*.row{
-    background-color:azure
-}*/
+.row{
+    margin:0px
+}

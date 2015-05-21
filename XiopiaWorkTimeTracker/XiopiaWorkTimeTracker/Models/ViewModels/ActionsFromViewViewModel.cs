@@ -15,5 +15,6 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
         public string Value { get; set; }
         public string AttrIll { get; set; }
         public string AttrHoliday { get; set; }
+        public string Row { get; set; }
     }
 }
