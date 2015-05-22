@@ -1,0 +1,140 @@
+﻿@using XiopiaWorkTimeTracker.Models.ViewModels
+@using Ressources
+@model UserAndRolesViewModel
+
+@{
+	AjaxOptions options = new AjaxOptions
+	{
+		UpdateTargetId = "searchResult",
+		Confirm = "Are you sure to start search?",
+		InsertionMode = InsertionMode.Replace,
+		LoadingElementId = "divLoading"
+	};
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<section class="data-settings-section">
+	@using (Ajax.BeginForm("SearchPeople", options))
+	{
+		<div id="divLoading" style="color:red;width:200px;background-color:yellow;font-size:larger;display:none;position:absolute;">Loading ....</div>
+		<div>
+			@Html.TextBox("keyword")
+			<button type="submit">Search</button>
+		</div>
+	}
+
+	<div id="tblRolen" class="container-fluid">
+		<div class="row role-Header">
+			<div class="col-lg-12">
+				<div class="row webGrid-header">
+					<div class="col-lg-2 center-block">Mitarbeiter</div>
+					<div class="col-lg-2 center-block">User Rolle</div>
+					<div class="col-lg-2 center-block">Accounting Rolle</div>
+					<div class="col-lg-2 center-block">Admin Rolle</div>
+					<div class="col-lg-2 center-block">Projektmanager Rolle</div>
+					<div class="col-lg-2 center-block">Aktion</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="searchResult">
+			@Html.Action("SearchPeople", new { keyword = "" })
+		</div>
+	</div>
+
+	<div class="modal fade" id="newWorkTimeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="exampleModalLabel">Rolle Vervaltung</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						@Html.Hidden("userGuid")
+						<div class="form-group">
+							<span class="glyphicon glyphicon-user"></span>
+							<label for="Mitarbeiter" class="control-label">Mitarbeiter:</label>
+							<input type="text" class="form-control" id="Mitarbeiter" readonly />
+						</div>
+						<div class="form-group">
+							<label for="User" class="control-label">User:</label>
+							<input type="checkbox" class="form-control" id="User" />
+						</div>
+						<div class="form-group">
+							<label for="Accounting" class="control-label">Accounting:</label>
+							<input type="checkbox" class="form-control" id="Accounting" />
+						</div>
+						<div class="form-group">
+							<label for="Admin" class="control-label">Admin:</label>
+							<input type="checkbox" class="form-control" id="Admin" />
+						</div>
+						<div class="form-group">
+							<label for="Projektmanager" class="control-label">Projektmanager:</label>
+							<input type="checkbox" class="form-control" id="Projektmanager" />
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+					<button type="submit" class="btn btn-primary" onclick="setUserRole($('#userGuid').val(), $('#User').is(':checked'), $('#Accounting').is(':checked'), $('#Admin').is(':checked'), $('#Projektmanager').is(':checked')); hideModalDialog();">Speichern</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		//debugger;
+		function editBtnClick(id) {
+			getSelectedUserRole(id);
+		}
+
+		function getSelectedUserRole(id) {
+			$.ajax({
+				type: "GET",
+				data: { id: id },
+				datatype: "json",
+				contentType: "application/json; charset=utf-8",
+				url: '/Admin/GetSelectedUserRole',
+				success: function (data) {
+					$('#Mitarbeiter').val(data.User.FirstName + " " + data.User.LastName);
+					$('#userGuid').val(id);
+					data.UserRoleId == 1 ? $('#User').prop("checked", true) : $('#User').removeAttr('checked')
+					data.AccountingRoleId == 1 ? $('#Accounting').prop("checked", true) : $('#Accounting').removeAttr('checked')
+					data.AdminRoleId == 1 ? $('#Admin').prop("checked", true) : $('#Admin').removeAttr('checked')
+					data.ProjectSupervisorRoleId == 1 ? $('#Projektmanager').prop("checked", true) : $('#Projektmanager').removeAttr('checked')
+					setTimeout('showModalDialog();', 1);
+				},
+				error: function () {
+					alert("error");
+				}
+			});
+		}
+
+		function showModalDialog() {
+			$('#newWorkTimeModal').modal('show');
+		}
+
+		function hideModalDialog() {
+			//setTimeout("$('#newWorkTimeModal').modal('hide');", 1000); 
+			setTimeout("window.location.reload(true);", 1000);
+		}
+
+		function setUserRole(guid, user, accounting, admin, projektmanager) {
+			$.ajax({
+				type: "GET",
+				data: { guid: guid, user: user, accounting: accounting, admin: admin, projektmanager: projektmanager },
+				datatype: "json",
+				contentType: "application/json; charset=utf-8",
+				url: '/Admin/UpdateUserRole',
+				success: function (data) {
+
+				},
+				error: function (er) {
+					//window.location.reload(true);
+				}
+			});
+		}
+
+	</script>
+</section>
+

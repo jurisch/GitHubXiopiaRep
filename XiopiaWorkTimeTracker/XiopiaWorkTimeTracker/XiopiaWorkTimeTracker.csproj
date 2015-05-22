@@ -576,6 +576,8 @@
     <Content Include="Scripts\jquery.globalize\cultures\globalize.culture.zu.js" />
     <Content Include="Scripts\jquery.globalize\cultures\globalize.cultures.js" />
     <Content Include="Scripts\jquery.globalize\globalize.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -614,6 +616,8 @@
     <Content Include="Views\Projects\EditProject.cshtml" />
     <Content Include="Views\Projects\DeleteProject.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Admin\RolesManagement.cshtml" />
+    <Content Include="Views\Admin\SearchPeople.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

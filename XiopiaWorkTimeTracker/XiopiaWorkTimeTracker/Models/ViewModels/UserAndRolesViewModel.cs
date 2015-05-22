@@ -1,4 +1,5 @@
-﻿using XiopiaWorkTimeTracker.Models.Database;
+﻿using System.Collections.Generic;
+using XiopiaWorkTimeTracker.Models.Database;
 
 namespace XiopiaWorkTimeTracker.Models.ViewModels
 {
@@ -13,5 +14,7 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
         public int AccountingRoleId { get; set; }
 
         public int ProjectSupervisorRoleId { get; set; }
-    }
+
+		public List<Employee> employees = new List<Employee>();
+	}
 }

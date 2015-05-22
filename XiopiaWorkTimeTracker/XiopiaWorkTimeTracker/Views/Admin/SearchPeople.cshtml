@@ -1,0 +1,27 @@
+﻿@using XiopiaWorkTimeTracker.Models.ViewModels
+@using Ressources
+@model UserAndRolesViewModel
+
+@foreach (var user in Model.employees)
+{
+	<div class="row role-Hover">
+		<div class="col-lg-2">
+			<input type="text" class="form-control user" value="@user.FirstName @user.LastName" disabled />
+		</div>
+		<div class="col-lg-2">
+			<input type="checkbox" id="chk1" class="form-control" checked="@user.HasRole("User")" disabled />
+		</div>
+		<div class="col-lg-2">
+			<input type="checkbox" id="chk2" class="form-control" checked="@user.HasRole("Accounting")" disabled />
+		</div>
+		<div class="col-lg-2">
+			<input type="checkbox" id="chk3" class="form-control" checked="@user.HasRole("Admin")" disabled />
+		</div>
+		<div class="col-lg-2">
+			<input type="checkbox" id="chk4" class="form-control" checked="@user.HasRole("ProjectSupervisor")" disabled />
+		</div>
+		<div class="col-lg-2">
+			<button class="new-mode do-not-hover-this" id="editBtn" onclick="editBtnClick('@user.Guid'); return false;">Edit</button>
+		</div>
+	</div>
+}
