@@ -17,28 +17,44 @@ namespace XiopiaWorkTimeTracker.Controllers
 		// GET: Admin
 		public ActionResult Index()
         {
-            var settingsViewModel = new SettingsViewModel();
-			
-            using (var context = new WorkTimeTrackerDbContext())
-            {
-                var globalSettings = context.GlobalSettings;
-                settingsViewModel.DaysAweek = globalSettings.First().DaysAweek;
-                settingsViewModel.HoursAday = globalSettings.First().HoursAday;
-                settingsViewModel.HoursAweek = globalSettings.First().HoursAweek;
-                settingsViewModel.MonthsAyear = globalSettings.First().MonthsAyear;
-                settingsViewModel.VacationDays = globalSettings.First().VacationDays;
+			var settingsViewModel = GetModel(null);
+            return View(settingsViewModel);
+        }
+
+		private SettingsViewModel GetModel(string firstName) {
+
+			var settingsViewModel = new SettingsViewModel();
+
+			using (var context = new WorkTimeTrackerDbContext())
+			{
+				var globalSettings = context.GlobalSettings;
+				settingsViewModel.DaysAweek = globalSettings.First().DaysAweek;
+				settingsViewModel.HoursAday = globalSettings.First().HoursAday;
+				settingsViewModel.HoursAweek = globalSettings.First().HoursAweek;
+				settingsViewModel.MonthsAyear = globalSettings.First().MonthsAyear;
+				settingsViewModel.VacationDays = globalSettings.First().VacationDays;
 
 				UserAndRolesViewModel usrvm = new UserAndRolesViewModel();
 				usersRepository = new UserRepository();
-				var users = usersRepository.GetAll();
+				List<Employee> users = usersRepository.GetAll();
+				List<Employee> searchResult = new List<Employee>();
+
 				if (users != null)
 				{
-					settingsViewModel.usrvm = new UserAndRolesViewModel { employees = users };
+					if (null == firstName)
+						settingsViewModel.usrvm = new UserAndRolesViewModel { employees = users };
+					else {
+						foreach (var user in users) {
+							if (user.FirstName.Contains(firstName))
+								searchResult.Add(user);
+						}
+						settingsViewModel.usrvm = new UserAndRolesViewModel { employees = searchResult };
+					}
 				}
 
-            }
-            return View(settingsViewModel);
-        }
+			}
+			return settingsViewModel;
+		}
 
         [HttpPost]
         public ActionResult SaveSettings(SettingsViewModel model)
@@ -87,7 +103,7 @@ namespace XiopiaWorkTimeTracker.Controllers
 		
 
 		[HttpGet]
-		public ActionResult UpdateUserRole(Guid guid, bool user, bool accounting, bool admin, bool projektmanager)
+		public PartialViewResult UpdateUserRole(Guid guid, bool user, bool accounting, bool admin, bool projektmanager)
 		{
 			if (ModelState.IsValid)
 			{
@@ -109,13 +125,20 @@ namespace XiopiaWorkTimeTracker.Controllers
 
 				usersRepository.SetModified(selectedUser);
 				usersRepository.SaveChanges();
-
 			}
 
-			return PartialView("/Admin#RolesManagement");
+			var data = GetModel(null);
+			return PartialView(data.usrvm);
+
 		}
 
-	   [HttpPost]
+		public PartialViewResult SearchPeople(string keyword)
+		{
+			var data = GetModel(keyword);
+			return PartialView(data.usrvm);
+		}
+
+		[HttpPost]
         public ActionResult SetVariable(string key, string value)
         {
             Session[key] = value;
