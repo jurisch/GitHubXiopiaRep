@@ -128,7 +128,7 @@ namespace XiopiaWorkTimeTracker.Controllers
             {
                 int userId = Int32.Parse(tmp.ToString());
                 var projectsRepo = new ProjectsRepository();
-                var userViewModel = new UserViewModel();
+                var userViewModel = new UserViewModel(userId);
 
                 userViewModel.User = this.usersRepository.Get(userId);
 

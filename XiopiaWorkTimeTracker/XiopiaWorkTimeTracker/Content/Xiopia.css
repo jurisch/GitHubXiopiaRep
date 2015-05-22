@@ -1,6 +1,6 @@
 ﻿body {
     position: relative;
-    width:100%;
+    width: 100%;
 }
 
 
@@ -38,107 +38,135 @@ modal-content {
 
 /*start Alpay*/
 .webGrid {
-        font-family: verdana,arial,sans-serif;
-        font-size: 12px;
-        color: #333333;
-        border-width: 1px;
-        border-color: #999999;
-        border-collapse: collapse;
-    }
-.webGrid-header {
-		text-align: center;
-        font-weight:bold;
-        font-size:larger;
-		background: #b5cfd2;
-		border-width: 1px;
-        padding: 8px;
-        border-style: solid;
-        border-color: #999999;
+    font-family: verdana,arial,sans-serif;
+    font-size: 12px;
+    color: #333333;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
 }
+
+.webGrid-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+    background: #b5cfd2;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #999999;
+}
+
 .webGrid-footer {
-		text-align: center;
+    text-align: center;
 }
 
 .webGrid-row {
-		border-bottom:solid 0px;
-		border-left:solid 0px;
-		border-right:solid 0px;
-        border-width: 1px;
-        padding: 3px;
-        border-color: #333333;
+    border-bottom: solid 0px;
+    border-left: solid 0px;
+    border-right: solid 0px;
+    border-width: 1px;
+    padding: 3px;
+    border-color: #333333;
 }
 
-.webGrid-row:hover{
-    cursor: pointer;
-    background: #77dff6;
-}
+    .webGrid-row:hover {
+        cursor: pointer;
+        background: #77dff6;
+    }
 
 .webGrid-Date, .webGrid-WeekDay {
-	border-right:solid 1px;
-    border-color:black;
-	font-weight:bold;
-    padding:0.6em;
+    border-right: solid 1px;
+    border-color: black;
+    font-weight: bold;
+    padding: 0.6em;
 }
+
 .webGrid-StartTime {
     text-align: center;
-	border-right:solid 1px;
-    border-color:black;
+    border-right: solid 1px;
+    border-color: black;
 }
+
 .webGrid-PauseLength {
     text-align: center;
-	border-right:solid 1px;
-    border-color:black;
+    border-right: solid 1px;
+    border-color: black;
 }
+
 .webGrid-EndTime {
     text-align: center;
-	border-right:solid 1px;
-    border-color:black;
+    border-right: solid 1px;
+    border-color: black;
 }
+
 .webGrid-Proj {
     text-align: center;
 }
 
 .clsRed {
-	background: peachpuff;
-}
-.clsNormal {
-	background: #ffffff;
+    background: peachpuff;
 }
 
-.body-content{
-	width: 90%;
+.clsNormal {
+    background: #ffffff;
 }
-.navbar-default  {
-	background-color:inherit;
+
+.body-content {
+    width: 90%;
+}
+
+.navbar-default {
+    background-color: inherit;
 }
 
 .jumbotron {
-	text-align: center;
-	font-size:medium;
+    text-align: center;
+    font-size: medium;
 }
 
-.jumbotron > h1 {
-	font-size:xx-large;
-}
+    .jumbotron > h1 {
+        font-size: xx-large;
+    }
 
 /*end Alpay*/
 
 .center-block {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.field-illness{
-    text-align:center;
-    background-color:red;
+.field-illness {
+    text-align: center;
+    background-color: red;
 }
 
-.field-holiday{
-    text-align:center;
-    background-color:lightblue;
+.field-holiday {
+    text-align: center;
+    background-color: lightblue;
 }
 
-.row{
-    margin:0px
+.row {
+    margin: 0px;
+}
+
+.jumbotron {
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.panel-heading {
+    background-color: aqua;
+    height: 50px;
+}
+
+input[type=checkbox]{
+  box-shadow: none;
+  box-sizing: inherit;
+  width: 20px;
+  height: 20px;
 }

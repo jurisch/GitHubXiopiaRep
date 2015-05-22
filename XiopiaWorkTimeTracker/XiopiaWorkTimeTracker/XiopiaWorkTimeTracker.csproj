@@ -179,6 +179,7 @@
     <Compile Include="Models\Repositories\WorkTimeEntriesRepository.cs" />
     <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\ViewModels\ActionsFromViewViewModel.cs" />
+    <Compile Include="Models\ViewModels\OverviewViewModel.cs" />
     <Compile Include="Models\ViewModels\RolesManagementViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectViewModel.cs" />
     <Compile Include="Models\ViewModels\SettingsViewModel.cs" />

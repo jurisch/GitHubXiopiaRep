@@ -2,7 +2,7 @@
 @using Ressources
 @model UserViewModel
 
-<link rel="stylesheet" href="~/Content/bootstrap.min.css">
+@*<link rel="stylesheet" href="~/Content/bootstrap.min.css">*@
 <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
 
@@ -17,7 +17,7 @@
 <nav>
     <ul class="pagination">
         <li id="li1"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 1})">@Language.January</a></li>
-        <li id ="li2"><a href=" @Url.Action("SelectMonthWorkTimes", "User", new { month = 2 }) ">@Language.February</a></li>
+        <li id="li2"><a href=" @Url.Action("SelectMonthWorkTimes", "User", new { month = 2 }) ">@Language.February</a></li>
         <li id="li3"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 3})">@Language.March</a></li>
         <li id="li4"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 4})">@Language.April</a></li>
         <li id="li5"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 5})">@Language.Mai</a></li>
@@ -67,7 +67,7 @@
                     <div class="col-lg-10 container  form-group date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
                         @if (curDay.DataRow.Count == 0)
                         {
-                            <div class="row date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
+                            <div class="row webGrid-row date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
                                 <div class="col-md-2">
                                     <div class="webGrid-StartTime" style="text-align:center;vertical-align: middle;">00:00</div>
                                 </div>
@@ -92,7 +92,7 @@
                         {
                             foreach (var curEntry in curDay.DataRow)
                             {
-                                <div class="row date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
+                                <div class="row webGrid-row date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
                                     @Html.Hidden(curEntry.EntryId.ToString())
                                     @if (curEntry.AttrIll)
                                     {
@@ -147,9 +147,180 @@
             }
         </div>
         <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">Zusammenfassung</div>
-                <div>Panel content</div>
+            <div class="panel panel-info">
+                <div class="row">
+                    <div class="panel-heading">
+                        <div class="col-sm-8">
+                            <h3 class="panel-title">Zusammenfassung</h3>
+                        </div>
+                        <div class="col-sm-2">
+                            <h3 class="panel-title">Monat</h3>
+                        </div>
+                        <div class="col-sm-2">
+                            <h3 class="panel-title">Jahr</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Arbeitstage
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.Raw(Model.Overview.WorkdaysInMonth.ToString())
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.Display(Model.Overview.WorkdaysYear.ToString())
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Gearbeitete Tage (Mo. - Fr.)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.Display(Model.Overview.WorkedNormalDays.ToString())
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Gearbeitete Tage (Sa.,So.,Ft.)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.Display(Model.Overview.WorkedOtherDays.ToString())
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Überstundenausgleich
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Krankheitstage
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Urlaubstage genommen
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Urlaubstage geplant
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Urlaubstage verfügbar
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Soll Stunden
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Ausfallzeit
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Geleistete Stunden
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Überstunden
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            übernehmen
+                        </div>
+                        <div class="col-sm-2">
+                            <input id="saveBtn" type="radio" class="btn btn-primary btn-sm" checked name="overWork"/>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" size="3" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            ausbezahlen
+                        </div>
+                        <div class="col-sm-2">
+                            <input id="payBtn" type="radio" class="btn btn-primary btn-sm" name="overWork" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" size="3" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -195,7 +366,7 @@
             }
         });
 
-    })
+    });
 
     $(".webGrid-row").one('click', function(event){
         var node = event.target;
@@ -267,10 +438,10 @@
         @foreach(var opt in Model.UserProjects)
         {
             @:var option = document.createElement("option");
-            @:option.text = "@opt.Text";
-            @:option.value = "@opt.Value";
-            @:$("#editProject").append(option);
-        }
+                                                                                            @:option.text = "@opt.Text";
+                                                                                            @:option.value = "@opt.Value";
+                                                                                            @:$("#editProject").append(option);
+                                                                                        }
     });
 
     function CancelEdit()
