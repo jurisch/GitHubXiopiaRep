@@ -94,6 +94,13 @@ namespace XiopiaWorkTimeTracker.Models.Database
             this.workTimeRepo.SaveChanges();
         }
 
+        public void DeleteEntry(WorkTimeEntry entry)
+        {
+            entry.EmployeeId = this.Id;
+            this.workTimeRepo.SetDeleted(entry);
+            this.workTimeRepo.SaveChanges();
+        }
+
         public List<WorkTimeEntry> GetTodayStartedEntries()
         {
             return this.workTimeRepo.GetUserTodayStartedEntries(this.Id);

@@ -79,7 +79,7 @@ modal-content {
     border-right: solid 1px;
     border-color: black;
     font-weight: bold;
-    padding: 0.6em;
+    padding: 0.3em;
 }
 
 .webGrid-StartTime {
@@ -173,8 +173,9 @@ modal-content {
     background-color: lightblue;
 }
 
-.row {
-    margin: 0px;
+.field-illness > p, .field-holiday > p{
+    vertical-align:middle;
+    font-weight:bolder;
 }
 
 .jumbotron {
@@ -191,8 +192,16 @@ modal-content {
 }
 
 input[type=checkbox]{
-  box-shadow: none;
-  box-sizing: inherit;
-  width: 20px;
-  height: 20px;
+  box-shadow: none !important;
+  box-sizing: inherit !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+input[type=time]{
+    width:100px;
+}
+
+input[type=number]{
+    width:80px;
 }

@@ -18,6 +18,7 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
         public int ProjectId { get; set; }
         public bool AttrIll { get; set; }
         public bool AttrHoliday { get; set; }
+        public string OldHtml { get; set; }
 
         public WorkTimeEntry GetWorkTimeEntry()
         {

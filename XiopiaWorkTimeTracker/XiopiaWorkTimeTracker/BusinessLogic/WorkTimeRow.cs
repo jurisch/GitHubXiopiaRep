@@ -14,8 +14,5 @@ namespace XiopiaWorkTimeTracker.BusinessLogic
         public string PauseLength { get; set; }
         public string Project { get; set; }
         public bool WorkDay { get; set; }
-        public bool AttrIll { get; set; }
-        public bool AttrHoliday { get; set; }
-
     }
 }

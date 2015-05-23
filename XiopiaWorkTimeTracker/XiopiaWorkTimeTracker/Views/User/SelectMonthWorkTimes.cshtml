@@ -2,7 +2,6 @@
 @using Ressources
 @model UserViewModel
 
-@*<link rel="stylesheet" href="~/Content/bootstrap.min.css">*@
 <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
 
@@ -16,18 +15,18 @@
 </div>
 <nav>
     <ul class="pagination">
-        <li id="li1"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 1})">@Language.January</a></li>
-        <li id="li2"><a href=" @Url.Action("SelectMonthWorkTimes", "User", new { month = 2 }) ">@Language.February</a></li>
-        <li id="li3"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 3})">@Language.March</a></li>
-        <li id="li4"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 4})">@Language.April</a></li>
-        <li id="li5"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 5})">@Language.Mai</a></li>
-        <li id="li6"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 6})">@Language.Juni</a></li>
-        <li id="li7"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 7})">@Language.July</a></li>
-        <li id="li8"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 8})">@Language.August</a></li>
-        <li id="li9"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 9})">@Language.September</a></li>
-        <li id="li10"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 10})">@Language.October</a></li>
-        <li id="li11"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 11})">@Language.November</a></li>
-        <li id="li12"><a href="@Url.Action("SelectMonthWorkTimes", "User", new { month = 12})">@Language.Dezember</a></li>
+        <li id="li1"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=1})">@Language.January</a></li>
+        <li id="li2"><a href=" @Url.Action("selectmonthworktimes", "User", new { month = 2})">@Language.February</a></li>
+        <li id="li3"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=3})">@Language.March</a></li>
+        <li id="li4"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=4})">@Language.April</a></li>
+        <li id="li5"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=5})">@Language.Mai</a></li>
+        <li id="li6"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=6})">@Language.Juni</a></li>
+        <li id="li7"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=7})">@Language.July</a></li>
+        <li id="li8"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=8})">@Language.August</a></li>
+        <li id="li9"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=9})">@Language.September</a></li>
+        <li id="li10"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=10})">@Language.October</a></li>
+        <li id="li11"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=11})">@Language.November</a></li>
+        <li id="li12"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=12})">@Language.Dezember</a></li>
     </ul>
 </nav>
 
@@ -48,6 +47,7 @@
 </div>
 
 <div id="tblWebGrid" class="container-fluid">
+    <input id="hiddenOldHtml" type="hidden" maxlength="1000" />
     <div class="row">
         <div class="col-md-9">
             <div class="row webGrid-header">
@@ -64,61 +64,54 @@
                 <div class="row">
                     <div class="col-lg-1 webGrid-Date date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">@curDay.WorkDate.ToString("dd.MM")</div>
                     <div class="col-lg-1 webGrid-WeekDay date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">@curDay.WorkDate.ToString("ddd")</div>
-                    <div class="col-lg-10 container  form-group date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
-                        @if (curDay.DataRow.Count == 0)
+                    @if (curDay.AttrIll)
                         {
-                            <div class="row webGrid-row date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
-                                <div class="col-md-2">
-                                    <div class="webGrid-StartTime" style="text-align:center;vertical-align: middle;">00:00</div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="webGrid-PauseLength" style="text-align:center;">00</div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="webGrid-EndTime" style="text-align:center;">00:00</div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="webGrid-Proj">&nbsp;</div>
-                                </div>
-                                <div class="col-md-1">
-                                    <input type="checkbox" class="form-control input-xs Attr-Ill" />
-                                </div>
-                                <div class="col-md-1">
-                                    <input type="checkbox" class="form-control input-xs Attr-Holiday" />
-                                </div>
+                            <div class="col-md-8 field-illness">
+                                <p>Krank !!!</p>
                             </div>
+                            <div class="col-md-1">
+                                <input type="checkbox" class="form-control input-xs Attr-Ill" checked="@curDay.AttrIll" />
+                                @Html.Hidden(curDay.DayId.ToString())
+                            </div>
+                            <div class="col-md-1"></div>
                         }
-                        else
-                        {
-                            foreach (var curEntry in curDay.DataRow)
+                    else if (curDay.AttrHoliday)
+                    {
+                        <div class="col-md-8 field-holiday">
+                            <p>Urlaub</p>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-1">
+                            <input type="checkbox" class="form-control input-xs Attr-Holiday" checked="@curDay.AttrHoliday" />
+                            @Html.Hidden(curDay.DayId.ToString())
+                        </div>
+                    }
+                    else
+                    {                
+                        <div class="col-lg-8 container  form-group date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
+                            @if (curDay.DataRow.Count == 0)
                             {
                                 <div class="row webGrid-row date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
-                                    @Html.Hidden(curEntry.EntryId.ToString())
-                                    @if (curEntry.AttrIll)
-                                    {
-                                        <div class="col-md-10 field-illness">
-                                            <h3>Krank !!!</h3>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input type="checkbox" class="form-control input-xs Attr-Ill" checked="@curEntry.AttrIll" />
-                                        </div>
-                                        <div class="col-md-1"> </div>
-
-                                    }
-                                    else if (curEntry.AttrHoliday)
-                                    {
-                                        <div class="col-md-10 field-holiday">
-                                            <h3>Urlaub</h3>
-                                        </div>
-                                        <div class="col-md-1">
-
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input type="checkbox" class="form-control input-xs Attr-Holiday" checked="@curEntry.AttrHoliday" />
-                                        </div>
-                                    }
-                                    else
-                                    {
+                                    <div class="col-md-2">
+                                        <div class="webGrid-StartTime" style="text-align:center;vertical-align: middle;">00:00</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="webGrid-PauseLength" style="text-align:center;">00</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="webGrid-EndTime" style="text-align:center;">00:00</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="webGrid-Proj">&nbsp;</div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                foreach (var curEntry in curDay.DataRow)
+                                {
+                                    <div class="row webGrid-row date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
+                                        @Html.Hidden(curEntry.EntryId.ToString())
                                         <div class="col-md-2">
                                             <div class="webGrid-StartTime">@curEntry.StartTime.Trim()</div>
                                         </div>
@@ -128,21 +121,23 @@
                                         <div class="col-md-2">
                                             <div class="webGrid-EndTime">@curEntry.EndTime</div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                             <div class="webGrid-Proj">@curEntry.Project</div>
                                         </div>
                                         <div class="col-md-1">
-                                            <input type="checkbox" class="form-control input-xs  Attr-Ill" />
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Delete"><span aria-hidden="true">&times;</span></button>
                                         </div>
-                                        <div class="col-md-1">
-                                            <input type="checkbox" class=" form-control input-xs Attr-Holiday" />
-                                        </div>
-                                    }
-                                </div>
+                                    </div>
+                                }
                             }
-                        }
                     </div>
-
+                        <div class="col-md-1">
+                            <input type="checkbox" class="form-control input-xs Attr-Ill" checked="@curDay.AttrIll" />
+                        </div>
+                        <div class="col-md-1">
+                            <input type="checkbox" class="form-control input-xs Attr-Holiday" checked="@curDay.AttrHoliday" />
+                        </div>
+                    }
                 </div>
             }
         </div>
@@ -303,7 +298,7 @@
                             übernehmen
                         </div>
                         <div class="col-sm-2">
-                            <input id="saveBtn" type="radio" class="btn btn-primary btn-sm" checked name="overWork"/>
+                            <input id="saveBtn" type="radio" class="btn btn-primary btn-sm" checked name="overWork" />
                         </div>
                         <div class="col-sm-2">
                             <input type="text" size="3" />
@@ -327,7 +322,7 @@
 </div>
 
 <script>
-    debugger;
+    //debugger;
 
     $(document).ready(function(){
         $("#li" + @Model.CurrentMonth).addClass("active");
@@ -368,6 +363,46 @@
 
     });
 
+    $(".Attr-Ill").one('click', function(event){
+        var node = event.target;
+        var att = document.createAttribute("id");
+        att.value = "editContaner";
+        node.parentElement.parentElement.setAttributeNode(att);
+
+        var tmp = $("#editContaner").find("input[type=hidden]");
+        var day = $("#editContaner").find("div.webGrid-Date")[0].innerText;
+        var rowId = "";
+        if((tmp != null) && (tmp.length > 0))
+        {
+            rowId = tmp[0].name;
+        }
+        var valJsn = '{ "Day" : "' + day +
+            '", "Year" :"' + @Model.CurrentYear +
+            '", "Month" :"' + @Model.WorkDay.Month +
+            '", "AttrIll" :"' + node.checked + '"}';
+            PostElementChange("Attr-Ill", rowId, valJsn);
+    });
+
+    $(".Attr-Holiday").one('click', function(){
+        var node = event.target;
+        var att = document.createAttribute("id");
+        att.value = "editContaner";
+        node.parentElement.parentElement.setAttributeNode(att);
+
+        var tmp = $("#editContaner").find("input[type=hidden]");
+        var day = $("#editContaner").find("div.webGrid-Date")[0].innerText;
+        var rowId = "";
+        if((tmp != null) && (tmp.length > 0))
+        {
+            rowId = tmp[0].name;
+        }
+        var valJsn = '{ "Day" : "' + day +
+            '", "Year" :"' + @Model.CurrentYear +
+            '", "Month" :"' + @Model.WorkDay.Month +
+            '", "AttrHoliday" :"' + node.checked + '"}';
+            PostElementChange("Attr-Holiday", rowId, valJsn);
+    });
+
     $(".webGrid-row").one('click', function(event){
         var node = event.target;
         var att = document.createAttribute("id");
@@ -382,67 +417,62 @@
         {
             rowId = tmp[0].name;
         }
-        if(node.className.indexOf("Attr-Ill") > -1)
+
+        if((node.className == "close") || 
+            ((node.localName == "span") && 
+            (node.parentElement.className == "close")))
         {
-            var valJsn = '{ "Day" : "' + day +
-            '", "Year" :"' + @Model.CurrentYear +
-            '", "Month" :"' + @Model.WorkDay.Month +
-            '", "AttrIll" :"' + node.checked + '"}';
-            PostElementChange("Attr-Ill", rowId, valJsn);
-            return;
-        }
-        else if(node.className.indexOf("Attr-Holiday") > -1)
-        {
-            var valJsn = '{ "Day" : "' + day +
-            '", "Year" :"' + @Model.CurrentYear +
-            '", "Month" :"' + @Model.WorkDay.Month +
-            '", "AttrHoliday" :"' + node.checked + '"}';
-            PostElementChange("Attr-Holiday", rowId, valJsn);
+            PostElementChange("DeleteElement", rowId, "");
             return;
         }
 
-        var editHtml = '<div class="row">\
-                                    <input id="hiddenId" type="hidden" value="' + rowId + '"/>\
-                                    <input id="hiddenDay" type="hidden" value="' + day + '"/>\
-                                    <div class="col-lg-3">\
-                                        <input type="time" id="editStartTime" class="form-control" autofocus value="' +
-                                            $("#editContaner").find("div.webGrid-StartTime").text() + '"/>\
-                                    </div>\
-                                    <div class="col-lg-2">\
-                                        <input type="number" id="editPause" min="0" class="form-control" value="' +
-                                            $("#editContaner").find("div.webGrid-PauseLength").text()+ '"/>\
-                                    </div>\
-                                    <div class="col-lg-3">\
-                                        <input type="time" id="editEndTime" class="form-control" value="' +
-                                            $("#editContaner").find("div.webGrid-EndTime").text() + '"/>\
-                                    </div>\
-                                    <div class="col-lg-2">\
-                                             <select class="form-control" id="editProject" name="Project"></select>\
-                                    </div>\
-                                    <div class="col-lg-1">&nbsp;</div>\
-                                    <div class="col-lg-1">&nbsp;</div>\
-                                </div>\
-                                <div class="row"  style="margin:10px;">\
-                                    <div class="col-lg-1">\
-                                        <button type="button" onclick="SaveEdit()" class="btn btn-primary btn-xs">Save</button>\
-                                    </div>\
-                                    <div class="col-lg-1">\
-                                        <button type="button" onclick="CancelEdit()" class="btn btn-default btn-xs">Cancel</button>\
-                                    </div>\
-                                    <div class="col-lg-10">\
-                                        <button type="button" class="btn btn-primary btn-xs" style="margin-left:10px;">Add new project</button>\
-                                    </div>\
-                                </div>';
+        // Save original html
+        $("#hiddenOldHtml").val($("#editContaner").html());
+
+        var editHtml = CreateEdit(day, rowId);
         $("#editContaner").html(editHtml);
-
-        @foreach(var opt in Model.UserProjects)
-        {
+        @foreach(var opt in Model.UserProjects){
             @:var option = document.createElement("option");
-                                                                                            @:option.text = "@opt.Text";
-                                                                                            @:option.value = "@opt.Value";
-                                                                                            @:$("#editProject").append(option);
-                                                                                        }
-    });
+            @:option.text = "@opt.Text";
+            @:option.value = "@opt.Value";
+            @:$("#editProject").append(option);
+                                                                                                                }
+        }
+    );
+
+    function CreateEdit(day, rowId)
+    {
+        return '<div class="row">\
+                    <input id="hiddenId" type="hidden" value="' + rowId + '"/>\
+                    <input id="hiddenDay" type="hidden" value="' + day + '"/>\
+                    <div class="col-md-3">\
+                        <input type="time" id="editStartTime" class="form-control" autofocus value="' +
+                           $("#editContaner").find("div.webGrid-StartTime").text() + '"/>\
+                    </div>\
+                    <div class="col-md-2">\
+                        <input type="number" id="editPause" min="0" class="form-control" value="' +
+                           $("#editContaner").find("div.webGrid-PauseLength").text()+ '"/>\
+                    </div>\
+                    <div class="col-md-3">\
+                        <input type="time" id="editEndTime" class="form-control" value="' +
+                           $("#editContaner").find("div.webGrid-EndTime").text() + '"/>\
+                    </div>\
+                    <div class="col-md-4">\
+                        <select class="form-control" id="editProject" name="Project"></select>\
+                    </div>\
+                </div>\
+                <div class="row"  style="margin:10px;">\
+                    <div class="col-md-1">\
+                        <button type="button" onclick="SaveEdit()" class="btn btn-primary btn-xs">Save</button>\
+                    </div>\
+                    <div class="col-md-1">\
+                        <button type="button" onclick="CancelEdit()" class="btn btn-default btn-xs">Cancel</button>\
+                    </div>\
+                    <div class="col-md-10">\
+                        <button type="button" onclick="AddNewProject()" class="btn btn-primary btn-xs" style="margin-left:10px;">Add new project</button>\
+                    </div>\
+                </div>';
+    }
 
     function CancelEdit()
     {
@@ -451,6 +481,7 @@
 
     function SaveEdit(date)
     {
+        $("#hiddenOldHtml").val("");
         PostElementChange("Row", $("#hiddenId").val(),
             '{ "Day" : "' + $("#hiddenDay").val() +
             '", "Year" :"' + @Model.CurrentYear +
@@ -461,24 +492,47 @@
             '", "ProjectId" : " ' + $("#editProject").val() + '"}');
     }
 
+    function AddNewProject()
+    {
+        PostElementChange("Row", $("#hiddenId").val(),
+            '{ "Day" : "' + $("#hiddenDay").val() +
+            '", "Year" :"' + @Model.CurrentYear +
+            '", "Month" :"' + @Model.CurrentMonth +
+            '", "StartTime" :"' + $("#editStartTime").val() +
+            '", "EndTime" :"' + $("#editEndTime").val() +
+            '", "PauseLength" :"' + $("#editPause").val() +
+            '", "ProjectId" : " ' + $("#editProject").val() + '"}');
+
+    }
+
     function PostElementChange(element, elementId, value)
     {
-        $("#editElement").removeAttr("id");
-        var newProjData = { "UserId": @Model.User.Id, "Action": "ElementChange", "ElementId": elementId, "Element":element, "Value": value};
+        //$("#editElement").removeAttr("id");
+        var newProjData = { 'UserId': @Model.User.Id, 'Action': 'ElementChange', 'ElementId': elementId, 'Element':element, 'Value': value};
         $.ajax({
             type: "POST",
             url: "/User/ActionFromView",
             data: newProjData,
             datatype: "html",
             success: function (data) {
-                $("#editElement").removeAttr("id");
-                switch(data)
+                var oldHtml = $("#hiddenOldHtml").val();
+                if((oldHtml == null) || (oldHtml == ""))
                 {
-                    case 0:
-                        window.location.replace("/User/SelectMonthWorkTimes/?month=@Model.CurrentMonth");
-                        break;
-                    default:
-                        break;
+                    window.location.replace("/User/SelectMonthWorkTimes/?month=@Model.CurrentMonth");
+                }
+                else
+                {
+                    var day = $("#editContaner").parent().find("div.webGrid-Date").text();
+                    $("#editContaner").html(oldHtml);
+                    var editHtml = CreateEdit(day, "");
+                    $("#editContaner").append(editHtml);
+                    @foreach(var opt in Model.UserProjects)
+                    {
+                        @:var option = document.createElement("option");
+                        @:option.text = "@opt.Text";
+                        @:option.value = "@opt.Value";
+                        @:$("#editProject").append(option);
+                    }
                 }
             },
             error: function () {

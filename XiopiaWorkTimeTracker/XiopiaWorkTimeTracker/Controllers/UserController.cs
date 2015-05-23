@@ -93,26 +93,41 @@ namespace XiopiaWorkTimeTracker.Controllers
                     }
                     break;
                 case "ElementChange":
-                    ResultRowHelper serializer = new JavaScriptSerializer().Deserialize<ResultRowHelper>(model.Value);
-                    if (string.IsNullOrEmpty(model.ElementId))
+                    if ((model.Value == null) && (model.Element.Equals("DeleteElement")))
                     {
-                        wtEntry = new WorkTimeEntry();
-                        wtEntry = serializer.GetWorkTimeEntry();
-                        wtEntry.EmployeeId = model.UserId;
-                        user.AddTimeEntry(wtEntry);
+                        wtEntry = user.GetTimeEntryByid(Int32.Parse(model.ElementId));
+                        user.DeleteEntry(wtEntry);
                     }
                     else
                     {
-                        var tempEntry = serializer.GetWorkTimeEntry();
-                        wtEntry = user.GetTimeEntryByid(Int32.Parse(model.ElementId));
+                        ResultRowHelper serializer = new JavaScriptSerializer().Deserialize<ResultRowHelper>(model.Value);
+                        if (string.IsNullOrEmpty(model.ElementId))
+                        {
+                            wtEntry = serializer.GetWorkTimeEntry();
+                            user.AddTimeEntry(wtEntry);
+                        }
+                        else
+                        {
+                            wtEntry = user.GetTimeEntryByid(Int32.Parse(model.ElementId));
 
-                        wtEntry.WorkStartTime = tempEntry.WorkStartTime;
-                        wtEntry.WorkEndTime = tempEntry.WorkEndTime;
-                        wtEntry.PauseLength = tempEntry.PauseLength;
-                        wtEntry.ProjectName = tempEntry.ProjectName;
-                        wtEntry.AttrHoliday = tempEntry.AttrHoliday;
-                        wtEntry.AttrIll = tempEntry.AttrIll;
-                        user.UpdateTimeEntry(wtEntry);
+                            if (!serializer.AttrHoliday && !serializer.AttrIll && (serializer.StartTime == null) && (serializer.EndTime == null) && (serializer.PauseLength == 0))
+                            {
+                                user.DeleteEntry(wtEntry);
+                            }
+                            else
+                            {
+
+                                var tempEntry = serializer.GetWorkTimeEntry();
+
+                                wtEntry.WorkStartTime = tempEntry.WorkStartTime;
+                                wtEntry.WorkEndTime = tempEntry.WorkEndTime;
+                                wtEntry.PauseLength = tempEntry.PauseLength;
+                                wtEntry.ProjectName = tempEntry.ProjectName;
+                                wtEntry.AttrHoliday = tempEntry.AttrHoliday;
+                                wtEntry.AttrIll = tempEntry.AttrIll;
+                                user.UpdateTimeEntry(wtEntry);
+                            }
+                        }
                     }
                     break;
                 default:
@@ -161,15 +176,26 @@ namespace XiopiaWorkTimeTracker.Controllers
                                 if (modelViewDayRows.WorkDate.Day == dbEntry.WorkDay.Day)
                                 {
                                     var entry = new WorkTimeRow();
-                                    entry.EntryId = dbEntry.Id;
-                                    entry.StartTime = dbEntry.WorkStartTime.HasValue ? dbEntry.WorkStartTime.Value.ToShortTimeString() : "00:00";
-                                    entry.PauseLength = dbEntry.PauseLength.HasValue ? dbEntry.PauseLength.Value.ToString() : "0";
-                                    entry.EndTime = dbEntry.WorkEndTime.HasValue ? dbEntry.WorkEndTime.Value.ToShortTimeString() : "00:00";
-                                    entry.Project = dbEntry.ProjectName;
-                                    entry.AttrHoliday = dbEntry.AttrHoliday;
-                                    entry.AttrIll = dbEntry.AttrIll;
-                                    entry.AttrHoliday = dbEntry.AttrHoliday;
-                                    modelViewDayRows.DataRow.Add(entry);
+                                    if (dbEntry.AttrIll)
+                                    {
+                                        modelViewDayRows.AttrIll = dbEntry.AttrIll;
+                                        modelViewDayRows.DayId = dbEntry.Id;
+                                        continue;
+                                    }
+                                    else if (dbEntry.AttrHoliday)
+                                    {
+                                        modelViewDayRows.AttrHoliday = dbEntry.AttrHoliday;
+                                        modelViewDayRows.DayId = dbEntry.Id;
+                                    }
+                                    else
+                                    {
+                                        entry.EntryId = dbEntry.Id;
+                                        entry.StartTime = dbEntry.WorkStartTime.HasValue ? dbEntry.WorkStartTime.Value.ToShortTimeString() : "00:00";
+                                        entry.PauseLength = dbEntry.PauseLength.HasValue ? dbEntry.PauseLength.Value.ToString() : "0";
+                                        entry.EndTime = dbEntry.WorkEndTime.HasValue ? dbEntry.WorkEndTime.Value.ToShortTimeString() : "00:00";
+                                        entry.Project = dbEntry.ProjectName;
+                                        modelViewDayRows.DataRow.Add(entry);
+                                    }
                                 }
                             }
                         }
