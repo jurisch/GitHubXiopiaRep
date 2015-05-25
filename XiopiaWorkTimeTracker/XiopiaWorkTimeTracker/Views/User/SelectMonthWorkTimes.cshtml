@@ -266,7 +266,7 @@
                             Soll Stunden
                         </div>
                         <div class="col-sm-2">
-
+                            @Html.Raw(Model.Overview.TargetHowers.ToString())
                         </div>
                         <div class="col-sm-2">
 
@@ -307,24 +307,24 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
                             übernehmen
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <input id="saveBtn" type="radio" class="btn btn-primary btn-sm" checked name="overWork" />
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <input type="text" size="3" />
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
                             ausbezahlen
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <input id="payBtn" type="radio" class="btn btn-primary btn-sm" name="overWork" />
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <input type="text" size="3" />
                         </div>
                     </div>
