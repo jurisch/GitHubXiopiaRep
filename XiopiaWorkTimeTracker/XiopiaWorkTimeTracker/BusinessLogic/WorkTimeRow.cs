@@ -9,9 +9,9 @@ namespace XiopiaWorkTimeTracker.BusinessLogic
     {
         public DateTime Date { get; set; }
         public int EntryId { get; set; }
-        public string StartTime { get; set; }
-        public string EndTime { get; set; }
-        public string PauseLength { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public int PauseLength { get; set; }
         public string Project { get; set; }
         public bool WorkDay { get; set; }
     }

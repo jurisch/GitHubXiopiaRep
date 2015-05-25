@@ -17,9 +17,9 @@ namespace XiopiaWorkTimeTracker.Models
 
         }
 
-        public UserViewModel(int userId)
+        public UserViewModel(int userId, int month)
         {
-            overview = new OverviewViewModel(userId);
+            overview = new OverviewViewModel(userId, month);
         }
 
         public Employee User { get; set; }

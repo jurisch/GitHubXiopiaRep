@@ -143,7 +143,7 @@ namespace XiopiaWorkTimeTracker.Controllers
             {
                 int userId = Int32.Parse(tmp.ToString());
                 var projectsRepo = new ProjectsRepository();
-                var userViewModel = new UserViewModel(userId);
+                var userViewModel = new UserViewModel(userId, month);
 
                 userViewModel.User = this.usersRepository.Get(userId);
 
@@ -190,9 +190,9 @@ namespace XiopiaWorkTimeTracker.Controllers
                                     else
                                     {
                                         entry.EntryId = dbEntry.Id;
-                                        entry.StartTime = dbEntry.WorkStartTime.HasValue ? dbEntry.WorkStartTime.Value.ToShortTimeString() : "00:00";
-                                        entry.PauseLength = dbEntry.PauseLength.HasValue ? dbEntry.PauseLength.Value.ToString() : "0";
-                                        entry.EndTime = dbEntry.WorkEndTime.HasValue ? dbEntry.WorkEndTime.Value.ToShortTimeString() : "00:00";
+                                        entry.StartTime = dbEntry.WorkStartTime.Value;
+                                        entry.PauseLength = dbEntry.PauseLength.HasValue ? dbEntry.PauseLength.Value : 0;
+                                        entry.EndTime = dbEntry.WorkEndTime.Value;
                                         entry.Project = dbEntry.ProjectName;
                                         modelViewDayRows.DataRow.Add(entry);
                                     }
