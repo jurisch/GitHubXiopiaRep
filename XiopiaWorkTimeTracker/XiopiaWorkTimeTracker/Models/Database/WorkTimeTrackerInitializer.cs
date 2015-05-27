@@ -75,13 +75,93 @@ namespace XiopiaWorkTimeTracker.Models.Database
             settings.ForEach(r => context.GlobalSettings.Add(r));
             context.SaveChanges();
 
-            //var times = new List<WorkTimeEntry>() {
-            //    new WorkTimeEntry { Id=1, WorkDay=new DateTime(2015, 05, 10), EmployeeId = 1, ProjectId = 1, WorkStartTime = new DateTime(2015, 05, 10, 09, 00, 00), PauseLength = 30, WorkEndTime = new DateTime(2015, 05, 10, 17, 30, 00) },
-            //    new WorkTimeEntry { Id=2, WorkDay=new DateTime(2015, 05, 11), EmployeeId = 3, ProjectId = 1, WorkStartTime = new DateTime(2015, 05, 11, 08, 00, 00), PauseLength = 20, WorkEndTime = new DateTime(2015, 05, 11, 17, 30, 00) },
-            //    new WorkTimeEntry { Id=3, WorkDay=new DateTime(2015, 05, 12), EmployeeId = 1, ProjectId = 2, WorkStartTime = new DateTime(2015, 05, 12, 09, 00, 00), PauseLength = 30, WorkEndTime = new DateTime(2015, 05, 12, 17, 30, 00) }
-            //};
-            //times.ForEach(r => context.WorkTimeEntries.Add(r));
-            //context.SaveChanges();
-        }
-    }
+			//Start: Test Data For GermanHolidays 
+			var holidayStatesRepository = new HolidayStatesRepository();
+			holidayStatesRepository.Add(new GermanState { Land = "Baden_Würtenberg" });
+			holidayStatesRepository.Add(new GermanState { Land = "Bayern" });
+			holidayStatesRepository.Add(new GermanState { Land = "Berlin" });
+			holidayStatesRepository.Add(new GermanState { Land = "Brandenburg" });
+			holidayStatesRepository.Add(new GermanState { Land = "Bremen" });
+			holidayStatesRepository.Add(new GermanState { Land = "Hamburg" });
+			holidayStatesRepository.Add(new GermanState { Land = "Hessen" });
+			holidayStatesRepository.Add(new GermanState { Land = "Mecklenburg_Vorpommern" });
+			holidayStatesRepository.Add(new GermanState { Land = "Niedersachsen" });
+			holidayStatesRepository.Add(new GermanState { Land = "Nordrhein_Westfalen" });
+			holidayStatesRepository.Add(new GermanState { Land = "Rheinland_Pfalz" });
+			holidayStatesRepository.Add(new GermanState { Land = "Saarland" });
+			holidayStatesRepository.Add(new GermanState { Land = "Sachsen" });
+			holidayStatesRepository.Add(new GermanState { Land = "Sachsen_Anhalt" });
+			holidayStatesRepository.Add(new GermanState { Land = "Schleswig_Holstein" });
+			holidayStatesRepository.Add(new GermanState { Land = "Thüringen" });
+			holidayStatesRepository.SaveChanges();
+
+			var holidaysTypRepository = new HolidaysTypRepository();
+			holidaysTypRepository.Add(new HolidayTyp { FeiertagsArt = "Fester_Feiertag" });
+			holidaysTypRepository.Add(new HolidayTyp { FeiertagsArt = "Bewegliche_Feiertag" });
+			holidaysTypRepository.SaveChanges();
+
+			var germanHolidayRepository = new GermanHolidayRepository();
+			var gh1 = new GermanHoliday { Feiertag = "Neujahr", Datum = "01.01.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt=true};
+			var gh2 = new GermanHoliday { Feiertag = "Heiligen Drei Könige", Datum = "06.01.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
+			var gh3 = new GermanHoliday { Feiertag = "Karfreitag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
+			var gh4 = new GermanHoliday { Feiertag = "Ostersonntag", TageHinzu = 0, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
+			var gh5 = new GermanHoliday { Feiertag = "Ostermontag", TageHinzu = 1, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
+			var gh6 = new GermanHoliday { Feiertag = "Tag der Arbeit", Datum = "01.05.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
+			var gh7 = new GermanHoliday { Feiertag = "Christi Himmelfahrt", TageHinzu = 39, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
+			var gh8 = new GermanHoliday { Feiertag = "Pfingstsonntag", TageHinzu = 49, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
+			var gh9 = new GermanHoliday { Feiertag = "Pfingstmontag", TageHinzu = 50, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
+			var gh10 = new GermanHoliday { Feiertag = "Fronleichnam", TageHinzu = 60, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
+			var gh11 = new GermanHoliday { Feiertag = "Mariä Himmelfahrt", Datum = "15.08.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
+			var gh12 = new GermanHoliday { Feiertag = "Tag der dt. Einheit", Datum = "03.10.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
+			var gh13 = new GermanHoliday { Feiertag = "Allerheiligen", Datum = "01.11.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
+			var gh14 = new GermanHoliday { Feiertag = "1. Weinachtstag", Datum = "25.12.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
+			var gh15 = new GermanHoliday { Feiertag = "2. Weinachtstag", Datum = "26.12.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
+			germanHolidayRepository.Add(gh1);germanHolidayRepository.Add(gh2);germanHolidayRepository.Add(gh3);germanHolidayRepository.Add(gh4);
+			germanHolidayRepository.Add(gh5);germanHolidayRepository.Add(gh6);germanHolidayRepository.Add(gh7);germanHolidayRepository.Add(gh8);
+			germanHolidayRepository.Add(gh9);germanHolidayRepository.Add(gh10);germanHolidayRepository.Add(gh11);germanHolidayRepository.Add(gh12);
+			germanHolidayRepository.Add(gh13);germanHolidayRepository.Add(gh14);germanHolidayRepository.Add(gh15);
+			germanHolidayRepository.SaveChanges();
+
+
+			var gHolidayRepository = germanHolidayRepository.GetAll();
+
+			//for (int i = 1; i > 16; i++)
+			//{
+			//	germanHolidayRepository.GetById(1).AddGermanStateToHoliday(i);
+			//	germanHolidayRepository.GetById(3).AddGermanStateToHoliday(i);
+			//	germanHolidayRepository.GetById(4).AddGermanStateToHoliday(i);
+			//	germanHolidayRepository.GetById(5).AddGermanStateToHoliday(i);
+			//	germanHolidayRepository.GetById(6).AddGermanStateToHoliday(i);
+			//	germanHolidayRepository.GetById(7).AddGermanStateToHoliday(i);
+			//	germanHolidayRepository.GetById(8).AddGermanStateToHoliday(i);
+			//	germanHolidayRepository.GetById(9).AddGermanStateToHoliday(i);
+			//	germanHolidayRepository.GetById(12).AddGermanStateToHoliday(i);
+			//	germanHolidayRepository.GetById(14).AddGermanStateToHoliday(i);
+			//	germanHolidayRepository.GetById(15).AddGermanStateToHoliday(i);
+			//}
+			germanHolidayRepository.GetById(2).AddGermanStateToHoliday(1); germanHolidayRepository.GetById(2).AddGermanStateToHoliday(2); germanHolidayRepository.GetById(2).AddGermanStateToHoliday(14);
+			germanHolidayRepository.GetById(10).AddGermanStateToHoliday(1); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(2); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(7);
+			germanHolidayRepository.GetById(10).AddGermanStateToHoliday(10); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(11); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(12);
+			germanHolidayRepository.GetById(11).AddGermanStateToHoliday(12);
+			germanHolidayRepository.GetById(13).AddGermanStateToHoliday(1); germanHolidayRepository.GetById(13).AddGermanStateToHoliday(2); germanHolidayRepository.GetById(13).AddGermanStateToHoliday(10);
+			germanHolidayRepository.GetById(13).AddGermanStateToHoliday(11); germanHolidayRepository.GetById(13).AddGermanStateToHoliday(12);
+			germanHolidayRepository.SaveChanges();
+			//End: Test Data For GermanHolidays 
+
+
+
+
+
+
+
+			//var times = new List<WorkTimeEntry>() {
+			//    new WorkTimeEntry { Id=1, WorkDay=new DateTime(2015, 05, 10), EmployeeId = 1, ProjectId = 1, WorkStartTime = new DateTime(2015, 05, 10, 09, 00, 00), PauseLength = 30, WorkEndTime = new DateTime(2015, 05, 10, 17, 30, 00) },
+			//    new WorkTimeEntry { Id=2, WorkDay=new DateTime(2015, 05, 11), EmployeeId = 3, ProjectId = 1, WorkStartTime = new DateTime(2015, 05, 11, 08, 00, 00), PauseLength = 20, WorkEndTime = new DateTime(2015, 05, 11, 17, 30, 00) },
+			//    new WorkTimeEntry { Id=3, WorkDay=new DateTime(2015, 05, 12), EmployeeId = 1, ProjectId = 2, WorkStartTime = new DateTime(2015, 05, 12, 09, 00, 00), PauseLength = 30, WorkEndTime = new DateTime(2015, 05, 12, 17, 30, 00) }
+			//};
+			//times.ForEach(r => context.WorkTimeEntries.Add(r));
+			//context.SaveChanges();
+		}
+
+	}
 }

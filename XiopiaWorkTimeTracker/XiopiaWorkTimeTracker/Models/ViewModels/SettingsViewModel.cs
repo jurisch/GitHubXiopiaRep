@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using XiopiaWorkTimeTracker.Models.Database;
 using XiopiaWorkTimeTracker.Models.ViewModels;
 
 namespace XiopiaWorkTimeTracker.Models
@@ -17,5 +19,7 @@ namespace XiopiaWorkTimeTracker.Models
 		public int VacationDays { get; set; }
 
 		public UserAndRolesViewModel usrvm { get; set;}
+
+		public FeierTag germanHolidays { get; set; }
 	}
 }

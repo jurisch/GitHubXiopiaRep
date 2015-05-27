@@ -160,6 +160,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\Employee.cs" />
+    <Compile Include="Models\ViewModels\FeierTag.cs" />
+    <Compile Include="Models\Database\GermanHoliday.cs" />
+    <Compile Include="Models\Database\GermanState.cs" />
+    <Compile Include="Models\Database\HolidayToStateMapping.cs" />
+    <Compile Include="Models\Database\HolidayTyp.cs" />
     <Compile Include="Models\Database\ProjectToMembersMapping.cs" />
     <Compile Include="Models\Database\SettingsModel.cs" />
     <Compile Include="Models\Database\Project.cs" />
@@ -169,6 +174,10 @@
     <Compile Include="Models\Database\WorkTimeEntry.cs" />
     <Compile Include="Models\Database\WorkTimeRole.cs" />
     <Compile Include="Models\Database\WorkTimeTrackerInitializer.cs" />
+    <Compile Include="Models\Repositories\GermanHolidayRepository.cs" />
+    <Compile Include="Models\Repositories\HolidayStatesRepository.cs" />
+    <Compile Include="Models\Repositories\HolidaysTypRepository.cs" />
+    <Compile Include="Models\Repositories\HolidayToStateRepository.cs" />
     <Compile Include="Models\Repositories\ProjectsRepository.cs" />
     <Compile Include="Models\Repositories\ProjectToMembersRepository.cs" />
     <Compile Include="Models\Repositories\Repository.cs" />

@@ -14,7 +14,13 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
         public DbSet<Project> Projects { get; set; }
 
-        public DbSet<WorkTimeEntry> WorkTimeEntries { get; set; }
+		public DbSet<GermanHoliday> GermanHolidays { get; set; }
+
+		public DbSet<GermanState> GermanStates { get; set; }
+
+		public DbSet<HolidayTyp> HolidayTyps { get; set; }
+
+		public DbSet<WorkTimeEntry> WorkTimeEntries { get; set; }
 
         public DbSet<WorkTimeRole> WorkTimeTrackerRoles { get; set; }
 
@@ -24,8 +30,10 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
         public DbSet<ProjectToMembersMapping> ProjectToMembersMappings { get; set; }
 
+		public DbSet<HolidayToStateMapping> HolidayToStateMappings { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 

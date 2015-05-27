@@ -1,14 +1,111 @@
-﻿@using XiopiaWorkTimeTracker.Models
+﻿@using XiopiaWorkTimeTracker.Models.ViewModels
 @using Ressources
-@model SettingsViewModel
+@model FeierTag
 
 <section class="data-settings-section">
-    <h3>@Language.Holidays</h3>
-    <table data-toggle="table">
-        <tr>
+	<h3>@Language.Holidays</h3>
+	@*<button type="submit" class="btn btn-primary" onclick="getAllHoliday('1')">Alle Feiertage</button>*@
+	<table style="width:100%;">
+		<tr>
+			<td>
+				<div id="DivGrid" style="width:100%;">
+					@{
+						var grid1 = new WebGrid(source: Model.feiertage, canPage: false, ajaxUpdateContainerId: "gridContent", canSort:false);
+						@grid1.GetHtml(mode: WebGridPagerModes.All,
+							tableStyle: "webgrid-table",
+							headerStyle: "webgrid-header",
+							footerStyle: "webgrid-footer",
+							alternatingRowStyle: "webgrid-alternating-row",
+							selectedRowStyle: "webgrid-selected-row",
+							rowStyle: "webgrid-row-style",
+							fillEmptyRows: false,
+							columns: grid1.Columns(
+							 grid1.Column("feiertag", header: "Feiertag"),
+							 grid1.Column("Datum", header: "Datum", format: (item) => string.Format("{0:dd.MM.yyyy}", item.datum)),
+							 grid1.Column("art", header: "Art"),
+							 grid1.Column("Länder", "Bundesland", format: (item) =>
+							 {
+								 if (item.Länder == null)
+								 {
+									 return String.Empty;
+								 }
+								 else
+								 {
+									 string tmp = "<div style=''>";
+									 foreach (var land in item.Länder)
+									 {
+										 tmp += land + "<br/>";
+									 }
+									 tmp += "</div>";
+									 return new HtmlString(tmp);
+								 }
+							 }),
+							 grid1.Column("festgelegt", header: "Festgelegt", format: item => @Html.CheckBox("Festgelegt", (bool)(item.Festgelegt ?? false), new { @disabled = "disabled" }), style: "center")
+						))}
+				</div>
+			</td>
+		</tr>
+	</table>
+	<style type="text/css">
+		.data-settings-section {
+			width:100%;
+		}
+		.webgrid-table
+		{
+			font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+			/*font-size: 1.2em;*/
+			width: 100%;
+			display: table;
+			border-collapse: separate;
+			border: solid 1px #98BF21;
+			background-color: white;
+		}
+		.webgrid-table td, th
+		{
+			border: 1px solid #98BF21;
+			padding: 3px 7px 2px;
+		}
+		.webgrid-header
+		{
+			background-color: #A7C942;
+			color: #FFFFFF;
+			padding-bottom: 4px;
+			padding-top: 5px;
+			text-align: left;
+		}
+		.webgrid-footer
+		{
+		}
+		.webgrid-row-style
+		{
+			padding: 3px 7px 2px;
+		}
+		.webgrid-alternating-row
+		{
+			background-color: #EAF2D3;
+			padding: 3px 7px 2px;
+		}
 
-            <td>Weihnachten</td>
-            <td><input type="text" /></td>
-        </tr>
-    </table>
+	</style>
+
+
+
+	<script>
+		////debugger;
+		//function getAllHoliday(id) {
+		//	$.ajax({
+		//		type: "GET",
+		//		data: { id : id },
+		//		datatype: "json",
+		//		contentType: "application/json; charset=utf-8",
+		//		url: '/Admin/GermanHolidays',
+		//		success: function (data) {
+		//			alert("Holiday ok!");
+		//		},
+		//		error: function () {
+		//			alert("Holiday error");
+		//		}
+		//	});
+		//}
+	</script>
 </section>
