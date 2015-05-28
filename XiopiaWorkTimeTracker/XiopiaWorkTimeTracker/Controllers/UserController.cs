@@ -192,8 +192,8 @@ namespace XiopiaWorkTimeTracker.Controllers
                                         entry.EntryId = dbEntry.Id;
                                         entry.StartTime = dbEntry.WorkStartTime.Value;
                                         entry.PauseLength = dbEntry.PauseLength.HasValue ? dbEntry.PauseLength.Value : 0;
-                                        entry.EndTime = dbEntry.WorkEndTime.Value;
-                                        entry.Project = dbEntry.ProjectName;
+                                        entry.EndTime = dbEntry.WorkEndTime.HasValue ? dbEntry.WorkEndTime.Value : Convert.ToDateTime("00:00").Date;
+										entry.Project = dbEntry.ProjectName;
                                         modelViewDayRows.DataRow.Add(entry);
                                     }
                                 }
