@@ -11,13 +11,17 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
     {
         private Employee _user;
         private int _month;
+		private List<DateTime> germanHoliday = new List<DateTime>();
+		GermanHolidayRepository germanholidayrep = new GermanHolidayRepository();
+		List<GermanHoliday> x;
 
-        public OverviewViewModel(int userId, int month)
+		public OverviewViewModel(int userId, int month)
         {
             _month = month;
             var usersRepository = new UserRepository();
             _user = usersRepository.Get(userId);
-        }
+			x = germanholidayrep.GetAllByMonth(_month);
+		}
 
         public int WorkdaysInMonth
         {
@@ -25,12 +29,25 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
             {
                 int wDays = 0;
                 var daysCount = DateTime.DaysInMonth(DateTime.Now.Year, _month);
+
+				foreach (GermanHoliday h in x) {
+					//germanHoliday.Add(DateTime.Parse(h.Datum+""+DateTime.Now.Year));
+					germanHoliday.Add(DateTime.Parse(h.Datum));
+				}
+
                 for (int i = 1; i < daysCount + 1; i++ )
                 {
+					bool holiday = false;
                     var curDay = new DateTime(DateTime.Now.Year, _month, i);
-                    if(!curDay.DayOfWeek.ToString("d").Equals("6") && !curDay.DayOfWeek.ToString("d").Equals("0") )
+                    if(!curDay.DayOfWeek.ToString("d").Equals("6") && !curDay.DayOfWeek.ToString("d").Equals("0"))
                     {
-                        wDays++;
+						foreach (DateTime d in germanHoliday) {
+							if (d == curDay)
+							{
+								holiday = true;
+							}
+						}
+                        if (!holiday) wDays++;
                     }
                 }
                 return wDays;
@@ -155,5 +172,6 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
                 return WorkdaysInMonth * 8;
             }
         }
-    }
+
+	}
 }

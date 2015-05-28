@@ -18,6 +18,9 @@ namespace XiopiaWorkTimeTracker.Models
 		[Display(Name = "VacationDays", ResourceType = typeof(Ressources.Language))]
 		public int VacationDays { get; set; }
 
+		[Display(Name = "Bundesland")]
+		public int GermanStateId { get; set; }
+
 		public UserAndRolesViewModel usrvm { get; set;}
 
 		public FeierTag germanHolidays { get; set; }

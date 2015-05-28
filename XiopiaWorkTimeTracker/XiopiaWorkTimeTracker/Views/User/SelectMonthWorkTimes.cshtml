@@ -61,97 +61,123 @@
                 <div class="col-md-1 center-block">@Language.RequestHoloday</div>
             </div>
             @foreach (var curDay in Model.WorkDays)
-            {
-                <div class="row">
-                    <div class="col-lg-1 webGrid-Date date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">@curDay.WorkDate.ToString("dd.MM")</div>
-                    <div class="col-lg-1 webGrid-WeekDay date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">@curDay.WorkDate.ToString("ddd")</div>
-                    @if (curDay.AttrIll)
-                    {
-                        <div class="col-md-8 field-illness">
-                            <p>Krank !!!</p>
-                        </div>
-                        <div class="col-md-1">
-                            <input type="checkbox" class="form-control input-xs Attr-Ill" checked="@curDay.AttrIll" />
-                            @Html.Hidden(curDay.DayId.ToString())
-                        </div>
-                        <div class="col-md-1"></div>
-                    }
-                    else if (curDay.AttrHoliday)
-                    {
-                        <div class="col-md-8 field-holiday">
-                            <p>Urlaub</p>
-                        </div>
-                        <div class="col-md-1"></div>
-                        <div class="col-md-1">
-                            <input type="checkbox" class="form-control input-xs Attr-Holiday" checked="@curDay.AttrHoliday" />
-                            @Html.Hidden(curDay.DayId.ToString())
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="col-lg-8 container  form-group date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
-                            @if (curDay.DataRow.Count == 0)
-                            {
-                                <div class="row webGrid-row date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
-                                    <div class="col-md-2">
-                                        <div class="webGrid-StartTime" style="text-align:center;vertical-align: middle;">00:00</div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="webGrid-PauseLength" style="text-align:center;">00</div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="webGrid-EndTime" style="text-align:center;">00:00</div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="webGrid-Proj">&nbsp;</div>
-                                    </div>
-                                </div>
-                            }
-                            else
-                            {
-                                foreach (var curEntry in curDay.DataRow)
-                                {
-                                    <div class="row webGrid-row date-dayofweek-@curDay.WorkDate.DayOfWeek.ToString("d")">
-                                        @Html.Hidden(curEntry.EntryId.ToString())
-                                        <div class="col-md-2">
-                                            <div class="webGrid-StartTime">@curEntry.StartTime.ToShortTimeString()</div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="webGrid-PauseLength">@curEntry.PauseLength</div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="webGrid-EndTime">@curEntry.EndTime.ToShortTimeString()</div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="webGrid-Proj">@curEntry.Project</div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            @{
-                                                float hours = 0;
-                                                if ((curEntry.StartTime != null) && (curEntry.EndTime != null))
-                                                {
-                                                    var span = curEntry.EndTime - curEntry.StartTime;
-                                                    var hr = span.Hours * 60 + span.Minutes - curEntry.PauseLength;
-                                                    hours = (float)hr/60;
-                                                }
-                                            }
-                                            <div class="webGrid-Proj">@hours.ToString("#.##")</div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Delete"><span aria-hidden="true">&times;</span></button>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        </div>
-                        <div class="col-md-1">
-                            <input type="checkbox" class="form-control input-xs Attr-Ill" checked="@curDay.AttrIll" />
-                        </div>
-                        <div class="col-md-1">
-                            <input type="checkbox" class="form-control input-xs Attr-Holiday" checked="@curDay.AttrHoliday" />
-                        </div>
-                    }
-                </div>
+			{
+				var hol = false;
+				var ftagClass = " date-dayofweek-"+curDay.WorkDate.DayOfWeek.ToString("d");
+				var holidayName = "";
+				foreach (var gHoliday in curDay.AttrGermanHoliday)
+				{
+					if (gHoliday.Datum.ToString().Equals(curDay.WorkDate.ToString("dd.MM.yyyy 00:00:00")))
+					{
+						hol = true;
+						ftagClass = "date-dayofweek-0";
+						holidayName = gHoliday.Feiertag;
+                        break;
+					}
+				}
+                 <div class="row">
+						<div class="col-lg-1 webGrid-Date @ftagClass" style="width: 7%;">@curDay.WorkDate.ToString("dd.MM")</div>
+						<div class="col-lg-1 webGrid-WeekDay @ftagClass" style="width: 9.6%;">
+							@{
+								if (hol)
+								{
+									@curDay.WorkDate.ToString("ddd") @: -
+									<label style="height: 10px; font-size: 9px;">@holidayName</label>
+								}
+								else
+								{
+									@curDay.WorkDate.ToString("ddd");
+								}
+							}
+						</div>
+						@if (curDay.AttrIll)
+						{
+							<div class="col-md-8 field-illness">
+								<p>Krank !!!</p>
+							</div>
+							<div class="col-md-1">
+								<input type="checkbox" class="form-control input-xs Attr-Ill" checked="@curDay.AttrIll" />
+								@Html.Hidden(curDay.DayId.ToString())
+							</div>
+							<div class="col-md-1"></div>
+						}
+						else if (curDay.AttrHoliday)
+						{
+							<div class="col-md-8 field-holiday">
+								<p>Urlaub</p>
+							</div>
+							<div class="col-md-1"></div>
+							<div class="col-md-1">
+								<input type="checkbox" class="form-control input-xs Attr-Holiday" checked="@curDay.AttrHoliday" />
+								@Html.Hidden(curDay.DayId.ToString())
+							</div>
+						}
+						else
+						{
+							<div class="col-lg-8 container  form-group @ftagClass">
+								@if (curDay.DataRow.Count == 0)
+								{
+									<div class="row webGrid-row @ftagClass">
+										<div class="col-md-2">
+											<div class="webGrid-StartTime" style="text-align:center;vertical-align: middle;">00:00</div>
+										</div>
+										<div class="col-md-2">
+											<div class="webGrid-PauseLength" style="text-align:center;">00</div>
+										</div>
+										<div class="col-md-2">
+											<div class="webGrid-EndTime" style="text-align:center;">00:00</div>
+										</div>
+										<div class="col-md-6">
+											<div class="webGrid-Proj">&nbsp;</div>
+										</div>
+									</div>
+								}
+								else
+								{
+									foreach (var curEntry in curDay.DataRow)
+									{
+										<div class="row webGrid-row @ftagClass">
+											@Html.Hidden(curEntry.EntryId.ToString())
+											<div class="col-md-2">
+												<div class="webGrid-StartTime">@curEntry.StartTime.ToShortTimeString()</div>
+											</div>
+											<div class="col-md-2">
+												<div class="webGrid-PauseLength">@curEntry.PauseLength</div>
+											</div>
+											<div class="col-md-2">
+												<div class="webGrid-EndTime">@curEntry.EndTime.ToShortTimeString()</div>
+											</div>
+											<div class="col-md-4">
+												<div class="webGrid-Proj">@curEntry.Project</div>
+											</div>
+											<div class="col-md-1">
+												@{
+													float hours = 0;
+													if ((curEntry.StartTime != null) && (curEntry.EndTime != null))
+													{
+														var span = curEntry.EndTime - curEntry.StartTime;
+														var hr = span.Hours * 60 + span.Minutes - curEntry.PauseLength;
+														hours = (float)hr / 60;
+													}
+												}
+												<div class="webGrid-Proj">@hours.ToString("#.##")</div>
+											</div>
+											<div class="col-md-1">
+												<button type="button" class="close" data-dismiss="alert" aria-label="Delete"><span aria-hidden="true">&times;</span></button>
+											</div>
+										</div>
+														}
+													}
+							</div>
+							<div class="col-md-1">
+								<input type="checkbox" class="form-control input-xs Attr-Ill" checked="@curDay.AttrIll" />
+							</div>
+							<div class="col-md-1">
+								<input type="checkbox" class="form-control input-xs Attr-Holiday" checked="@curDay.AttrHoliday" />
+							</div>
+													}
+					</div>
+
             }
         </div>
         <div class="col-md-3">
