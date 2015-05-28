@@ -335,7 +335,7 @@
 </div>
 
 <script>
-    //debugger;
+    debugger;
 
     $(document).ready(function(){
         $("#li" + @Model.CurrentMonth).addClass("active");
@@ -420,9 +420,9 @@
         var node = event.target;
         var att = document.createAttribute("id");
         att.value = "editContaner";
-        this.parentElement.setAttributeNode(att);
+        this.setAttributeNode(att);
 
-        var day = $("#editContaner").parent().find("div.webGrid-Date").text();
+        var day = $("#editContaner").parent().parent().find("div.webGrid-Date").text();
 
         var tmp = $("#editContaner").find("input[type=hidden]");
         var rowId = "";
@@ -496,7 +496,7 @@
     {
         $("#hiddenOldHtml").val("");
         PostElementChange("Row", $("#hiddenId").val(),
-            '{ "Day" : "' + $("#hiddenDay").val() +
+            '{ "Day" : "' + $("#editContaner").parent().parent().find("div.webGrid-Date").text() +
             '", "Year" :"' + @Model.CurrentYear +
             '", "Month" :"' + @Model.CurrentMonth +
             '", "StartTime" :"' + $("#editStartTime").val() +
@@ -508,7 +508,7 @@
     function AddNewProject()
     {
         PostElementChange("Row", $("#hiddenId").val(),
-            '{ "Day" : "' + $("#hiddenDay").val() +
+            '{ "Day" : "' + $("#editContaner").parent().parent().find("div.webGrid-Date").text() +
             '", "Year" :"' + @Model.CurrentYear +
             '", "Month" :"' + @Model.CurrentMonth +
             '", "StartTime" :"' + $("#editStartTime").val() +
