@@ -70,7 +70,7 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
             var settings = new List<Setting>
             {
-                new Setting{ DaysAweek = 5, HoursAday = 8, HoursAweek = 40, MonthsAyear=12, VacationDays=30},
+                new Setting{ DaysAweek = 5, HoursAday = 8, HoursAweek = 40, MonthsAyear=12, VacationDays=30, GermanStateId=2},
             };
             settings.ForEach(r => context.GlobalSettings.Add(r));
             context.SaveChanges();
@@ -96,8 +96,8 @@ namespace XiopiaWorkTimeTracker.Models.Database
 			holidayStatesRepository.SaveChanges();
 
 			var holidaysTypRepository = new HolidaysTypRepository();
-			holidaysTypRepository.Add(new HolidayTyp { FeiertagsArt = "Fester_Feiertag" });
-			holidaysTypRepository.Add(new HolidayTyp { FeiertagsArt = "Bewegliche_Feiertag" });
+			holidaysTypRepository.Add(new HolidayTyp { FeiertagsArt = "Fester Feiertag" });
+			holidaysTypRepository.Add(new HolidayTyp { FeiertagsArt = "Bewegliche Feiertag" });
 			holidaysTypRepository.SaveChanges();
 
 			var germanHolidayRepository = new GermanHolidayRepository();

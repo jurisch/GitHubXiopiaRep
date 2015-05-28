@@ -46,6 +46,13 @@
                     @Html.ValidationMessageFor(m => m.VacationDays)
                 </td>
             </tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.GermanStateId)</td>
+				<td>
+					@Html.TextBoxFor(m => m.GermanStateId, new { @class = "data-num-field-small" })
+					@Html.ValidationMessageFor(m => m.GermanStateId)
+				</td>
+			</tr>
         </table>
     }
 </section>

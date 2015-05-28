@@ -34,6 +34,7 @@ namespace XiopiaWorkTimeTracker.Controllers
 				settingsViewModel.HoursAweek = globalSettings.First().HoursAweek;
 				settingsViewModel.MonthsAyear = globalSettings.First().MonthsAyear;
 				settingsViewModel.VacationDays = globalSettings.First().VacationDays;
+				settingsViewModel.GermanStateId = globalSettings.First().GermanStateId;
 
 				UserAndRolesViewModel usrvm = new UserAndRolesViewModel();
 				FeierTag feiertagView = new FeierTag();
