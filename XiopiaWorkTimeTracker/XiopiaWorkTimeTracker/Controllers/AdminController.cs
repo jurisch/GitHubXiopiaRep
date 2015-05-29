@@ -155,14 +155,16 @@ namespace XiopiaWorkTimeTracker.Controllers
 		}
 
 
-		//[HttpGet]
-		//public ActionResult GermanHolidays(int id)
-		//{
-		//	var holidayViewModel = new FeierTag();
-		//	var allHolidays = holidayViewModel.feiertage;
+		[HttpGet]
+		public ActionResult UpdateSelectedGermanHoliday(int id, bool festgelegt)
+		{
+			var holidayrep = new GermanHolidayRepository();
+			var selectedHoliday = holidayrep.GetById(id);
+			selectedHoliday.Festgelegt = festgelegt;
+			holidayrep.SaveChanges();
 
-		//	return Json(allHolidays, JsonRequestBehavior.AllowGet);
-		//}
-				
+			return Json(selectedHoliday, JsonRequestBehavior.AllowGet);
+		}
+
 	}
 }

@@ -20,6 +20,7 @@
 							rowStyle: "webgrid-row-style",
 							fillEmptyRows: false,
 							columns: grid1.Columns(
+							 grid1.Column("Id", header: "Id", style: "Id"),
 							 grid1.Column("feiertag", header: "Feiertag"),
 							 grid1.Column("Datum", header: "Datum", format: (item) => string.Format("{0:dd.MM.yyyy}", item.datum)),
 							 grid1.Column("art", header: "Art"),
@@ -40,9 +41,15 @@
 									 return new HtmlString(tmp);
 								 }
 							 }),
-							 grid1.Column("festgelegt", header: "Festgelegt", format: item => @Html.CheckBox("Festgelegt", (bool)(item.Festgelegt ?? false), new { @disabled = "disabled" }), style: "center")
-						))}
-				</div>
+							 grid1.Column("festgelegt", header: "Festgelegt", format: item => @Html.CheckBox("Festgelegt", (bool)(item.Festgelegt ?? false), new { @disabled = "disabled" }), style: "center festgelegt"),
+                             grid1.Column("Action", format: @<text>
+									<button class="edit-holiday display-mode">Edit</button>
+									<button class="save-holiday edit-mode">Save</button>
+									<button class="cancel-holiday edit-mode">Cancel</button>
+							</text>, style: "col3Width", canSort: false)
+						))
+}
+</div>
 			</td>
 		</tr>
 	</table>
@@ -88,24 +95,51 @@
 
 	</style>
 
+	<script type="text/javascript">
+		//debugger;
+		$(function () {
+			$('.edit-mode').hide();
 
+			$(".festgelegt").on('click', function () {
+				var chk = $(this).parents('tr:first').find(".festgelegt>input:first");
+				chk.attr('checked') == "checked" ? chk.removeAttr('checked') : chk.prop("checked", true);
+			});
 
-	<script>
-		////debugger;
-		//function getAllHoliday(id) {
-		//	$.ajax({
-		//		type: "GET",
-		//		data: { id : id },
-		//		datatype: "json",
-		//		contentType: "application/json; charset=utf-8",
-		//		url: '/Admin/GermanHolidays',
-		//		success: function (data) {
-		//			alert("Holiday ok!");
-		//		},
-		//		error: function () {
-		//			alert("Holiday error");
-		//		}
-		//	});
-		//}
+			$('.edit-holiday').on('click', function () {
+				var tr = $(this).parents('tr:first');
+				var chkBox = tr.find(".festgelegt>input:first");
+				chkBox.removeAttr('disabled');
+				tr.find('.edit-mode, .display-mode').toggle();
+			});
+
+			$('.cancel-holiday').on('click', function () {
+				var tr = $(this).parents('tr:first');
+				var chkBox = tr.find(".festgelegt>input:first");
+				chkBox.attr("disabled", "disabled");
+				tr.find('.edit-mode, .display-mode').toggle();
+			});
+
+			$('.save-holiday').on('click', function () {
+				var tr = $(this).parents('tr:first');
+				var ID = tr.find('.Id').text();
+				var Festgelegt = tr.find(".festgelegt>input:first").prop("checked");
+				tr.find('.edit-mode, .display-mode').toggle();
+				tr.find(".festgelegt>input:first").attr("disabled", "disabled");
+				$.ajax({
+					type: "GET",
+					data: { id: ID, festgelegt: Festgelegt },
+					datatype: "json",
+					contentType: "application/json; charset=utf-8",
+					url: '/Admin/UpdateSelectedGermanHoliday',
+					success: function (data) {
+					},
+					error: function () {
+						alert("Holiday error");
+					}
+				});
+
+			});
+		 })
 	</script>
+
 </section>
