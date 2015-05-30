@@ -9,6 +9,7 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
 {
 	public class FeierTag
 	{
+		private int id;
 		private string art;
 		private string feiertag;
 		private DateTime datum;
@@ -20,6 +21,14 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
 
 		public FeierTag() {
 			Initial();
+		}
+
+		public int Id
+		{
+			get
+			{
+				return this.id;
+			}
 		}
 
 		public String Feiertag
@@ -152,6 +161,7 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
 		internal FeierTag(GermanHoliday h)
 		{
 			HolidaysTypRepository typ = new HolidaysTypRepository();
+			this.id = h.Id;
 			this.feiertag = h.Feiertag;
 			this.testDatum = h.Datum;
 			this.tageHinzu = h.TageHinzu;

@@ -103,6 +103,18 @@ namespace XiopiaWorkTimeTracker.Models.Database
 			var germanHolidayRepository = new GermanHolidayRepository();
 			var gh1 = new GermanHoliday { Feiertag = "Neujahr", Datum = "01.01.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt=true};
 			var gh2 = new GermanHoliday { Feiertag = "Heiligen Drei Könige", Datum = "06.01.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
+
+			var bw1 = new GermanHoliday { Feiertag = "Fastnacht", TageHinzu = -47, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
+			//var bw2 = new GermanHoliday { Feiertag = "Friedensfest", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
+			//var bw3 = new GermanHoliday { Feiertag = "Reformationstag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
+			//var bw4 = new GermanHoliday { Feiertag = "Volkstrauertag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
+			//var bw5 = new GermanHoliday { Feiertag = "Buß und Bettag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
+			//var bw6 = new GermanHoliday { Feiertag = "Totensonntag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
+			//var bw7 = new GermanHoliday { Feiertag = "1. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
+			//var bw8 = new GermanHoliday { Feiertag = "2. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
+			//var bw9 = new GermanHoliday { Feiertag = "3. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
+			//var bw10 = new GermanHoliday { Feiertag = "4. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
+
 			var gh3 = new GermanHoliday { Feiertag = "Karfreitag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
 			var gh4 = new GermanHoliday { Feiertag = "Ostersonntag", TageHinzu = 0, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
 			var gh5 = new GermanHoliday { Feiertag = "Ostermontag", TageHinzu = 1, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
@@ -116,7 +128,8 @@ namespace XiopiaWorkTimeTracker.Models.Database
 			var gh13 = new GermanHoliday { Feiertag = "Allerheiligen", Datum = "01.11.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
 			var gh14 = new GermanHoliday { Feiertag = "1. Weinachtstag", Datum = "25.12.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
 			var gh15 = new GermanHoliday { Feiertag = "2. Weinachtstag", Datum = "26.12.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
-			germanHolidayRepository.Add(gh1);germanHolidayRepository.Add(gh2);germanHolidayRepository.Add(gh3);germanHolidayRepository.Add(gh4);
+			germanHolidayRepository.Add(gh1);germanHolidayRepository.Add(gh2); germanHolidayRepository.Add(bw1); germanHolidayRepository.Add(gh3);
+			germanHolidayRepository.Add(gh4);
 			germanHolidayRepository.Add(gh5);germanHolidayRepository.Add(gh6);germanHolidayRepository.Add(gh7);germanHolidayRepository.Add(gh8);
 			germanHolidayRepository.Add(gh9);germanHolidayRepository.Add(gh10);germanHolidayRepository.Add(gh11);germanHolidayRepository.Add(gh12);
 			germanHolidayRepository.Add(gh13);germanHolidayRepository.Add(gh14);germanHolidayRepository.Add(gh15);
@@ -125,20 +138,6 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
 			var gHolidayRepository = germanHolidayRepository.GetAll();
 
-			//for (int i = 1; i > 16; i++)
-			//{
-			//	germanHolidayRepository.GetById(1).AddGermanStateToHoliday(i);
-			//	germanHolidayRepository.GetById(3).AddGermanStateToHoliday(i);
-			//	germanHolidayRepository.GetById(4).AddGermanStateToHoliday(i);
-			//	germanHolidayRepository.GetById(5).AddGermanStateToHoliday(i);
-			//	germanHolidayRepository.GetById(6).AddGermanStateToHoliday(i);
-			//	germanHolidayRepository.GetById(7).AddGermanStateToHoliday(i);
-			//	germanHolidayRepository.GetById(8).AddGermanStateToHoliday(i);
-			//	germanHolidayRepository.GetById(9).AddGermanStateToHoliday(i);
-			//	germanHolidayRepository.GetById(12).AddGermanStateToHoliday(i);
-			//	germanHolidayRepository.GetById(14).AddGermanStateToHoliday(i);
-			//	germanHolidayRepository.GetById(15).AddGermanStateToHoliday(i);
-			//}
 			germanHolidayRepository.GetById(2).AddGermanStateToHoliday(1); germanHolidayRepository.GetById(2).AddGermanStateToHoliday(2); germanHolidayRepository.GetById(2).AddGermanStateToHoliday(14);
 			germanHolidayRepository.GetById(10).AddGermanStateToHoliday(1); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(2); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(7);
 			germanHolidayRepository.GetById(10).AddGermanStateToHoliday(10); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(11); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(12);

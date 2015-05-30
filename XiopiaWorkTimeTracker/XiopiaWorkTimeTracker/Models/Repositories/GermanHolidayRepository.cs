@@ -21,7 +21,7 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
 
 		public List<GermanHoliday> GetAllByMonth(int month)
 		{
-			var x = DbSet.Select(g => g).ToList();
+			var x = GetAllAccepted();
 			List<GermanHoliday> convertedDates = new List<GermanHoliday>();
 
 			foreach (GermanHoliday h in x) {
@@ -96,6 +96,33 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
 			OsterTag = l + 28 - 31 * ((int)OsterMonat / 4);
 
 			return Convert.ToDateTime(OsterTag.ToString() + "." + OsterMonat + "." + jahr);
+		}
+
+		public String GetFeiertag(DateTime datum, int land)
+		{
+			var feiertage = GetAllAccepted();
+			// Liste der Feiertage durchgehen
+			foreach (GermanHoliday f in feiertage)
+			{
+				if (datum.ToShortDateString().Equals(GetDatum(GetOstersonntag(datum.Year), f).ToShortDateString()))
+				{
+					HolidayStatesRepository hsr = new HolidayStatesRepository();
+					// Prüfen ob das Land enthalten ist
+					foreach (string l in f.Land)
+					{
+						if (hsr.GetById(land).Equals(l))
+						{
+							return f.Feiertag;
+						}
+					}
+				}
+			}
+			return "";
+		}
+
+		public Boolean IsFeiertag(DateTime date, int land)
+		{
+			return (GetFeiertag(date, land).Length > 0);
 		}
 
 	}

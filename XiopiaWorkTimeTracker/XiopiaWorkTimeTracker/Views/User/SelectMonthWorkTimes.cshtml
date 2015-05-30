@@ -76,13 +76,13 @@
 					}
 				}
                  <div class="row">
-						<div class="col-lg-1 webGrid-Date @ftagClass" style="width: 7%;">@curDay.WorkDate.ToString("dd.MM")</div>
-						<div class="col-lg-1 webGrid-WeekDay @ftagClass" style="width: 9.6%;">
+						<div class="col-lg-1 webGrid-Date @ftagClass">@curDay.WorkDate.ToString("dd.MM")</div>
+						<div class="col-lg-1 webGrid-WeekDay @ftagClass">
 							@{
 								if (hol)
 								{
-									@curDay.WorkDate.ToString("ddd") @: -
-									<label style="height: 10px; font-size: 9px;">@holidayName</label>
+									@curDay.WorkDate.ToString("ddd") 
+									<span style="float: right; background-color:red;" class="badge badge-important" data-toggle="tooltip" data-placement="top" data-original-title="@holidayName">i</span>
 								}
 								else
 								{
@@ -361,10 +361,11 @@
 </div>
 
 <script>
-    debugger;
+    //debugger;
 
     $(document).ready(function(){
-        $("#li" + @Model.CurrentMonth).addClass("active");
+    	$("#li" + @Model.CurrentMonth).addClass("active");
+    	$('[data-toggle="tooltip"]').tooltip();
     });
 
     $("#startNowBtn").on("click", function (event) {
