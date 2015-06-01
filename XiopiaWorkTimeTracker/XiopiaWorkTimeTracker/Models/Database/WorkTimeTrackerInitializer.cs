@@ -59,8 +59,6 @@ namespace XiopiaWorkTimeTracker.Models.Database
             usersRepo.SaveChanges();
 
             var projectsRepo = new ProjectsRepository();
-            projectsRepo.Add(new Project { Name = "Urlaub", ProjectResponsible = "Default" });
-            projectsRepo.Add(new Project { Name = "Krank", ProjectResponsible = "Default" });
             projectsRepo.Add(new Project { Name = "Momentan ohne Projekt", ProjectResponsible = "Default" });
             projectsRepo.Add(new Project { Name = "Weiterbildung", ProjectResponsible = "Default" });
             projectsRepo.Add(new Project { Name = "Business Development", ProjectResponsible = "Default" });
