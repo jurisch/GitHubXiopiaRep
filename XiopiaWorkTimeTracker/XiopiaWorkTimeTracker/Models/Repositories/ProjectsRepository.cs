@@ -8,6 +8,15 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
 {
     public class ProjectsRepository : Repository<Project>
     {
+        private UserRepository _userRepo = null;
+        private ProjectToMembersRepository _projectToMemberRepo = null;
+
+        public ProjectsRepository()
+        {
+            _userRepo = new UserRepository();
+            _projectToMemberRepo = new ProjectToMembersRepository();
+        }
+
         public Project GetByGuid(Guid guid)
         {
             return DbSet.Where(g => g.Guid == guid).First();
@@ -16,11 +25,14 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
         public List<Project> GetByUserId(int id)
         {
             var projectsList = new List<Project>();
-            var userRepo = new UserRepository();
-            var userGuid = userRepo.Get(id).Guid;
+            var userGuid = this._userRepo.Get(id).Guid;
 
-            var userToProjMapRepo = new ProjectToMembersRepository();
-            return userToProjMapRepo.GetProjectsByUserGuid(userGuid);
+            return this._projectToMemberRepo.GetProjectsByUserGuid(userGuid);
+        }
+
+        public Project GetByName(string name)
+        {
+            return DbSet.Where(n => n.Name.Equals(name)).First();
         }
     }
 }

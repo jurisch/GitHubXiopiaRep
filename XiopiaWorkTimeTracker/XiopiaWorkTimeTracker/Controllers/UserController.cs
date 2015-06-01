@@ -13,20 +13,22 @@ namespace XiopiaWorkTimeTracker.Controllers
 {
     public class UserController : Controller
     {
-        UserRepository usersRepository = null;
+        private UserRepository _usersRepository = null;
+        private ProjectsRepository _projectsRepo = null;
 
         enum ViewArctionResults { Success, MultipleStarts, NotYetStarted }
 
         public UserController()
         {
-            this.usersRepository = new UserRepository();
+            this._usersRepository = new UserRepository();
+            this._projectsRepo = new ProjectsRepository();
         }
 
         // GET: User
         public ActionResult Index()
         {
             var userViewModel = new UserViewModel();
-            var users = this.usersRepository.GetAll();
+            var users = this._usersRepository.GetAll();
             if (users != null)
             {
                 foreach (var user in users)
@@ -41,7 +43,7 @@ namespace XiopiaWorkTimeTracker.Controllers
         [HttpPost]
         public JsonResult ActionFromView(ActionsFromViewViewModel model)
         {
-            var user = this.usersRepository.Get(model.UserId);
+            var user = this._usersRepository.Get(model.UserId);
             WorkTimeEntry wtEntry = null;
             WorkTimeEntry startetEntry = null;
             ViewArctionResults result = ViewArctionResults.Success;
@@ -142,13 +144,14 @@ namespace XiopiaWorkTimeTracker.Controllers
             if (tmp != null)
             {
                 int userId = Int32.Parse(tmp.ToString());
-                var projectsRepo = new ProjectsRepository();
                 var userViewModel = new UserViewModel(userId, month);
 
-                userViewModel.User = this.usersRepository.Get(userId);
+                userViewModel.User = this._usersRepository.Get(userId);
 
                 var projectsSelectListItems = new List<SelectListItem>();
-                foreach (var pr in projectsRepo.GetByUserId(userId))
+
+                // Add all user projects
+                foreach (var pr in _projectsRepo.GetByUserId(userId))
                 {
                     projectsSelectListItems.Add(new SelectListItem()
                     {
@@ -156,6 +159,39 @@ namespace XiopiaWorkTimeTracker.Controllers
                         Value = pr.Id.ToString()
                     });
                 }
+
+                // Adding user independent default projects
+                var defaultProjekt = this._projectsRepo.GetByName("Momentan ohne Projekt");
+                projectsSelectListItems.Add(new SelectListItem()
+                {
+                    Text = defaultProjekt.Name,
+                    Value = defaultProjekt.Id.ToString()
+                });
+                defaultProjekt = this._projectsRepo.GetByName("Weiterbildung");
+                projectsSelectListItems.Add(new SelectListItem()
+                {
+                    Text = defaultProjekt.Name,
+                    Value = defaultProjekt.Id.ToString()
+                });
+                defaultProjekt = this._projectsRepo.GetByName("Business Development");
+                projectsSelectListItems.Add(new SelectListItem()
+                {
+                    Text = defaultProjekt.Name,
+                    Value = defaultProjekt.Id.ToString()
+                });
+                defaultProjekt = this._projectsRepo.GetByName("Personalmanagement");
+                projectsSelectListItems.Add(new SelectListItem()
+                {
+                    Text = defaultProjekt.Name,
+                    Value = defaultProjekt.Id.ToString()
+                });
+                defaultProjekt = this._projectsRepo.GetByName("Vorstellungsgespräche");
+                projectsSelectListItems.Add(new SelectListItem()
+                {
+                    Text = defaultProjekt.Name,
+                    Value = defaultProjekt.Id.ToString()
+                });
+
                 userViewModel.UserProjects = projectsSelectListItems;
 
                 if (userViewModel.User != null)
