@@ -9,25 +9,33 @@ namespace XiopiaWorkTimeTracker.Models.Database
 {
 	public class GermanHoliday
 	{
+
+		public enum Feiertagsarten
+		{
+			Fest = 1,
+			Beweglich = 2
+		}
 		public int Id { get; set; }
 
 		[Required]
 		public string Feiertag { get; set; }
 
+		public DateTime? DatumConverted { get; set; }
 
 		public string Datum { get; set; }
 
 		public int TageHinzu { get; set; }
 
 		[Required]
-		public int FeiertagsArt { get; set; }
+		public Feiertagsarten FeiertagsArt { get; set; }
 
 		public bool Festgelegt { get; set; }
 
 
 		public virtual List<int> LänderId { get; set; }
 
-		public List<string> Land {
+		public List<string> Land
+		{
 			get
 			{
 				List<string> names = new List<string>();

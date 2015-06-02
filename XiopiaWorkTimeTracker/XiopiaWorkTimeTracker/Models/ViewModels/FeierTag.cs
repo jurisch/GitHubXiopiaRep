@@ -12,8 +12,8 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
 		private int id;
 		private string art;
 		private string feiertag;
-		private DateTime datum;
-		private string testDatum;
+		private DateTime datumConverted;
+		private string datum;
 		private int tageHinzu;
 		private List<string> länder;
 		private bool festgelegt;
@@ -38,11 +38,11 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
 				return this.feiertag;
 			}
 		}
-		public DateTime Datum
+		public DateTime DatumConverted
 		{
 			get
 			{
-				return datum;
+				return datumConverted;
 
 			}
 		}
@@ -77,7 +77,7 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
 			GermanHolidayRepository ghr = new GermanHolidayRepository();
 			HolidayToStateRepository hsr = new HolidayToStateRepository();
 
-			List<GermanHoliday> allHolidays = ghr.GetAll();
+			List<GermanHoliday> allHolidays = ghr.GetAllConverted();
 			foreach (GermanHoliday h in allHolidays)
 			{
 				feiertage.Add(new FeierTag(h));
@@ -89,7 +89,7 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
 			HolidaysTypRepository typ = new HolidaysTypRepository();
 			this.id = h.Id;
 			this.feiertag = h.Feiertag;
-			this.datum = DateTime.Parse(h.Datum);
+			this.datumConverted = h.DatumConverted.Value;
 			this.tageHinzu = h.TageHinzu;
 			this.art = typ.GetById(h.FeiertagsArt).FeiertagsArt;
 			this.länder = new List<string>();

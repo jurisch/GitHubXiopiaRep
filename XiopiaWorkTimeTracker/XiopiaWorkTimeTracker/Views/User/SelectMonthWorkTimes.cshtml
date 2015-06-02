@@ -67,7 +67,7 @@
 				var holidayName = "";
 				foreach (var gHoliday in curDay.AttrGermanHoliday)
 				{
-					if (gHoliday.Datum.ToString().Equals(curDay.WorkDate.ToString("dd.MM.yyyy 00:00:00")))
+					if (gHoliday.DatumConverted.ToString().Equals(curDay.WorkDate.ToString("dd.MM.yyyy 00:00:00")))
 					{
 						hol = true;
 						ftagClass = "date-dayofweek-0";

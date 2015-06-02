@@ -7,7 +7,7 @@ namespace XiopiaWorkTimeTracker.Models.Database
 {
 	public class HolidayTyp
 	{
-		public int Id { get; set; }
+		public GermanHoliday.Feiertagsarten Id { get; set; }
 
 		public string FeiertagsArt { get; set; }
 	}
