@@ -6,7 +6,7 @@ using XiopiaWorkTimeTracker.Models.Repositories;
 
 namespace XiopiaWorkTimeTracker.Models.Database
 {
-    public class WorkTimeTrackerInitializer : System.Data.Entity.DropCreateDatabaseAlways<WorkTimeTrackerDbContext>
+    public class WorkTimeTrackerInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<WorkTimeTrackerDbContext>
     {
         protected override void Seed(WorkTimeTrackerDbContext context)
         {

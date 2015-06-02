@@ -10,19 +10,19 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
     {
         public List<WorkTimeEntry> GetUserEntriesForMonth(int id, int month)
         {
-//            return DbSet.Where(e => e.EmployeeId == id).ToList();
-            var quiry = from c in DbSet
-                            where c.EmployeeId == id
-                            select c;
-            var list = new List<WorkTimeEntry>();
-            foreach(var ent in quiry)
-            {
-                if(ent.WorkDay.Month == month)
-                {
-                    list.Add(ent);
-                }
-            }
-            return list;
+            return DbSet.Where(e => e.EmployeeId == id && e.WorkDay.Month == month ).ToList();
+            //var quiry = from c in DbSet
+            //                where c.EmployeeId == id
+            //                select c;
+            //var list = new List<WorkTimeEntry>();
+            //foreach(var ent in quiry)
+            //{
+            //    if(ent.WorkDay.Month == month)
+            //    {
+            //        list.Add(ent);
+            //    }
+            //}
+            //return list;
         }
 
         public List<WorkTimeEntry> GetUserTodayStartedEntries(int id)
