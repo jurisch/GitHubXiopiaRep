@@ -77,7 +77,7 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
 			GermanHolidayRepository ghr = new GermanHolidayRepository();
 			HolidayToStateRepository hsr = new HolidayToStateRepository();
 
-			List<GermanHoliday> allHolidays = ghr.GetAllConverted();
+			List<GermanHoliday> allHolidays = ghr.GetAll().Values.ToList();
 			foreach (GermanHoliday h in allHolidays)
 			{
 				feiertage.Add(new FeierTag(h));

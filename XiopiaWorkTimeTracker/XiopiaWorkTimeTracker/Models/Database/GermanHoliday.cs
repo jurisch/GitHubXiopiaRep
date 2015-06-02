@@ -20,7 +20,7 @@ namespace XiopiaWorkTimeTracker.Models.Database
 		[Required]
 		public string Feiertag { get; set; }
 
-		public DateTime? DatumConverted { get; set; }
+		public virtual DateTime? DatumConverted { get; set; }
 
 		public string Datum { get; set; }
 

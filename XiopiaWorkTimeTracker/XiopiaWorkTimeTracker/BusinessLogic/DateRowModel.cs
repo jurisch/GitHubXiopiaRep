@@ -17,15 +17,13 @@ namespace XiopiaWorkTimeTracker.BusinessLogic
 		{
 			get
 			{
-				List<DateTime> germanHoliday = new List<DateTime>();
 				GermanHolidayRepository germanholidayrep = new GermanHolidayRepository();
-				List<GermanHoliday> x = germanholidayrep.GetAllByMonth(this.WorkDate.Month);
-				//foreach (GermanHoliday h in x)
-				//{
-				//	//germanHoliday.Add(DateTime.Parse(h.Datum + "" + DateTime.Now.Year));
-				//	germanHoliday.Add(DateTime.Parse(h.Datum));
-				//}
-				//return germanHoliday;
+				List<GermanHoliday> x = new List<GermanHoliday>();
+				Dictionary<int, GermanHoliday> germanHolidays = germanholidayrep.GetAll();
+                foreach (var id in germanholidayrep.GetAllByMonthAccepted(this.WorkDate.Month))
+				{
+					x.Add(germanHolidays[id]);
+                }
 				return x;
 			}
 		}

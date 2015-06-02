@@ -165,9 +165,7 @@ namespace XiopiaWorkTimeTracker.Controllers
 			holidayrep.SetModified(selectedHoliday);
 			holidayrep.SaveChanges();
 
-			new System.Timers.Timer(1000);
-            holidayrep.UpdateHolidayOnCacheById(selectedHoliday);
-
+            holidayrep.UpdateHolidayOnCacheById(id);
 
 			return Json(selectedHoliday, JsonRequestBehavior.AllowGet);
 		}
