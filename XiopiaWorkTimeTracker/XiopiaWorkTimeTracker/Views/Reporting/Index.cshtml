@@ -1,40 +1,49 @@
-﻿
+﻿@using Ressources
+@using XiopiaWorkTimeTracker.Models.ViewModels
+@model ReportingViewModel
+
 <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
 
 <header>
-    <h1>Backoffice Reporting</h1>
+    <h1>@Language.BackofficeReporting</h1>
 </header>
 
-<div class="container">
-    <div class="row">
-        <h3>Suche für:</h3>
+@using (Html.BeginForm("Search", "Reporting", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            <h3>@Language.SearchFor</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-2">
+                <h3>@Language.Employee</h3>
+                @Html.DropDownListFor(u => u.SelectedUser, Model.UserList)
+            </div>
+            <div class="col-lg-2">
+                <h3>@Language.Project</h3>
+                @Html.DropDownListFor(p => p.SelectedProject, Model.AllProjects)
+            </div>
+            <div class="col-lg-2">
+                <h3>@Language.from</h3>
+                @*@Html.TextBoxFor(f => f.From, ViewData.TemplateInfo.FormattedModelValue.ToString(), new { type = "date", @class = "form-control" })*@
+                <input type="date" name="From" value="@Model.From"/>
+                @Html.ValidationMessageFor(f => f.From)
+            </div>
+            <div class="col-lg-2">
+                <h3>@Language.until</h3>
+                <input type="date" name="Until" value=@Model.Until.ToString()/>
+                @Html.ValidationMessageFor(u => u.Until)
+            </div>
+            <div class="col-lg-2">&nbsp;</div>
+            <div class="col-lg-2">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <input type="submit" value=@Language.Search style="margin:15px" />
+            </div>
+        </div>
     </div>
-    <div class="row">
-        <div class="col-lg-2">
-            <h3>Mitarbeiter</h3>
-            <input type="text" />
-        </div>
-        <div class="col-lg-2">
-            <h3>Projekt</h3>
-            <input type="text" />
-        </div>
-        <div class="col-lg-2">
-            <h3>from</h3>
-            <input type="date" />
-        </div>
-        <div class="col-lg-2">
-            <h3>bis</h3>
-            <input type="date" />
-        </div>
-        <div class="col-lg-2">&nbsp;</div>
-        <div class="col-lg-2">&nbsp;</div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <input type="button" value="Suchen" style="margin:15px"/>
-        </div>
-    </div>
-</div>
+}
 
 <div class="container">
     @*<div class="row">

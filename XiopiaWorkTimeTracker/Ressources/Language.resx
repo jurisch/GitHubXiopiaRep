@@ -276,4 +276,31 @@
   <data name="AddMember" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="from" xml:space="preserve">
+    <value>from</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchFor" xml:space="preserve">
+    <value>Search for</value>
+  </data>
+  <data name="until" xml:space="preserve">
+    <value>until</value>
+  </data>
+  <data name="BackofficeReporting" xml:space="preserve">
+    <value>Backoffice Reporting</value>
+  </data>
+  <data name="AllUsers" xml:space="preserve">
+    <value>All users</value>
+  </data>
+  <data name="AllProjects" xml:space="preserve">
+    <value>All Projects</value>
+  </data>
+  <data name="ErrorUntilBeforeFrom" xml:space="preserve">
+    <value>End date should be geater then Start date</value>
+  </data>
 </root>

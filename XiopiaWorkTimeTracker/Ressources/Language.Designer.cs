@@ -88,6 +88,24 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Projects.
+        /// </summary>
+        public static string AllProjects {
+            get {
+                return ResourceManager.GetString("AllProjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All users.
+        /// </summary>
+        public static string AllUsers {
+            get {
+                return ResourceManager.GetString("AllUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to April.
         /// </summary>
         public static string April {
@@ -102,6 +120,15 @@ namespace Ressources {
         public static string August {
             get {
                 return ResourceManager.GetString("August", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backoffice Reporting.
+        /// </summary>
+        public static string BackofficeReporting {
+            get {
+                return ResourceManager.GetString("BackofficeReporting", resourceCulture);
             }
         }
         
@@ -196,11 +223,29 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Employee.
+        /// </summary>
+        public static string Employee {
+            get {
+                return ResourceManager.GetString("Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End Work.
         /// </summary>
         public static string EndWork {
             get {
                 return ResourceManager.GetString("EndWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date should be geater then Start date.
+        /// </summary>
+        public static string ErrorUntilBeforeFrom {
+            get {
+                return ResourceManager.GetString("ErrorUntilBeforeFrom", resourceCulture);
             }
         }
         
@@ -228,6 +273,15 @@ namespace Ressources {
         public static string February {
             get {
                 return ResourceManager.GetString("February", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to from.
+        /// </summary>
+        public static string from {
+            get {
+                return ResourceManager.GetString("from", resourceCulture);
             }
         }
         
@@ -466,6 +520,24 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for.
+        /// </summary>
+        public static string SearchFor {
+            get {
+                return ResourceManager.GetString("SearchFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to September.
         /// </summary>
         public static string September {
@@ -507,6 +579,15 @@ namespace Ressources {
         public static string TooltipPleaseEnterProjectResponsible {
             get {
                 return ResourceManager.GetString("TooltipPleaseEnterProjectResponsible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to until.
+        /// </summary>
+        public static string until {
+            get {
+                return ResourceManager.GetString("until", resourceCulture);
             }
         }
         

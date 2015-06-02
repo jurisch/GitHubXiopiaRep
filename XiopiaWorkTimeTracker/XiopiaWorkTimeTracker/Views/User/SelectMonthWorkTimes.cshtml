@@ -16,7 +16,7 @@
 <nav>
     <ul class="pagination">
         <li id="li1"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=1})">@Language.January</a></li>
-        <li id="li2"><a href=" @Url.Action("selectmonthworktimes", "User", new { month = 2 }) ">@Language.February</a></li>
+        <li id="li2"><a href="@Url.Action("selectmonthworktimes", "User", new { month = 2 }) ">@Language.February</a></li>
         <li id="li3"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=3})">@Language.March</a></li>
         <li id="li4"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=4})">@Language.April</a></li>
         <li id="li5"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=5})">@Language.Mai</a></li>
@@ -476,7 +476,8 @@
                     @:option.text = "@opt.Text";
                     @:option.value = "@opt.Value";
                     @:$("#editProject").append(option);
-                                                                                                                        }
+                                                                                                                        
+        }
     }
     );
 
