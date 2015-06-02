@@ -94,8 +94,8 @@ namespace XiopiaWorkTimeTracker.Models.Database
 			holidayStatesRepository.SaveChanges();
 
 			var holidaysTypRepository = new HolidaysTypRepository();
-			holidaysTypRepository.Add(new HolidayTyp { Id = (GermanHoliday.Feiertagsarten)1,FeiertagsArt= "Fest" });
-			holidaysTypRepository.Add(new HolidayTyp { Id = (GermanHoliday.Feiertagsarten)2, FeiertagsArt = "Beweglich" });
+			holidaysTypRepository.Add(new HolidayTyp { Id = GermanHoliday.Feiertagsarten.Fest, FeiertagsArt = "Fester Feiertag" });
+			holidaysTypRepository.Add(new HolidayTyp { Id = GermanHoliday.Feiertagsarten.Beweglich, FeiertagsArt = "Bewegliche Feiertag" });
 			holidaysTypRepository.SaveChanges();
 
 			var germanHolidayRepository = new GermanHolidayRepository();
