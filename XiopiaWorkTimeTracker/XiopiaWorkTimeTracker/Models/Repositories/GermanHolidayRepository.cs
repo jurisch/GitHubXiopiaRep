@@ -51,7 +51,7 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
 				_allHolidays = GetGermanHolidaysConverted(DbSet.Select(g => g).ToList());
 			}
 
-			if (_allHolidays[0].DatumConverted.HasValue)
+			if (!_allHolidays[0].DatumConverted.HasValue)
 			{
 				_allHolidays = GetGermanHolidaysConverted(DbSet.Select(g => g).ToList());
 			}
