@@ -94,38 +94,38 @@ namespace XiopiaWorkTimeTracker.Models.Database
 			holidayStatesRepository.SaveChanges();
 
 			var holidaysTypRepository = new HolidaysTypRepository();
-			holidaysTypRepository.Add(new HolidayTyp { FeiertagsArt = "Fester Feiertag" });
-			holidaysTypRepository.Add(new HolidayTyp { FeiertagsArt = "Bewegliche Feiertag" });
+			holidaysTypRepository.Add(new HolidayTyp { Id = (GermanHoliday.Feiertagsarten)1,FeiertagsArt= "Fest" });
+			holidaysTypRepository.Add(new HolidayTyp { Id = (GermanHoliday.Feiertagsarten)2, FeiertagsArt = "Beweglich" });
 			holidaysTypRepository.SaveChanges();
 
 			var germanHolidayRepository = new GermanHolidayRepository();
-			var gh1 = new GermanHoliday { Feiertag = "Neujahr", Datum = "01.01.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt=true};
-			var gh2 = new GermanHoliday { Feiertag = "Heiligen Drei Könige", Datum = "06.01.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
+			var gh1 = new GermanHoliday { Feiertag = "Neujahr", Datum = "01.01.", FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Fest).Id, Festgelegt=true};
+			var gh2 = new GermanHoliday { Feiertag = "Heiligen Drei Könige", Datum = "06.01.", FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Fest).Id, Festgelegt = true };
 
-			var bw1 = new GermanHoliday { Feiertag = "Fastnacht", TageHinzu = -47, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
-			//var bw2 = new GermanHoliday { Feiertag = "Friedensfest", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
-			//var bw3 = new GermanHoliday { Feiertag = "Reformationstag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
-			//var bw4 = new GermanHoliday { Feiertag = "Volkstrauertag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
-			//var bw5 = new GermanHoliday { Feiertag = "Buß und Bettag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
-			//var bw6 = new GermanHoliday { Feiertag = "Totensonntag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
-			//var bw7 = new GermanHoliday { Feiertag = "1. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
-			//var bw8 = new GermanHoliday { Feiertag = "2. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
-			//var bw9 = new GermanHoliday { Feiertag = "3. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
-			//var bw10 = new GermanHoliday { Feiertag = "4. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = false };
+			var bw1 = new GermanHoliday { Feiertag = "Fastnacht", TageHinzu = -47, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = false };
+			//var bw2 = new GermanHoliday { Feiertag = "Friedensfest", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = false };
+			//var bw3 = new GermanHoliday { Feiertag = "Reformationstag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = false };
+			//var bw4 = new GermanHoliday { Feiertag = "Volkstrauertag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = false };
+			//var bw5 = new GermanHoliday { Feiertag = "Buß und Bettag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = false };
+			//var bw6 = new GermanHoliday { Feiertag = "Totensonntag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = false };
+			//var bw7 = new GermanHoliday { Feiertag = "1. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = false };
+			//var bw8 = new GermanHoliday { Feiertag = "2. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = false };
+			//var bw9 = new GermanHoliday { Feiertag = "3. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = false };
+			//var bw10 = new GermanHoliday { Feiertag = "4. Advent", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = false };
 
-			var gh3 = new GermanHoliday { Feiertag = "Karfreitag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
-			var gh4 = new GermanHoliday { Feiertag = "Ostersonntag", TageHinzu = 0, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
-			var gh5 = new GermanHoliday { Feiertag = "Ostermontag", TageHinzu = 1, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
-			var gh6 = new GermanHoliday { Feiertag = "Tag der Arbeit", Datum = "01.05.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
-			var gh7 = new GermanHoliday { Feiertag = "Christi Himmelfahrt", TageHinzu = 39, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
-			var gh8 = new GermanHoliday { Feiertag = "Pfingstsonntag", TageHinzu = 49, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
-			var gh9 = new GermanHoliday { Feiertag = "Pfingstmontag", TageHinzu = 50, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
-			var gh10 = new GermanHoliday { Feiertag = "Fronleichnam", TageHinzu = 60, FeiertagsArt = holidaysTypRepository.GetById(2).Id, Festgelegt = true };
-			var gh11 = new GermanHoliday { Feiertag = "Mariä Himmelfahrt", Datum = "15.08.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
-			var gh12 = new GermanHoliday { Feiertag = "Tag der dt. Einheit", Datum = "03.10.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
-			var gh13 = new GermanHoliday { Feiertag = "Allerheiligen", Datum = "01.11.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
-			var gh14 = new GermanHoliday { Feiertag = "1. Weinachtstag", Datum = "25.12.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
-			var gh15 = new GermanHoliday { Feiertag = "2. Weinachtstag", Datum = "26.12.", FeiertagsArt = holidaysTypRepository.GetById(1).Id, Festgelegt = true };
+			var gh3 = new GermanHoliday { Feiertag = "Karfreitag", TageHinzu = -2, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = true };
+			var gh4 = new GermanHoliday { Feiertag = "Ostersonntag", TageHinzu = 0, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = true };
+			var gh5 = new GermanHoliday { Feiertag = "Ostermontag", TageHinzu = 1, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = true };
+			var gh6 = new GermanHoliday { Feiertag = "Tag der Arbeit", Datum = "01.05.", FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Fest).Id, Festgelegt = true };
+			var gh7 = new GermanHoliday { Feiertag = "Christi Himmelfahrt", TageHinzu = 39, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = true };
+			var gh8 = new GermanHoliday { Feiertag = "Pfingstsonntag", TageHinzu = 49, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = true };
+			var gh9 = new GermanHoliday { Feiertag = "Pfingstmontag", TageHinzu = 50, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = true };
+			var gh10 = new GermanHoliday { Feiertag = "Fronleichnam", TageHinzu = 60, FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Beweglich).Id, Festgelegt = true };
+			var gh11 = new GermanHoliday { Feiertag = "Mariä Himmelfahrt", Datum = "15.08.", FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Fest).Id, Festgelegt = true };
+			var gh12 = new GermanHoliday { Feiertag = "Tag der dt. Einheit", Datum = "03.10.", FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Fest).Id, Festgelegt = true };
+			var gh13 = new GermanHoliday { Feiertag = "Allerheiligen", Datum = "01.11.", FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Fest).Id, Festgelegt = true };
+			var gh14 = new GermanHoliday { Feiertag = "1. Weinachtstag", Datum = "25.12.", FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Fest).Id, Festgelegt = true };
+			var gh15 = new GermanHoliday { Feiertag = "2. Weinachtstag", Datum = "26.12.", FeiertagsArt = holidaysTypRepository.GetById(GermanHoliday.Feiertagsarten.Fest).Id, Festgelegt = true };
 			germanHolidayRepository.Add(gh1);germanHolidayRepository.Add(gh2); germanHolidayRepository.Add(bw1); germanHolidayRepository.Add(gh3);
 			germanHolidayRepository.Add(gh4);
 			germanHolidayRepository.Add(gh5);germanHolidayRepository.Add(gh6);germanHolidayRepository.Add(gh7);germanHolidayRepository.Add(gh8);
@@ -145,19 +145,6 @@ namespace XiopiaWorkTimeTracker.Models.Database
 			germanHolidayRepository.SaveChanges();
 			//End: Test Data For GermanHolidays 
 
-
-
-
-
-
-
-			//var times = new List<WorkTimeEntry>() {
-			//    new WorkTimeEntry { Id=1, WorkDay=new DateTime(2015, 05, 10), EmployeeId = 1, ProjectId = 1, WorkStartTime = new DateTime(2015, 05, 10, 09, 00, 00), PauseLength = 30, WorkEndTime = new DateTime(2015, 05, 10, 17, 30, 00) },
-			//    new WorkTimeEntry { Id=2, WorkDay=new DateTime(2015, 05, 11), EmployeeId = 3, ProjectId = 1, WorkStartTime = new DateTime(2015, 05, 11, 08, 00, 00), PauseLength = 20, WorkEndTime = new DateTime(2015, 05, 11, 17, 30, 00) },
-			//    new WorkTimeEntry { Id=3, WorkDay=new DateTime(2015, 05, 12), EmployeeId = 1, ProjectId = 2, WorkStartTime = new DateTime(2015, 05, 12, 09, 00, 00), PauseLength = 30, WorkEndTime = new DateTime(2015, 05, 12, 17, 30, 00) }
-			//};
-			//times.ForEach(r => context.WorkTimeEntries.Add(r));
-			//context.SaveChanges();
 		}
 
 	}

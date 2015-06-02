@@ -8,7 +8,7 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
 {
 	public class HolidaysTypRepository : Repository<HolidayTyp>
 	{
-		public HolidayTyp GetById(int id)
+		public HolidayTyp GetById(GermanHoliday.Feiertagsarten id)
 		{
 			return DbSet.Where(g => g.Id == id).First();
 		}

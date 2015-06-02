@@ -32,7 +32,7 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
 
 				foreach (GermanHoliday h in x) {
 					//germanHoliday.Add(DateTime.Parse(h.Datum+""+DateTime.Now.Year));
-					germanHoliday.Add(DateTime.Parse(h.Datum));
+					germanHoliday.Add(h.DatumConverted.Value);
 				}
 
                 for (int i = 1; i < daysCount + 1; i++ )

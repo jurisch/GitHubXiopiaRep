@@ -161,7 +161,13 @@ namespace XiopiaWorkTimeTracker.Controllers
 			var holidayrep = new GermanHolidayRepository();
 			var selectedHoliday = holidayrep.GetById(id);
 			selectedHoliday.Festgelegt = festgelegt;
+
+			holidayrep.SetModified(selectedHoliday);
 			holidayrep.SaveChanges();
+
+			new System.Timers.Timer(1000);
+            holidayrep.UpdateHolidayOnCacheById(selectedHoliday);
+
 
 			return Json(selectedHoliday, JsonRequestBehavior.AllowGet);
 		}
