@@ -219,6 +219,7 @@
     <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\ViewModels\ActionsFromViewViewModel.cs" />
     <Compile Include="Models\ViewModels\OverviewViewModel.cs" />
+    <Compile Include="Models\ViewModels\ReportingViewModel.cs" />
     <Compile Include="Models\ViewModels\RolesManagementViewModel.cs" />
     <Compile Include="Models\ViewModels\ProjectViewModel.cs" />
     <Compile Include="Models\ViewModels\SettingsViewModel.cs" />
@@ -651,13 +652,9 @@
     <Content Include="Views\Admin\HolidaysSettings.cshtml" />
     <Content Include="Views\Admin\StartRecordingNowDialog.cshtml" />
     <Content Include="Views\User\StartRecordingNowDialog.cshtml" />
-    <Content Include="Views\Projects\CreateNewProject.cshtml" />
-    <Content Include="Views\Projects\EditProject.cshtml" />
-    <Content Include="Views\Projects\DeleteProject.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Admin\RolesManagement.cshtml" />
     <Content Include="Views\Admin\SearchPeople.cshtml" />
-    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
