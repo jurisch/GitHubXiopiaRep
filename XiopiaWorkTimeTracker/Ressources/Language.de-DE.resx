@@ -303,4 +303,7 @@
   <data name="ErrorUntilBeforeFrom" xml:space="preserve">
     <value>Enddatum muß größer als Startdatum sein</value>
   </data>
+  <data name="TooltipClickToEdit" xml:space="preserve">
+    <value>Zum Editiern bitte auf die Zeile klicken</value>
+  </data>
 </root>

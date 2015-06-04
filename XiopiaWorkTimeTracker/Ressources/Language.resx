@@ -303,4 +303,7 @@
   <data name="ErrorUntilBeforeFrom" xml:space="preserve">
     <value>End date should be geater then Start date</value>
   </data>
+  <data name="TooltipClickToEdit" xml:space="preserve">
+    <value>Please click the row to begin edit</value>
+  </data>
 </root>

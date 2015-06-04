@@ -565,6 +565,15 @@ namespace Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please click the row to begin edit.
+        /// </summary>
+        public static string TooltipClickToEdit {
+            get {
+                return ResourceManager.GetString("TooltipClickToEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please Enter Project Name.
         /// </summary>
         public static string TooltipPleaseEnterProjectName {
