@@ -9,6 +9,13 @@
 		<tr>
 			<td>
 				<div id="DivGrid" style="width:100%;">
+					@*<button type="button" id="btnExport" name="btnExport" href="/Admin/Export" title="Export..." class="btn btn-default btn-sm">
+						<i class="glyphicon glyphicon-export"></i>
+					</button>*@
+					<div>
+						Export Liste : @Html.ActionLink("Excel Export", "ExportXls", "Admin")
+						Export Liste : @Html.ActionLink("Pdf Export", "ExportPdf", "Admin")
+					</div>
 					@{
 						var grid1 = new WebGrid(source: Model.feiertage, canPage: false, ajaxUpdateContainerId: "gridContent", canSort:false);
 						@grid1.GetHtml(mode: WebGridPagerModes.All,

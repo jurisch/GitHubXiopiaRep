@@ -1,7 +1,12 @@
-﻿using System;
+﻿using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using XiopiaWorkTimeTracker.Models;
 using XiopiaWorkTimeTracker.Models.Database;
@@ -169,6 +174,117 @@ namespace XiopiaWorkTimeTracker.Controllers
 
 			return Json(selectedHoliday, JsonRequestBehavior.AllowGet);
 		}
+
+
+		public void ExportXls(FeierTag model)
+		{
+
+			WebGrid grid = new WebGrid(source: model.feiertage, canPage: false, canSort: false);
+			string gridData = grid.GetHtml(mode: WebGridPagerModes.All,
+							tableStyle: "webgrid-table",
+							headerStyle: "webgrid-header",
+							footerStyle: "webgrid-footer",
+							alternatingRowStyle: "webgrid-alternating-row",
+							selectedRowStyle: "webgrid-selected-row",
+							rowStyle: "webgrid-row-style",
+							fillEmptyRows: false,
+							columns: grid.Columns(
+							 grid.Column("Id", header: "Id", style: "Id"),
+							 grid.Column("feiertag", header: "Feiertag"),
+							 grid.Column("datumConverted", header: "Datum", format: (item) => string.Format("{0:dd.MM.yyyy}", item.datumConverted)),
+							 grid.Column("art", header: "Art"),
+							 grid.Column("Länder", "Bundesland", format: (item) =>
+							 {
+								 if (item.Länder == null)
+								 {
+									 return String.Empty;
+								 }
+								 else
+								 {
+									 string tmp = "<div style=''>";
+									 foreach (var land in item.Länder)
+									 {
+										 tmp += land + "<br/>";
+									 }
+									 tmp += "</div>";
+									 return new HtmlString(tmp);
+								 }
+							 }),
+							 grid.Column("festgelegt", header: "Festgelegt", style: "center festgelegt")
+						)).ToString();
+
+			Response.ClearContent();
+			Response.AddHeader("content-disposition", "attachment; filename=AllHolidays.xls");
+			Response.ContentType = "application/excel";
+			Response.Write(gridData);
+			Response.End();
+
+		}
+
+		public ActionResult ExportPdf(FeierTag model)
+		{
+
+			WebGrid grid = new WebGrid(source: model.feiertage, canPage: false, canSort: false);
+			string gridData = grid.GetHtml(mode: WebGridPagerModes.All,
+							tableStyle: "webgrid-table",
+							headerStyle: "webgrid-header",
+							footerStyle: "webgrid-footer",
+							alternatingRowStyle: "webgrid-alternating-row",
+							selectedRowStyle: "webgrid-selected-row",
+							rowStyle: "webgrid-row-style",
+							fillEmptyRows: false,
+							columns: grid.Columns(
+							 grid.Column("Id", header: "Id", style: "Id"),
+							 grid.Column("feiertag", header: "Feiertag"),
+							 grid.Column("datumConverted", header: "Datum", format: (item) => string.Format("{0:dd.MM.yyyy}", item.datumConverted)),
+							 grid.Column("art", header: "Art"),
+							 grid.Column("Länder", "Bundesland", format: (item) =>
+							 {
+								 if (item.Länder == null)
+								 {
+									 return String.Empty;
+								 }
+								 else
+								 {
+									 string tmp = "<div style=''>";
+									 foreach (var land in item.Länder)
+									 {
+										 tmp += land + "<br/>";
+									 }
+									 tmp += "</div>";
+									 return new HtmlString(tmp);
+								 }
+							 }),
+							 grid.Column("festgelegt", header: "Festgelegt", style: "center festgelegt")
+						)).ToString();
+
+			    //string exportData = String.Format("<html><head>{0}</head><body>{1}</body></html>", "<style>table{ border-spacing: 10px; border-collapse: separate; }</style>", gridData);
+				string exportData = gridData;
+				//var bytes = System.Text.Encoding.UTF8.GetBytes(exportData);
+
+				//PdfDocument document = new PdfDocument();
+				//document.Info.Title = "Created with PDFsharp";
+				//// Create an empty page 
+				//PdfPage page = document.AddPage();
+				//// Get an XGraphics object for drawing 
+				//XGraphics gfx = XGraphics.FromPdfPage(page);
+				//// Create a font 
+				//XFont font = new XFont("Verdana", 11, XFontStyle.BoldItalic);
+				//// Draw the text 
+				//gfx.DrawString(exportData, font, XBrushes.Black,
+				//new XRect(0, 0, page.Width, page.Height),
+				//XStringFormats.Center);
+				//// Save the document... 
+				//const string filename = "AllHolidays.pdf";
+				//document.Save(filename);
+				//// ...and start a viewer. 
+				//Process.Start(filename);
+
+			//	var pdfModel = new GeneratePDFModel();
+				return new Rotativa.ViewAsPdf("GeneratePDF", model) { FileName = "TestViewAsPdf.pdf" };
+
+		}
+
 
 	}
 }
