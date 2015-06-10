@@ -1,0 +1,32 @@
+﻿@model IEnumerable<LDAPTest.Models.Account>
+
+@{
+	ViewBag.Title = "People List";
+}
+
+<h2>People List</h2>
+
+<div id = "DivGrid" style = "width:100%;" >
+@{
+		var grid = new WebGrid(Model, canPage: true, defaultSort: "ID", rowsPerPage: 100);
+		@grid.GetHtml(tableStyle: "webGrid",
+					  headerStyle: "header",
+					  alternatingRowStyle: "alt",
+					  columns: grid.Columns(
+												grid.Column("ID"),
+												grid.Column("Username", style: "person"),
+												grid.Column("Name", header: "First Name"),
+												grid.Column("SecondName", header: "Second Name"),
+												grid.Column("AccountName"),
+												grid.Column("Email"),
+												grid.Column("", header: "ToEdit", format: @<text>@Html.ActionLink("Edit", "EditSelectedUserData", "Ldap", new { id = item.ID }, new { target = "_self" })</text>),
+												grid.Column("", header: "ToDelete", format: @<text>@Html.ActionLink("Delete", "DeleteSelectedUser", "Ldap", new { id = item.ID }, new { target = "_self" })</text>)
+
+											)
+					 );
+}
+
+</div>
+
+
+

@@ -1,0 +1,30 @@
+﻿
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+	margin-top: 50px !important;
+}
+
+body {
+	margin-top: 50px !important;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* form Alpay*/
+
+table {
+	width:100%;
+}
+
+.webGrid { margin: 4px; border-collapse: collapse; width: 100%; }
+.header { background-color: #E8E8E8; font-weight: bold; color: #FFF; }
+.webGrid th, .webGrid td { border: 1px solid #C0C0C0; padding: 5px; }
+.alt { background-color: #E8E8E8; color: #000; }
+.person { width: auto; font-weight:bold;}

@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Home</h2>
+
+@if (Session["LogedUserFullname"] != null)
+{
+	<text>Welcome @Session["LogedUserFullname"].ToString()</text>
+}
