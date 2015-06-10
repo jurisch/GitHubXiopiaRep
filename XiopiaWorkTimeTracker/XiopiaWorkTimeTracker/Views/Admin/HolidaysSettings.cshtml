@@ -9,11 +9,15 @@
 		<tr>
 			<td>
 				<div id="DivGrid" style="width:100%;">
-					@*<button type="button" id="btnExport" name="btnExport" href="/Admin/Export" title="Export..." class="btn btn-default btn-sm">
-						<i class="glyphicon glyphicon-export"></i>
-					</button>*@
+					
+					<a href='@Url.Action("Export", "Admin")'>
+						<button type="button" id="btnExport" name="btnExport" href="#" title="Expoert Excell 3" class="btn btn-default btn-sm">
+							<i class="glyphicon glyphicon-export"></i>
+						</button>
+					</a>
 					<div>
-						Export Liste : @Html.ActionLink("Excel Export", "ExportXls", "Admin")
+						Export Excell 1 : @Html.ActionLink("Excel Export", "ExportXls", "Admin")
+						Export Excell 2 : @Html.ActionLink("Excel Export", "DumpExcel", "Admin")
 						Export Liste : @Html.ActionLink("Pdf Export", "ExportPdf", "Admin")
 					</div>
 					@{

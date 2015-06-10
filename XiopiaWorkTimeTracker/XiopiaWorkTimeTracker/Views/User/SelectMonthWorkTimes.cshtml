@@ -28,6 +28,13 @@
         <li id="li11"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=11})">@Language.November</a></li>
         <li id="li12"><a href="@Url.Action("selectmonthworktimes", "User" , new { month=12})">@Language.Dezember</a></li>
     </ul>
+	<ul class="pagination" style="float: right;">
+		<li id="liXls">
+			<a style="color:red;"  href="@Url.Action("DumpExcel", "User" , Model)"> Export Xsl for @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.CurrentMonth) @Model.CurrentYear
+				<i class="glyphicon glyphicon-floppy-save"></i>
+			</a>
+		</li>
+	</ul>
 </nav>
 
 <!--Modal Dialog-->
