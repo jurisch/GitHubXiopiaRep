@@ -80,21 +80,30 @@ namespace XiopiaWorkTimeTracker.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var settings = new List<Setting>
-				{
-					new Setting{ DaysAweek = model.DaysAweek,
-						HoursAday = model.HoursAday,
-						HoursAweek = model.HoursAweek,
-						MonthsAyear = model.MonthsAyear,
-						VacationDays = model.VacationDays}
-				};
+				//var settings = new List<Setting>
+				//{
+				//	new Setting{ DaysAweek = model.DaysAweek,
+				//		HoursAday = model.HoursAday,
+				//		HoursAweek = model.HoursAweek,
+				//		MonthsAyear = model.MonthsAyear,
+				//		VacationDays = model.VacationDays,
+				//		GermanStateId = model.GermanStateId
+				//	}
+				//};
 				using (var context = new WorkTimeTrackerDbContext())
 				{
-					settings.ForEach(r => context.GlobalSettings.Add(r));
+					//context.GlobalSettings.Remove(context.GlobalSettings.First());
+					context.GlobalSettings.First().DaysAweek = model.DaysAweek;
+					context.GlobalSettings.First().HoursAday = model.HoursAday;
+					context.GlobalSettings.First().HoursAweek = model.HoursAweek;
+                    context.GlobalSettings.First().MonthsAyear = model.MonthsAyear;
+					context.GlobalSettings.First().VacationDays = model.VacationDays;
+					context.GlobalSettings.First().GermanStateId = model.GermanStateId;
+					//settings.ForEach(r => context.GlobalSettings.Add(r));
 					context.SaveChanges();
 				}
 			}
-			return View("Index");
+			return RedirectToAction("Index", "Admin");
 		}
 
 		[HttpGet]
@@ -170,7 +179,7 @@ namespace XiopiaWorkTimeTracker.Controllers
 		public ActionResult UpdateSelectedGermanHoliday(int id, bool festgelegt)
 		{
 			var holidayrep = new GermanHolidayRepository();
-			var selectedHoliday = holidayrep.GetById(id);
+			var selectedHoliday = holidayrep.AllHolidays[id];
 			selectedHoliday.Festgelegt = festgelegt;
 
 			holidayrep.SetModified(selectedHoliday);

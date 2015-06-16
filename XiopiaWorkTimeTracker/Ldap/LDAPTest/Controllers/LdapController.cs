@@ -205,7 +205,7 @@ namespace LDAPTest.Controllers
 							Session["LogedUserID"] = usr.UserName.ToString();
 							Session["LogedUserFullname"] = usr.UserName.ToString();
 
-							//TODO:automatisch addieren ? oder admin mail? 
+							//TODO_AB: automatisch addieren ? oder admin mail? 
 							error = "You are not in User List!!!";
 						}
 						else

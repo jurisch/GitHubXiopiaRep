@@ -11,49 +11,78 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
 	{
 		private static Dictionary<Int32, GermanHoliday> _allHolidays;
 		private static Dictionary<int, List<Int32>> _allHolidaysPerMonthAcceptedById;
+		private static Dictionary<DateTime, GermanHoliday> _allHolidaysAcceptedByDate;
 
 		static GermanHolidayRepository()
 		{
 			_allHolidays = new Dictionary<int, GermanHoliday>();
 			_allHolidaysPerMonthAcceptedById = new Dictionary<int, List<int>>();
+			_allHolidaysAcceptedByDate = new Dictionary<DateTime, GermanHoliday>();
+
 		}
 
-		public GermanHoliday GetById(int id)
+		public Dictionary<Int32, GermanHoliday> AllHolidays
 		{
-			return GetAll()[id];
-		}
-
-		public Dictionary<Int32, GermanHoliday> GetAll()
-		{
-			if (_allHolidays == null || _allHolidays.Count == 0)
+			get
 			{
-				List<GermanHoliday> germanHolidays = DbSet.Select(g => g).ToList();
-				Dictionary<int, GermanHoliday> convertedDates = new Dictionary<int, GermanHoliday>();
-				foreach (GermanHoliday h in germanHolidays)
+				if (_allHolidays == null || _allHolidays.Count == 0)
 				{
-					convertedDates.Add(h.Id, GetGermanHolidayConverted(h));
-				}
-				_allHolidays = convertedDates;
-			}
-			return _allHolidays;
-		}
-
-		public List<int> GetAllByMonthAccepted(int month)
-		{
-			if (!_allHolidaysPerMonthAcceptedById.ContainsKey(month))
-			{
-				List<int> _allHolidaystmp = new List<int>();
-				foreach (GermanHoliday germanHoliday in GetAll().Values)
-				{
-					if (germanHoliday.DatumConverted.Value.Month == month && germanHoliday.Festgelegt)
+					List<GermanHoliday> germanHolidays = DbSet.Select(g => g).ToList();
+					Dictionary<int, GermanHoliday> convertedDates = new Dictionary<int, GermanHoliday>();
+					foreach (GermanHoliday h in germanHolidays)
 					{
-						_allHolidaystmp.Add(germanHoliday.Id);
+						convertedDates.Add(h.Id, GetGermanHolidayConverted(h));
 					}
+					_allHolidays = convertedDates;
 				}
-				_allHolidaysPerMonthAcceptedById.Add(month, _allHolidaystmp);
+				return _allHolidays;
 			}
+		}
 
-			return _allHolidaysPerMonthAcceptedById[month];
+		public Dictionary<int, List<int>> AllHolidaysByMonthAccepted
+		{
+			get
+			{
+				if (_allHolidaysPerMonthAcceptedById == null || _allHolidaysPerMonthAcceptedById.Count == 0)
+				{
+					Dictionary<int, List<int>> temp = new Dictionary<int, List<int>>();
+					for (int month = 1; month < 13; month++)
+					{
+						temp.Add(month, new List<int>());
+					}
+					foreach (GermanHoliday germanHoliday in AllHolidays.Values)
+					{
+						if (germanHoliday.Festgelegt)
+						{
+							temp[germanHoliday.DatumConverted.Value.Month].Add(germanHoliday.Id);
+						}
+					}
+					_allHolidaysPerMonthAcceptedById = temp;
+				}
+
+				return _allHolidaysPerMonthAcceptedById;
+			}
+		}
+
+		public Dictionary<DateTime, GermanHoliday> AllHolidaysAcceptedByDate
+		{
+			get
+			{
+				if (_allHolidaysAcceptedByDate == null || _allHolidaysAcceptedByDate.Count == 0)
+				{
+					Dictionary<DateTime, GermanHoliday> temp = new Dictionary<DateTime, GermanHoliday>();
+					foreach (GermanHoliday germanHoliday in AllHolidays.Values)
+					{
+						if (germanHoliday.Festgelegt)
+						{
+							temp.Add(germanHoliday.DatumConverted.Value, germanHoliday);
+						}
+					}
+					_allHolidaysAcceptedByDate = temp;
+				}
+
+				return _allHolidaysAcceptedByDate;
+			}
 		}
 
 		private GermanHoliday GetGermanHolidayConverted(GermanHoliday h)
@@ -117,32 +146,30 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
 			return Convert.ToDateTime(OsterTag.ToString() + "." + OsterMonat + "." + jahr);
 		}
 
-		public String GetFeiertag(DateTime datum, int land)
+		public Boolean TryGetFeiertag(DateTime datum, int land, out String name)
 		{
-			var feiertage = GetAllByMonthAccepted(datum.Month);
-			// Liste der Feiertage durchgehen
-			foreach (int id in feiertage)
+			if (AllHolidaysAcceptedByDate.ContainsKey(datum))
 			{
-				GermanHoliday germanHoliday = GetById(id);
-				if (datum.ToShortDateString().Equals(GetDatum(GetOstersonntag(datum.Year), germanHoliday).ToShortDateString()))
+				// Liste der Feiertage durchgehen
+				GermanHoliday germanHoliday = AllHolidaysAcceptedByDate[datum];
+				if (germanHoliday.Land.Count == 0)
 				{
-					HolidayStatesRepository hsr = new HolidayStatesRepository();
-					// Prüfen ob das Land enthalten ist
-					foreach (string l in germanHoliday.Land)
-					{
-						if (hsr.GetById(land).Equals(l))
-						{
-							return germanHoliday.Feiertag;
-						}
-					}
+					name = germanHoliday.Feiertag;
+					return true;
+				}
+
+				HolidayStatesRepository hsr = new HolidayStatesRepository();
+				// Prüfen ob das Land enthalten ist
+				String landName = hsr.GetById(land).Land;
+				if (!String.IsNullOrEmpty(landName) && germanHoliday.Land.Contains(landName))
+				{
+					name = germanHoliday.Feiertag;
+					return true;
 				}
 			}
-			return "";
-		}
 
-		public Boolean IsFeiertag(DateTime date, int land)
-		{
-			return (GetFeiertag(date, land).Length > 0);
+			name = String.Empty;
+            return false;
 		}
 
 		public void UpdateHolidayOnCacheById(int id)
@@ -150,15 +177,21 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
 			var tmpHol = GetGermanHolidayConverted(DbSet.Where(g => g.Id == id).First());
 			GetAll()[id] = tmpHol;
 
-			List<int> acceptedIdsByMonth = GetAllByMonthAccepted(tmpHol.DatumConverted.Value.Month);
+			List<int> acceptedIdsByMonth = AllHolidaysByMonthAccepted[tmpHol.DatumConverted.Value.Month];
 
-			if (tmpHol.Festgelegt && !acceptedIdsByMonth.Contains(id))
+			if (tmpHol.Festgelegt)
 			{
-				acceptedIdsByMonth.Add(id);
+				if (!acceptedIdsByMonth.Contains(id))
+					acceptedIdsByMonth.Add(id);
+				if (!AllHolidaysAcceptedByDate.ContainsKey(tmpHol.DatumConverted.Value))
+					AllHolidaysAcceptedByDate.Add(tmpHol.DatumConverted.Value, tmpHol);
 			}
-			if (!tmpHol.Festgelegt && acceptedIdsByMonth.Contains(id))
+			if (!tmpHol.Festgelegt)
 			{
-				acceptedIdsByMonth.Remove(id);
+				if (acceptedIdsByMonth.Contains(id))
+					acceptedIdsByMonth.Remove(id);
+				if (AllHolidaysAcceptedByDate.ContainsKey(tmpHol.DatumConverted.Value))
+					AllHolidaysAcceptedByDate.Remove(tmpHol.DatumConverted.Value);
 			}
 		}
 	}

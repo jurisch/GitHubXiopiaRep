@@ -136,12 +136,12 @@ namespace XiopiaWorkTimeTracker.Models.Database
 
 			var gHolidayRepository = germanHolidayRepository.GetAll();
 
-			germanHolidayRepository.GetById(2).AddGermanStateToHoliday(1); germanHolidayRepository.GetById(2).AddGermanStateToHoliday(2); germanHolidayRepository.GetById(2).AddGermanStateToHoliday(14);
-			germanHolidayRepository.GetById(10).AddGermanStateToHoliday(1); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(2); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(7);
-			germanHolidayRepository.GetById(10).AddGermanStateToHoliday(10); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(11); germanHolidayRepository.GetById(10).AddGermanStateToHoliday(12);
-			germanHolidayRepository.GetById(11).AddGermanStateToHoliday(12);
-			germanHolidayRepository.GetById(13).AddGermanStateToHoliday(1); germanHolidayRepository.GetById(13).AddGermanStateToHoliday(2); germanHolidayRepository.GetById(13).AddGermanStateToHoliday(10);
-			germanHolidayRepository.GetById(13).AddGermanStateToHoliday(11); germanHolidayRepository.GetById(13).AddGermanStateToHoliday(12);
+			germanHolidayRepository.AllHolidays[2].AddGermanStateToHoliday(1); germanHolidayRepository.AllHolidays[2].AddGermanStateToHoliday(2); germanHolidayRepository.AllHolidays[2].AddGermanStateToHoliday(14);
+			germanHolidayRepository.AllHolidays[10].AddGermanStateToHoliday(1); germanHolidayRepository.AllHolidays[10].AddGermanStateToHoliday(2); germanHolidayRepository.AllHolidays[10].AddGermanStateToHoliday(7);
+			germanHolidayRepository.AllHolidays[10].AddGermanStateToHoliday(10); germanHolidayRepository.AllHolidays[10].AddGermanStateToHoliday(11); germanHolidayRepository.AllHolidays[10].AddGermanStateToHoliday(12);
+			germanHolidayRepository.AllHolidays[11].AddGermanStateToHoliday(12);
+			germanHolidayRepository.AllHolidays[13].AddGermanStateToHoliday(1); germanHolidayRepository.AllHolidays[13].AddGermanStateToHoliday(2); germanHolidayRepository.AllHolidays[13].AddGermanStateToHoliday(10);
+			germanHolidayRepository.AllHolidays[13].AddGermanStateToHoliday(11); germanHolidayRepository.AllHolidays[13].AddGermanStateToHoliday(12);
 			germanHolidayRepository.SaveChanges();
 			//End: Test Data For GermanHolidays 
 

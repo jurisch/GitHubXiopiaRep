@@ -15,7 +15,7 @@ namespace XiopiaWorkTimeTracker.Models.Repositories
 			var mappings = DbSet.Where(h => h.GermanStateId == id).ToList();
 			foreach (var m in mappings)
 			{
-				holidays.Add(germanHolidaysRepo.GetById(m.GermanHolidayId));
+				holidays.Add(germanHolidaysRepo.AllHolidays[m.GermanHolidayId]);
 			}
 			return holidays;
 		}

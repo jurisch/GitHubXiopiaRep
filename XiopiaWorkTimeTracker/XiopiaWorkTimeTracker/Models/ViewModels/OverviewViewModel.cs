@@ -20,8 +20,8 @@ namespace XiopiaWorkTimeTracker.Models.ViewModels
             _month = month;
             var usersRepository = new UserRepository();
             _user = usersRepository.Get(userId);
-			Dictionary<int, GermanHoliday> germanHolidays = germanholidayrep.GetAll();
-			foreach (var id in germanholidayrep.GetAllByMonthAccepted(month))
+			Dictionary<int, GermanHoliday> germanHolidays = germanholidayrep.AllHolidays;
+			foreach (var id in germanholidayrep.AllHolidaysByMonthAccepted[month])
 			{
 				x.Add(germanHolidays[id]);
 			}
