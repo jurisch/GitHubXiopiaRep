@@ -49,6 +49,9 @@ namespace XiopiaWorkTimeTracker.Formatters
 			string myMonat = string.Format("{0:MMMM}", new DateTime(userViewModel.CurrentYear, month, 1));
 			ExcelWorksheet ws = package.Workbook.Worksheets.Add(myMonat);
 			ws.View.ShowGridLines = false;
+			ws.Protection.IsProtected = true;
+			ws.Cells["A1:V40"].Style.Locked = true;
+			ws.Protection.SetPassword("Xiopia");
 
 			ws.Cells.Style.Font.Size = 9; //Default font size for whole sheet
 			ws.Cells.Style.Font.Name = "Arial";	//Default Font name for whole sheet
@@ -222,15 +225,25 @@ namespace XiopiaWorkTimeTracker.Formatters
 				var copy = ws.Cells["T" + (p - 1)];
 				var pWert = ws.Cells["V" + (p - 1)];
 				sm.Formula = "=SUM(" + str + ":" + end + ")";
-				copy.Formula = "=SUM(" + str + ":" + end + ")";
-				pWert.Formula = "=ROUND(DAY(F" + (days + 6) + ") * 24 + HOUR(F" + (days + 6) + ") + MINUTE(F" + (days + 6) + ") / 60, 2) * U" + (p - 1);
+				//copy.Formula = "=ROUND(DAY(" + sm.Address + ") * 24 + HOUR(" + sm.Address + ") + MINUTE(" + sm.Address + ") / 60, 2) * S" + (p - 1);
+				copy.Formula = "=" + sm.Address + " * S" + (p - 1);
+				pWert.Formula = "=ROUND(DAY(" + sm.Address + ") * 24 + HOUR(" + sm.Address + ") + MINUTE(" + sm.Address + ") / 60, 2) * U" + (p - 1);
 				sm.Calculate();
 				copy.Calculate();
 				pWert.Calculate();
 				sm.Style.Numberformat.Format = "[HH]:mm";
 				copy.Style.Numberformat.Format = "[HH]:mm";
-				pWert.Style.Numberformat.Format = "[HH]:mm"; ;
+				pWert.Style.Numberformat.Format = "0.00 €";
 			}
+
+			var pWertSum = ws.Cells["V13"];
+			var geleistetSum = ws.Cells["T13"];
+			pWertSum.Formula = "=SUM(V5:V12)";
+			geleistetSum.Formula = "=SUM(T5:T12)";
+			pWertSum.Style.Numberformat.Format = "0.00 €";
+			geleistetSum.Style.Numberformat.Format = "[HH]:mm";
+			pWertSum.Calculate();
+			geleistetSum.Calculate();
 
 			ws.Cells[(days + 6), 6, (days + 6), 14].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
 
@@ -254,7 +267,7 @@ namespace XiopiaWorkTimeTracker.Formatters
 			ws.Cells["V4:V14"].Style.Border.Right.Style = ws.Cells["Q4:Q14"].Style.Border.Right.Style = ws.Cells["S4:S14"].Style.Border.Right.Style =
 			ws.Cells["T4:T14"].Style.Border.Right.Style = ws.Cells["U4:U14"].Style.Border.Right.Style = ExcelBorderStyle.Medium;
 			ws.Cells["Q14:V14"].Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
-			ws.Cells["Q13:R14"].Merge = true; ws.Cells["S13:S14"].Merge = true; ws.Cells["T13:T14"].Merge = true; ws.Cells["V13:V14"].Merge = true; ws.Cells["U13:U14"].Merge = true;
+			ws.Cells["Q13:Q14"].Merge = true; ws.Cells["R13:S14"].Merge = true; ws.Cells["T13:T14"].Merge = true; ws.Cells["V13:V14"].Merge = true; ws.Cells["U13:U14"].Merge = true;
 			ws.Cells["T13"].Style.Font.Bold = ws.Cells["V13"].Style.Font.Bold = ws.Cells["T4"].Style.Font.Bold = ws.Cells["V4"].Style.Font.Bold = true;
 
 			//Summary table Setting Top/left,right/bottom borders.
@@ -266,6 +279,7 @@ namespace XiopiaWorkTimeTracker.Formatters
 			ws.Cells["Q31:V31"].Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
 
 			ws.Cells[6, 1, (days + 5), 14].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;	// Aligmnet is center
+			ws.Cells["A1:A2"].Style.Font.Size = 12;
 		}
 
 
